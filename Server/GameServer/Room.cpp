@@ -22,3 +22,8 @@ void Room::Broadcast(SendBufferRef sendBuffer)
 		p.second->ownerSession->Send(sendBuffer);
 	}
 }
+
+void Room::Update()
+{
+
+}

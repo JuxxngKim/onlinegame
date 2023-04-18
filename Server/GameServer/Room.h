@@ -8,6 +8,7 @@ public:
 	void Enter(PlayerRef player);
 	void Leave(PlayerRef player);
 	void Broadcast(SendBufferRef sendBuffer);
+	void Update();
 
 private:
 	map<uint64, PlayerRef> _players;
