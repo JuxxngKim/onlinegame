@@ -16,14 +16,10 @@ public class DataManager
 
 	public void Init()
     {
-        SkillDict = LoadJson<Data.SkillData, int, Data.Skill>("SkillData").MakeDict();
-        ItemDict = LoadJson<Data.ItemLoader, int, Data.ItemData>("ItemData").MakeDict();
-        MonsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData").MakeDict();
+        // SkillDict = LoadJson<Data.SkillData, int, Data.Skill>("SkillData").MakeDict();
+        // ItemDict = LoadJson<Data.ItemLoader, int, Data.ItemData>("ItemData").MakeDict();
+        // MonsterDict = LoadJson<Data.MonsterLoader, int, Data.MonsterData>("MonsterData").MakeDict();
 	}
 
-    Loader LoadJson<Loader, Key, Value>(string path) where Loader : ILoader<Key, Value>
-    {
-		TextAsset textAsset = Managers.Resource.Load<TextAsset>($"Data/{path}");
-        return Newtonsoft.Json.JsonConvert.DeserializeObject<Loader>(textAsset.text);
-	}
+
 }

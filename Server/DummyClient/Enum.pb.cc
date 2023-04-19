@@ -18,7 +18,7 @@
 PROTOBUF_PRAGMA_INIT_SEG
 namespace Protocol {
 }  // namespace Protocol
-static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[1];
+static const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* file_level_enum_descriptors_Enum_2eproto[11];
 static constexpr ::PROTOBUF_NAMESPACE_ID::ServiceDescriptor const** file_level_service_descriptors_Enum_2eproto = nullptr;
 const ::PROTOBUF_NAMESPACE_ID::uint32 TableStruct_Enum_2eproto::offsets[1] = {};
 static constexpr ::PROTOBUF_NAMESPACE_ID::internal::MigrationSchema* schemas = nullptr;
@@ -28,11 +28,37 @@ const char descriptor_table_protodef_Enum_2eproto[] PROTOBUF_SECTION_VARIABLE(pr
   "\n\nEnum.proto\022\010Protocol*h\n\nPlayerType\022\024\n\020"
   "PLAYER_TYPE_NONE\020\000\022\026\n\022PLAYER_TYPE_KNIGHT"
   "\020\001\022\024\n\020PLAYER_TYPE_MAGE\020\002\022\026\n\022PLAYER_TYPE_"
-  "ARCHER\020\003b\006proto3"
+  "ARCHER\020\003*\354\002\n\005MsgId\022\020\n\014S_ENTER_GAME\020\000\022\020\n\014"
+  "S_LEAVE_GAME\020\001\022\013\n\007S_SPAWN\020\002\022\r\n\tS_DESPAWN"
+  "\020\003\022\n\n\006C_MOVE\020\004\022\n\n\006S_MOVE\020\005\022\013\n\007C_SKILL\020\006\022"
+  "\013\n\007S_SKILL\020\007\022\017\n\013S_CHANGE_HP\020\010\022\t\n\005S_DIE\020\t"
+  "\022\017\n\013S_CONNECTED\020\n\022\013\n\007C_LOGIN\020\013\022\013\n\007S_LOGI"
+  "N\020\014\022\020\n\014C_ENTER_GAME\020\r\022\023\n\017C_CREATE_PLAYER"
+  "\020\016\022\023\n\017S_CREATE_PLAYER\020\017\022\017\n\013S_ITEM_LIST\020\020"
+  "\022\016\n\nS_ADD_ITEM\020\021\022\020\n\014C_EQUIP_ITEM\020\022\022\020\n\014S_"
+  "EQUIP_ITEM\020\023\022\021\n\rS_CHANGE_STAT\020\024\022\n\n\006S_PIN"
+  "G\020\025\022\n\n\006C_PONG\020\026*:\n\rCreatureState\022\010\n\004IDLE"
+  "\020\000\022\n\n\006MOVING\020\001\022\t\n\005SKILL\020\002\022\010\n\004DEAD\020\003*0\n\007M"
+  "oveDir\022\006\n\002UP\020\000\022\010\n\004DOWN\020\001\022\010\n\004LEFT\020\002\022\t\n\005RI"
+  "GHT\020\003*C\n\016GameObjectType\022\010\n\004NONE\020\000\022\n\n\006PLA"
+  "YER\020\001\022\013\n\007MONSTER\020\002\022\016\n\nPROJECTILE\020\003*A\n\tSk"
+  "illType\022\016\n\nSKILL_NONE\020\000\022\016\n\nSKILL_AUTO\020\001\022"
+  "\024\n\020SKILL_PROJECTILE\020\002*Z\n\021PlayerServerSta"
+  "te\022\026\n\022SERVER_STATE_LOGIN\020\000\022\026\n\022SERVER_STA"
+  "TE_LOBBY\020\001\022\025\n\021SERVER_STATE_GAME\020\002*c\n\010Ite"
+  "mType\022\022\n\016ITEM_TYPE_NONE\020\000\022\024\n\020ITEM_TYPE_W"
+  "EAPON\020\001\022\023\n\017ITEM_TYPE_ARMOR\020\002\022\030\n\024ITEM_TYP"
+  "E_CONSUMABLE\020\003*N\n\nWeaponType\022\024\n\020WEAPON_T"
+  "YPE_NONE\020\000\022\025\n\021WEAPON_TYPE_SWORD\020\001\022\023\n\017WEA"
+  "PON_TYPE_BOW\020\002*c\n\tArmorType\022\023\n\017ARMOR_TYP"
+  "E_NONE\020\000\022\025\n\021ARMOR_TYPE_HELMET\020\001\022\024\n\020ARMOR"
+  "_TYPE_ARMOR\020\002\022\024\n\020ARMOR_TYPE_BOOTS\020\003*F\n\016C"
+  "onsumableType\022\030\n\024CONSUMABLE_TYPE_NONE\020\000\022"
+  "\032\n\026CONSUMABLE_TYPE_POTION\020\001b\006proto3"
   ;
 static ::PROTOBUF_NAMESPACE_ID::internal::once_flag descriptor_table_Enum_2eproto_once;
 const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_Enum_2eproto = {
-  false, false, 136, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
+  false, false, 1195, descriptor_table_protodef_Enum_2eproto, "Enum.proto", 
   &descriptor_table_Enum_2eproto_once, nullptr, 0, 0,
   schemas, file_default_instances, TableStruct_Enum_2eproto::offsets,
   nullptr, file_level_enum_descriptors_Enum_2eproto, file_level_service_descriptors_Enum_2eproto,
@@ -54,6 +80,180 @@ bool PlayerType_IsValid(int value) {
     case 1:
     case 2:
     case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgId_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[1];
+}
+bool MsgId_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+    case 21:
+    case 22:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* CreatureState_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[2];
+}
+bool CreatureState_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MoveDir_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[3];
+}
+bool MoveDir_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* GameObjectType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[4];
+}
+bool GameObjectType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* SkillType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[5];
+}
+bool SkillType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* PlayerServerState_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[6];
+}
+bool PlayerServerState_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ItemType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[7];
+}
+bool ItemType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* WeaponType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[8];
+}
+bool WeaponType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ArmorType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[9];
+}
+bool ArmorType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* ConsumableType_descriptor() {
+  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_Enum_2eproto);
+  return file_level_enum_descriptors_Enum_2eproto[10];
+}
+bool ConsumableType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
       return true;
     default:
       return false;

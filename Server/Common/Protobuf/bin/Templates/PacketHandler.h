@@ -1,5 +1,7 @@
 #pragma once
 #include "Protocol.pb.h"
+#include "Enum.pb.h"
+#include "Struct.pb.h"
 
 using PacketHandlerFunc = std::function<bool(PacketSessionRef&, BYTE*, int32)>;
 extern PacketHandlerFunc GPacketHandler[UINT16_MAX];
