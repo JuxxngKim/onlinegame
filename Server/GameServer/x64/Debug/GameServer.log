@@ -9,40 +9,40 @@
   
   enum : uint16
   {
-  	PKT_S_ENTERGAME = 1000,
-  	PKT_S_LEAVEGAME = 1001,
-  	PKT_S_SPAWN = 1002,
-  	PKT_S_DESPAWN = 1003,
-  	PKT_C_MOVE = 1004,
-  	PKT_S_MOVE = 1005,
-  	PKT_C_SKILL = 1006,
-  	PKT_S_SKILL = 1007,
-  	PKT_S_CHANGEHP = 1008,
-  	PKT_S_DIE = 1009,
-  	PKT_S_CONNECTED = 1010,
-  	PKT_C_LOGIN = 1011,
-  	PKT_S_LOGIN = 1012,
-  	PKT_C_CREATEPLAYER = 1013,
-  	PKT_S_CREATEPLAYER = 1014,
-  	PKT_C_ENTERGAME = 1015,
-  	PKT_S_ITEMLIST = 1016,
-  	PKT_S_ADDITEM = 1017,
-  	PKT_C_EQUIPITEM = 1018,
-  	PKT_S_EQUIPITEM = 1019,
-  	PKT_S_CHANGESTAT = 1020,
-  	PKT_S_PING = 1021,
-  	PKT_C_PONG = 1022,
+  	PKT_S_EnterGame = 1000,
+  	PKT_S_LeaveGame = 1001,
+  	PKT_S_Spawn = 1002,
+  	PKT_S_Despawn = 1003,
+  	PKT_C_Move = 1004,
+  	PKT_S_Move = 1005,
+  	PKT_C_Skill = 1006,
+  	PKT_S_Skill = 1007,
+  	PKT_S_ChangeHp = 1008,
+  	PKT_S_Die = 1009,
+  	PKT_S_Connected = 1010,
+  	PKT_C_Login = 1011,
+  	PKT_S_Login = 1012,
+  	PKT_C_CreatePlayer = 1013,
+  	PKT_S_CreatePlayer = 1014,
+  	PKT_C_EnterGame = 1015,
+  	PKT_S_ItemList = 1016,
+  	PKT_S_AddItem = 1017,
+  	PKT_C_EquipItem = 1018,
+  	PKT_S_EquipItem = 1019,
+  	PKT_S_ChangeStat = 1020,
+  	PKT_S_Ping = 1021,
+  	PKT_C_Pong = 1022,
   };
   
   // Custom Handlers
   bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len);
-  bool Handle_C_MOVE(PacketSessionRef& session, Protocol::C_MOVE& pkt);
-  bool Handle_C_SKILL(PacketSessionRef& session, Protocol::C_SKILL& pkt);
-  bool Handle_C_LOGIN(PacketSessionRef& session, Protocol::C_LOGIN& pkt);
-  bool Handle_C_CREATEPLAYER(PacketSessionRef& session, Protocol::C_CREATEPLAYER& pkt);
-  bool Handle_C_ENTERGAME(PacketSessionRef& session, Protocol::C_ENTERGAME& pkt);
-  bool Handle_C_EQUIPITEM(PacketSessionRef& session, Protocol::C_EQUIPITEM& pkt);
-  bool Handle_C_PONG(PacketSessionRef& session, Protocol::C_PONG& pkt);
+  bool Handle_C_Move(PacketSessionRef& session, Protocol::C_Move& pkt);
+  bool Handle_C_Skill(PacketSessionRef& session, Protocol::C_Skill& pkt);
+  bool Handle_C_Login(PacketSessionRef& session, Protocol::C_Login& pkt);
+  bool Handle_C_CreatePlayer(PacketSessionRef& session, Protocol::C_CreatePlayer& pkt);
+  bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt);
+  bool Handle_C_EquipItem(PacketSessionRef& session, Protocol::C_EquipItem& pkt);
+  bool Handle_C_Pong(PacketSessionRef& session, Protocol::C_Pong& pkt);
   
   class ClientPacketHandler
   {
@@ -51,13 +51,13 @@
   	{
   		for (int32 i = 0; i < UINT16_MAX; i++)
   			GPacketHandler[i] = Handle_INVALID;
-  		GPacketHandler[PKT_C_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_MOVE>(Handle_C_MOVE, session, buffer, len); };
-  		GPacketHandler[PKT_C_SKILL] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_SKILL>(Handle_C_SKILL, session, buffer, len); };
-  		GPacketHandler[PKT_C_LOGIN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_LOGIN>(Handle_C_LOGIN, session, buffer, len); };
-  		GPacketHandler[PKT_C_CREATEPLAYER] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_CREATEPLAYER>(Handle_C_CREATEPLAYER, session, buffer, len); };
-  		GPacketHandler[PKT_C_ENTERGAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_ENTERGAME>(Handle_C_ENTERGAME, session, buffer, len); };
-  		GPacketHandler[PKT_C_EQUIPITEM] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_EQUIPITEM>(Handle_C_EQUIPITEM, session, buffer, len); };
-  		GPacketHandler[PKT_C_PONG] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_PONG>(Handle_C_PONG, session, buffer, len); };
+  		GPacketHandler[PKT_C_Move] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_Move>(Handle_C_Move, session, buffer, len); };
+  		GPacketHandler[PKT_C_Skill] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_Skill>(Handle_C_Skill, session, buffer, len); };
+  		GPacketHandler[PKT_C_Login] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_Login>(Handle_C_Login, session, buffer, len); };
+  		GPacketHandler[PKT_C_CreatePlayer] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_CreatePlayer>(Handle_C_CreatePlayer, session, buffer, len); };
+  		GPacketHandler[PKT_C_EnterGame] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_EnterGame>(Handle_C_EnterGame, session, buffer, len); };
+  		GPacketHandler[PKT_C_EquipItem] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_EquipItem>(Handle_C_EquipItem, session, buffer, len); };
+  		GPacketHandler[PKT_C_Pong] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_Pong>(Handle_C_Pong, session, buffer, len); };
   	}
   
   	static bool HandlePacket(PacketSessionRef& session, BYTE* buffer, int32 len)
@@ -65,22 +65,22 @@
   		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
   		return GPacketHandler[header->id](session, buffer, len);
   	}
-  	static SendBufferRef MakeSendBuffer(Protocol::S_ENTERGAME& pkt) { return MakeSendBuffer(pkt, PKT_S_ENTERGAME); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_LEAVEGAME& pkt) { return MakeSendBuffer(pkt, PKT_S_LEAVEGAME); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_SPAWN& pkt) { return MakeSendBuffer(pkt, PKT_S_SPAWN); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_DESPAWN& pkt) { return MakeSendBuffer(pkt, PKT_S_DESPAWN); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_MOVE& pkt) { return MakeSendBuffer(pkt, PKT_S_MOVE); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_SKILL& pkt) { return MakeSendBuffer(pkt, PKT_S_SKILL); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_CHANGEHP& pkt) { return MakeSendBuffer(pkt, PKT_S_CHANGEHP); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_DIE& pkt) { return MakeSendBuffer(pkt, PKT_S_DIE); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_CONNECTED& pkt) { return MakeSendBuffer(pkt, PKT_S_CONNECTED); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_LOGIN& pkt) { return MakeSendBuffer(pkt, PKT_S_LOGIN); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_CREATEPLAYER& pkt) { return MakeSendBuffer(pkt, PKT_S_CREATEPLAYER); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_ITEMLIST& pkt) { return MakeSendBuffer(pkt, PKT_S_ITEMLIST); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_ADDITEM& pkt) { return MakeSendBuffer(pkt, PKT_S_ADDITEM); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_EQUIPITEM& pkt) { return MakeSendBuffer(pkt, PKT_S_EQUIPITEM); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_CHANGESTAT& pkt) { return MakeSendBuffer(pkt, PKT_S_CHANGESTAT); }
-  	static SendBufferRef MakeSendBuffer(Protocol::S_PING& pkt) { return MakeSendBuffer(pkt, PKT_S_PING); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_EnterGame& pkt) { return MakeSendBuffer(pkt, PKT_S_EnterGame); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_LeaveGame& pkt) { return MakeSendBuffer(pkt, PKT_S_LeaveGame); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_Spawn& pkt) { return MakeSendBuffer(pkt, PKT_S_Spawn); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_Despawn& pkt) { return MakeSendBuffer(pkt, PKT_S_Despawn); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_Move& pkt) { return MakeSendBuffer(pkt, PKT_S_Move); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_Skill& pkt) { return MakeSendBuffer(pkt, PKT_S_Skill); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_ChangeHp& pkt) { return MakeSendBuffer(pkt, PKT_S_ChangeHp); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_Die& pkt) { return MakeSendBuffer(pkt, PKT_S_Die); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_Connected& pkt) { return MakeSendBuffer(pkt, PKT_S_Connected); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_Login& pkt) { return MakeSendBuffer(pkt, PKT_S_Login); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_CreatePlayer& pkt) { return MakeSendBuffer(pkt, PKT_S_CreatePlayer); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_ItemList& pkt) { return MakeSendBuffer(pkt, PKT_S_ItemList); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_AddItem& pkt) { return MakeSendBuffer(pkt, PKT_S_AddItem); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_EquipItem& pkt) { return MakeSendBuffer(pkt, PKT_S_EquipItem); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_ChangeStat& pkt) { return MakeSendBuffer(pkt, PKT_S_ChangeStat); }
+  	static SendBufferRef MakeSendBuffer(Protocol::S_Ping& pkt) { return MakeSendBuffer(pkt, PKT_S_Ping); }
   
   private:
   	template<typename PacketType, typename ProcessFunc>
@@ -119,49 +119,49 @@
   
   enum : uint16
   {
-  	PKT_S_ENTERGAME = 1000,
-  	PKT_S_LEAVEGAME = 1001,
-  	PKT_S_SPAWN = 1002,
-  	PKT_S_DESPAWN = 1003,
-  	PKT_C_MOVE = 1004,
-  	PKT_S_MOVE = 1005,
-  	PKT_C_SKILL = 1006,
-  	PKT_S_SKILL = 1007,
-  	PKT_S_CHANGEHP = 1008,
-  	PKT_S_DIE = 1009,
-  	PKT_S_CONNECTED = 1010,
-  	PKT_C_LOGIN = 1011,
-  	PKT_S_LOGIN = 1012,
-  	PKT_C_CREATEPLAYER = 1013,
-  	PKT_S_CREATEPLAYER = 1014,
-  	PKT_C_ENTERGAME = 1015,
-  	PKT_S_ITEMLIST = 1016,
-  	PKT_S_ADDITEM = 1017,
-  	PKT_C_EQUIPITEM = 1018,
-  	PKT_S_EQUIPITEM = 1019,
-  	PKT_S_CHANGESTAT = 1020,
-  	PKT_S_PING = 1021,
-  	PKT_C_PONG = 1022,
+  	PKT_S_EnterGame = 1000,
+  	PKT_S_LeaveGame = 1001,
+  	PKT_S_Spawn = 1002,
+  	PKT_S_Despawn = 1003,
+  	PKT_C_Move = 1004,
+  	PKT_S_Move = 1005,
+  	PKT_C_Skill = 1006,
+  	PKT_S_Skill = 1007,
+  	PKT_S_ChangeHp = 1008,
+  	PKT_S_Die = 1009,
+  	PKT_S_Connected = 1010,
+  	PKT_C_Login = 1011,
+  	PKT_S_Login = 1012,
+  	PKT_C_CreatePlayer = 1013,
+  	PKT_S_CreatePlayer = 1014,
+  	PKT_C_EnterGame = 1015,
+  	PKT_S_ItemList = 1016,
+  	PKT_S_AddItem = 1017,
+  	PKT_C_EquipItem = 1018,
+  	PKT_S_EquipItem = 1019,
+  	PKT_S_ChangeStat = 1020,
+  	PKT_S_Ping = 1021,
+  	PKT_C_Pong = 1022,
   };
   
   // Custom Handlers
   bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len);
-  bool Handle_S_ENTERGAME(PacketSessionRef& session, Protocol::S_ENTERGAME& pkt);
-  bool Handle_S_LEAVEGAME(PacketSessionRef& session, Protocol::S_LEAVEGAME& pkt);
-  bool Handle_S_SPAWN(PacketSessionRef& session, Protocol::S_SPAWN& pkt);
-  bool Handle_S_DESPAWN(PacketSessionRef& session, Protocol::S_DESPAWN& pkt);
-  bool Handle_S_MOVE(PacketSessionRef& session, Protocol::S_MOVE& pkt);
-  bool Handle_S_SKILL(PacketSessionRef& session, Protocol::S_SKILL& pkt);
-  bool Handle_S_CHANGEHP(PacketSessionRef& session, Protocol::S_CHANGEHP& pkt);
-  bool Handle_S_DIE(PacketSessionRef& session, Protocol::S_DIE& pkt);
-  bool Handle_S_CONNECTED(PacketSessionRef& session, Protocol::S_CONNECTED& pkt);
-  bool Handle_S_LOGIN(PacketSessionRef& session, Protocol::S_LOGIN& pkt);
-  bool Handle_S_CREATEPLAYER(PacketSessionRef& session, Protocol::S_CREATEPLAYER& pkt);
-  bool Handle_S_ITEMLIST(PacketSessionRef& session, Protocol::S_ITEMLIST& pkt);
-  bool Handle_S_ADDITEM(PacketSessionRef& session, Protocol::S_ADDITEM& pkt);
-  bool Handle_S_EQUIPITEM(PacketSessionRef& session, Protocol::S_EQUIPITEM& pkt);
-  bool Handle_S_CHANGESTAT(PacketSessionRef& session, Protocol::S_CHANGESTAT& pkt);
-  bool Handle_S_PING(PacketSessionRef& session, Protocol::S_PING& pkt);
+  bool Handle_S_EnterGame(PacketSessionRef& session, Protocol::S_EnterGame& pkt);
+  bool Handle_S_LeaveGame(PacketSessionRef& session, Protocol::S_LeaveGame& pkt);
+  bool Handle_S_Spawn(PacketSessionRef& session, Protocol::S_Spawn& pkt);
+  bool Handle_S_Despawn(PacketSessionRef& session, Protocol::S_Despawn& pkt);
+  bool Handle_S_Move(PacketSessionRef& session, Protocol::S_Move& pkt);
+  bool Handle_S_Skill(PacketSessionRef& session, Protocol::S_Skill& pkt);
+  bool Handle_S_ChangeHp(PacketSessionRef& session, Protocol::S_ChangeHp& pkt);
+  bool Handle_S_Die(PacketSessionRef& session, Protocol::S_Die& pkt);
+  bool Handle_S_Connected(PacketSessionRef& session, Protocol::S_Connected& pkt);
+  bool Handle_S_Login(PacketSessionRef& session, Protocol::S_Login& pkt);
+  bool Handle_S_CreatePlayer(PacketSessionRef& session, Protocol::S_CreatePlayer& pkt);
+  bool Handle_S_ItemList(PacketSessionRef& session, Protocol::S_ItemList& pkt);
+  bool Handle_S_AddItem(PacketSessionRef& session, Protocol::S_AddItem& pkt);
+  bool Handle_S_EquipItem(PacketSessionRef& session, Protocol::S_EquipItem& pkt);
+  bool Handle_S_ChangeStat(PacketSessionRef& session, Protocol::S_ChangeStat& pkt);
+  bool Handle_S_Ping(PacketSessionRef& session, Protocol::S_Ping& pkt);
   
   class ServerPacketHandler
   {
@@ -170,22 +170,22 @@
   	{
   		for (int32 i = 0; i < UINT16_MAX; i++)
   			GPacketHandler[i] = Handle_INVALID;
-  		GPacketHandler[PKT_S_ENTERGAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_ENTERGAME>(Handle_S_ENTERGAME, session, buffer, len); };
-  		GPacketHandler[PKT_S_LEAVEGAME] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_LEAVEGAME>(Handle_S_LEAVEGAME, session, buffer, len); };
-  		GPacketHandler[PKT_S_SPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_SPAWN>(Handle_S_SPAWN, session, buffer, len); };
-  		GPacketHandler[PKT_S_DESPAWN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_DESPAWN>(Handle_S_DESPAWN, session, buffer, len); };
-  		GPacketHandler[PKT_S_MOVE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_MOVE>(Handle_S_MOVE, session, buffer, len); };
-  		GPacketHandler[PKT_S_SKILL] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_SKILL>(Handle_S_SKILL, session, buffer, len); };
-  		GPacketHandler[PKT_S_CHANGEHP] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_CHANGEHP>(Handle_S_CHANGEHP, session, buffer, len); };
-  		GPacketHandler[PKT_S_DIE] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_DIE>(Handle_S_DIE, session, buffer, len); };
-  		GPacketHandler[PKT_S_CONNECTED] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_CONNECTED>(Handle_S_CONNECTED, session, buffer, len); };
-  		GPacketHandler[PKT_S_LOGIN] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_LOGIN>(Handle_S_LOGIN, session, buffer, len); };
-  		GPacketHandler[PKT_S_CREATEPLAYER] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_CREATEPLAYER>(Handle_S_CREATEPLAYER, session, buffer, len); };
-  		GPacketHandler[PKT_S_ITEMLIST] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_ITEMLIST>(Handle_S_ITEMLIST, session, buffer, len); };
-  		GPacketHandler[PKT_S_ADDITEM] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_ADDITEM>(Handle_S_ADDITEM, session, buffer, len); };
-  		GPacketHandler[PKT_S_EQUIPITEM] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_EQUIPITEM>(Handle_S_EQUIPITEM, session, buffer, len); };
-  		GPacketHandler[PKT_S_CHANGESTAT] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_CHANGESTAT>(Handle_S_CHANGESTAT, session, buffer, len); };
-  		GPacketHandler[PKT_S_PING] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_PING>(Handle_S_PING, session, buffer, len); };
+  		GPacketHandler[PKT_S_EnterGame] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_EnterGame>(Handle_S_EnterGame, session, buffer, len); };
+  		GPacketHandler[PKT_S_LeaveGame] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_LeaveGame>(Handle_S_LeaveGame, session, buffer, len); };
+  		GPacketHandler[PKT_S_Spawn] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_Spawn>(Handle_S_Spawn, session, buffer, len); };
+  		GPacketHandler[PKT_S_Despawn] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_Despawn>(Handle_S_Despawn, session, buffer, len); };
+  		GPacketHandler[PKT_S_Move] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_Move>(Handle_S_Move, session, buffer, len); };
+  		GPacketHandler[PKT_S_Skill] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_Skill>(Handle_S_Skill, session, buffer, len); };
+  		GPacketHandler[PKT_S_ChangeHp] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_ChangeHp>(Handle_S_ChangeHp, session, buffer, len); };
+  		GPacketHandler[PKT_S_Die] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_Die>(Handle_S_Die, session, buffer, len); };
+  		GPacketHandler[PKT_S_Connected] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_Connected>(Handle_S_Connected, session, buffer, len); };
+  		GPacketHandler[PKT_S_Login] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_Login>(Handle_S_Login, session, buffer, len); };
+  		GPacketHandler[PKT_S_CreatePlayer] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_CreatePlayer>(Handle_S_CreatePlayer, session, buffer, len); };
+  		GPacketHandler[PKT_S_ItemList] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_ItemList>(Handle_S_ItemList, session, buffer, len); };
+  		GPacketHandler[PKT_S_AddItem] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_AddItem>(Handle_S_AddItem, session, buffer, len); };
+  		GPacketHandler[PKT_S_EquipItem] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_EquipItem>(Handle_S_EquipItem, session, buffer, len); };
+  		GPacketHandler[PKT_S_ChangeStat] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_ChangeStat>(Handle_S_ChangeStat, session, buffer, len); };
+  		GPacketHandler[PKT_S_Ping] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::S_Ping>(Handle_S_Ping, session, buffer, len); };
   	}
   
   	static bool HandlePacket(PacketSessionRef& session, BYTE* buffer, int32 len)
@@ -193,13 +193,13 @@
   		PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
   		return GPacketHandler[header->id](session, buffer, len);
   	}
-  	static SendBufferRef MakeSendBuffer(Protocol::C_MOVE& pkt) { return MakeSendBuffer(pkt, PKT_C_MOVE); }
-  	static SendBufferRef MakeSendBuffer(Protocol::C_SKILL& pkt) { return MakeSendBuffer(pkt, PKT_C_SKILL); }
-  	static SendBufferRef MakeSendBuffer(Protocol::C_LOGIN& pkt) { return MakeSendBuffer(pkt, PKT_C_LOGIN); }
-  	static SendBufferRef MakeSendBuffer(Protocol::C_CREATEPLAYER& pkt) { return MakeSendBuffer(pkt, PKT_C_CREATEPLAYER); }
-  	static SendBufferRef MakeSendBuffer(Protocol::C_ENTERGAME& pkt) { return MakeSendBuffer(pkt, PKT_C_ENTERGAME); }
-  	static SendBufferRef MakeSendBuffer(Protocol::C_EQUIPITEM& pkt) { return MakeSendBuffer(pkt, PKT_C_EQUIPITEM); }
-  	static SendBufferRef MakeSendBuffer(Protocol::C_PONG& pkt) { return MakeSendBuffer(pkt, PKT_C_PONG); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_Move& pkt) { return MakeSendBuffer(pkt, PKT_C_Move); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_Skill& pkt) { return MakeSendBuffer(pkt, PKT_C_Skill); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_Login& pkt) { return MakeSendBuffer(pkt, PKT_C_Login); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_CreatePlayer& pkt) { return MakeSendBuffer(pkt, PKT_C_CreatePlayer); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_EnterGame& pkt) { return MakeSendBuffer(pkt, PKT_C_EnterGame); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_EquipItem& pkt) { return MakeSendBuffer(pkt, PKT_C_EquipItem); }
+  	static SendBufferRef MakeSendBuffer(Protocol::C_Pong& pkt) { return MakeSendBuffer(pkt, PKT_C_Pong); }
   
   private:
   	template<typename PacketType, typename ProcessFunc>
@@ -266,514 +266,37 @@
   pch.cpp
   Enum.pb.cc
   Protocol.pb.cc
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(1180,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(1614,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(2069,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(2296,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(2303,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(2521,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(2528,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(3108,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(4351,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(4574,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(1180,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(1614,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2069,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2296,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2303,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2521,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2528,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(3108,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(4351,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(4574,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Struct.pb.cc
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(608,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(903,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1205,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1212,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1462,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1469,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1476,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1483,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1497,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1770,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1967,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1974,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1981,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1988,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(608,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(903,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1205,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1212,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1462,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1469,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1476,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1483,68): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1497,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1770,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1967,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1974,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1981,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(1988,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
   GameServer.cpp
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(38,57): error C2061: 구문 오류: 식별자 'C_MOVE'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(39,58): error C2061: 구문 오류: 식별자 'C_SKILL'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(40,58): error C2061: 구문 오류: 식별자 'C_LOGIN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(41,65): error C2039: 'C_CREATEPLAYER': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(41,79): error C2061: 구문 오류: 식별자 'C_CREATEPLAYER'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(42,62): error C2039: 'C_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(42,73): error C2061: 구문 오류: 식별자 'C_ENTERGAME'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(43,62): error C2039: 'C_EQUIPITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(43,73): error C2061: 구문 오류: 식별자 'C_EQUIPITEM'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(44,57): error C2061: 구문 오류: 식별자 'C_PONG'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67,48): error C2039: 'S_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67,59): error C2061: 구문 오류: 식별자 'S_ENTERGAME'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,48): error C2039: 'S_LEAVEGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,59): error C2061: 구문 오류: 식별자 'S_LEAVEGAME'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,66): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(69,48): error C2061: 구문 오류: 식별자 'S_SPAWN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(69,62): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(70,48): error C2061: 구문 오류: 식별자 'S_DESPAWN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(70,64): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(71,48): error C2061: 구문 오류: 식별자 'S_MOVE'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(71,61): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(72,48): error C2061: 구문 오류: 식별자 'S_SKILL'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(72,62): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,48): error C2039: 'S_CHANGEHP': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,58): error C2061: 구문 오류: 식별자 'S_CHANGEHP'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,65): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(74,48): error C2061: 구문 오류: 식별자 'S_DIE'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(74,60): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(75,48): error C2061: 구문 오류: 식별자 'S_CONNECTED'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(75,66): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(76,48): error C2061: 구문 오류: 식별자 'S_LOGIN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(76,62): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,48): error C2039: 'S_CREATEPLAYER': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,62): error C2061: 구문 오류: 식별자 'S_CREATEPLAYER'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,69): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,48): error C2039: 'S_ITEMLIST': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,58): error C2061: 구문 오류: 식별자 'S_ITEMLIST'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,65): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,48): error C2039: 'S_ADDITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,57): error C2061: 구문 오류: 식별자 'S_ADDITEM'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,64): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,48): error C2039: 'S_EQUIPITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,59): error C2061: 구문 오류: 식별자 'S_EQUIPITEM'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,66): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,48): error C2039: 'S_CHANGESTAT': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,60): error C2061: 구문 오류: 식별자 'S_CHANGESTAT'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,67): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(82,48): error C2061: 구문 오류: 식별자 'S_PING'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(82,61): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,96): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_a81eeddd5128035359c2f8b53dfb73cd>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_a81eeddd5128035359c2f8b53dfb73cd>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,97): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_3442ba0baecc68523e71e69de1f3cac4>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_3442ba0baecc68523e71e69de1f3cac4>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,97): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_a7c88228f972f7aab1704a6f277f91d8>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_a7c88228f972f7aab1704a6f277f91d8>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,127): error C2039: 'C_CREATEPLAYER': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): error C2065: 'C_CREATEPLAYER': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,104): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_99201505b9d1b8262e10a118aa51d86b>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_99201505b9d1b8262e10a118aa51d86b>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,124): error C2039: 'C_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): error C2065: 'C_ENTERGAME': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,101): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_b2b752137c2fdfb0d5e7337b614e981b>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_b2b752137c2fdfb0d5e7337b614e981b>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,124): error C2039: 'C_EQUIPITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): error C2065: 'C_EQUIPITEM': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,101): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_4597bd388c8e8589a686fd6c53dd6b7c>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_4597bd388c8e8589a686fd6c53dd6b7c>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,96): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_91858dda1b5338f010fae4a0afb37eaa>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_91858dda1b5338f010fae4a0afb37eaa>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(69,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(70,88): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(71,85): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(72,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,89): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(74,84): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(75,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(76,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,93): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,89): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,88): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,91): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(82,85): error C2065: 'pkt': 선언되지 않은 식별자입니다.
   GameSession.cpp
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(38,57): error C2061: 구문 오류: 식별자 'C_MOVE'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(39,58): error C2061: 구문 오류: 식별자 'C_SKILL'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(40,58): error C2061: 구문 오류: 식별자 'C_LOGIN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(41,65): error C2039: 'C_CREATEPLAYER': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(41,79): error C2061: 구문 오류: 식별자 'C_CREATEPLAYER'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(42,62): error C2039: 'C_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(42,73): error C2061: 구문 오류: 식별자 'C_ENTERGAME'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(43,62): error C2039: 'C_EQUIPITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(43,73): error C2061: 구문 오류: 식별자 'C_EQUIPITEM'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(44,57): error C2061: 구문 오류: 식별자 'C_PONG'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67,48): error C2039: 'S_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67,59): error C2061: 구문 오류: 식별자 'S_ENTERGAME'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,48): error C2039: 'S_LEAVEGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,59): error C2061: 구문 오류: 식별자 'S_LEAVEGAME'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,66): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(69,48): error C2061: 구문 오류: 식별자 'S_SPAWN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(69,62): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(70,48): error C2061: 구문 오류: 식별자 'S_DESPAWN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(70,64): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(71,48): error C2061: 구문 오류: 식별자 'S_MOVE'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(71,61): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(72,48): error C2061: 구문 오류: 식별자 'S_SKILL'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(72,62): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,48): error C2039: 'S_CHANGEHP': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,58): error C2061: 구문 오류: 식별자 'S_CHANGEHP'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,65): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(74,48): error C2061: 구문 오류: 식별자 'S_DIE'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(74,60): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(75,48): error C2061: 구문 오류: 식별자 'S_CONNECTED'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(75,66): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(76,48): error C2061: 구문 오류: 식별자 'S_LOGIN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(76,62): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,48): error C2039: 'S_CREATEPLAYER': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,62): error C2061: 구문 오류: 식별자 'S_CREATEPLAYER'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,69): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,48): error C2039: 'S_ITEMLIST': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,58): error C2061: 구문 오류: 식별자 'S_ITEMLIST'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,65): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,48): error C2039: 'S_ADDITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,57): error C2061: 구문 오류: 식별자 'S_ADDITEM'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,64): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,48): error C2039: 'S_EQUIPITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,59): error C2061: 구문 오류: 식별자 'S_EQUIPITEM'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,66): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,48): error C2039: 'S_CHANGESTAT': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,60): error C2061: 구문 오류: 식별자 'S_CHANGESTAT'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,67): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(82,48): error C2061: 구문 오류: 식별자 'S_PING'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(82,61): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,96): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_a81eeddd5128035359c2f8b53dfb73cd>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_a81eeddd5128035359c2f8b53dfb73cd>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,97): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_3442ba0baecc68523e71e69de1f3cac4>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_3442ba0baecc68523e71e69de1f3cac4>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,97): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_a7c88228f972f7aab1704a6f277f91d8>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_a7c88228f972f7aab1704a6f277f91d8>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,127): error C2039: 'C_CREATEPLAYER': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): error C2065: 'C_CREATEPLAYER': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,104): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_99201505b9d1b8262e10a118aa51d86b>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_99201505b9d1b8262e10a118aa51d86b>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,124): error C2039: 'C_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): error C2065: 'C_ENTERGAME': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,101): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_b2b752137c2fdfb0d5e7337b614e981b>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_b2b752137c2fdfb0d5e7337b614e981b>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,124): error C2039: 'C_EQUIPITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): error C2065: 'C_EQUIPITEM': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,101): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_4597bd388c8e8589a686fd6c53dd6b7c>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_4597bd388c8e8589a686fd6c53dd6b7c>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,96): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_91858dda1b5338f010fae4a0afb37eaa>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_91858dda1b5338f010fae4a0afb37eaa>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(69,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(70,88): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(71,85): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(72,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,89): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(74,84): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(75,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(76,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,93): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,89): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,88): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,91): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(82,85): error C2065: 'pkt': 선언되지 않은 식별자입니다.
   GameSessionManager.cpp
   Player.cpp
   ClientPacketHandler.cpp
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(38,57): error C2061: 구문 오류: 식별자 'C_MOVE'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(39,58): error C2061: 구문 오류: 식별자 'C_SKILL'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(40,58): error C2061: 구문 오류: 식별자 'C_LOGIN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(41,65): error C2039: 'C_CREATEPLAYER': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(41,79): error C2061: 구문 오류: 식별자 'C_CREATEPLAYER'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(42,62): error C2039: 'C_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(42,73): error C2061: 구문 오류: 식별자 'C_ENTERGAME'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(43,62): error C2039: 'C_EQUIPITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(43,73): error C2061: 구문 오류: 식별자 'C_EQUIPITEM'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(44,57): error C2061: 구문 오류: 식별자 'C_PONG'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67,48): error C2039: 'S_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67,59): error C2061: 구문 오류: 식별자 'S_ENTERGAME'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,48): error C2039: 'S_LEAVEGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,59): error C2061: 구문 오류: 식별자 'S_LEAVEGAME'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,66): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(69,48): error C2061: 구문 오류: 식별자 'S_SPAWN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(69,62): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(70,48): error C2061: 구문 오류: 식별자 'S_DESPAWN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(70,64): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(71,48): error C2061: 구문 오류: 식별자 'S_MOVE'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(71,61): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(72,48): error C2061: 구문 오류: 식별자 'S_SKILL'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(72,62): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,48): error C2039: 'S_CHANGEHP': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,58): error C2061: 구문 오류: 식별자 'S_CHANGEHP'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,65): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(74,48): error C2061: 구문 오류: 식별자 'S_DIE'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(74,60): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(75,48): error C2061: 구문 오류: 식별자 'S_CONNECTED'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(75,66): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(76,48): error C2061: 구문 오류: 식별자 'S_LOGIN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(76,62): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,48): error C2039: 'S_CREATEPLAYER': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,62): error C2061: 구문 오류: 식별자 'S_CREATEPLAYER'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,69): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,48): error C2039: 'S_ITEMLIST': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,58): error C2061: 구문 오류: 식별자 'S_ITEMLIST'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,65): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,48): error C2039: 'S_ADDITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,57): error C2061: 구문 오류: 식별자 'S_ADDITEM'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,64): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,48): error C2039: 'S_EQUIPITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,59): error C2061: 구문 오류: 식별자 'S_EQUIPITEM'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,66): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,48): error C2039: 'S_CHANGESTAT': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,60): error C2061: 구문 오류: 식별자 'S_CHANGESTAT'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,67): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(82,48): error C2061: 구문 오류: 식별자 'S_PING'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(82,61): error C2535: 'SendBufferRef ClientPacketHandler::MakeSendBuffer(void)': 멤버 함수를 이미 정의했거나 선언했습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67): message : 'ClientPacketHandler::MakeSendBuffer' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,96): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_a81eeddd5128035359c2f8b53dfb73cd>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(53,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_a81eeddd5128035359c2f8b53dfb73cd>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,97): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_3442ba0baecc68523e71e69de1f3cac4>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(54,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_3442ba0baecc68523e71e69de1f3cac4>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,97): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_a7c88228f972f7aab1704a6f277f91d8>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(55,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_a7c88228f972f7aab1704a6f277f91d8>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,127): error C2039: 'C_CREATEPLAYER': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): error C2065: 'C_CREATEPLAYER': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,104): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_99201505b9d1b8262e10a118aa51d86b>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(56,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_99201505b9d1b8262e10a118aa51d86b>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,124): error C2039: 'C_ENTERGAME': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): error C2065: 'C_ENTERGAME': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,101): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_b2b752137c2fdfb0d5e7337b614e981b>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(57,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_b2b752137c2fdfb0d5e7337b614e981b>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,124): error C2039: 'C_EQUIPITEM': 'Protocol'의 멤버가 아닙니다.
-C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.h(154): message : 'Protocol' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): error C2065: 'C_EQUIPITEM': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,101): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_4597bd388c8e8589a686fd6c53dd6b7c>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(58,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_4597bd388c8e8589a686fd6c53dd6b7c>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,96): error C2672: 'ClientPacketHandler::HandlePacket': 일치하는 오버로드된 함수가 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,1): error C2974: 'ClientPacketHandler::HandlePacket': 'PacketType'의 템플릿 인수가 잘못되었습니다. 형식이 필요합니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(86): message : 'ClientPacketHandler::HandlePacket' 선언을 참조하십시오.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,1): error C2679: 이항 '=': 오른쪽 피연산자로 'ClientPacketHandler::Init::<lambda_91858dda1b5338f010fae4a0afb37eaa>' 형식을 사용하는 연산자가 없거나 허용되는 변환이 없습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1108,15): message : 'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::nullptr_t) noexcept'일 수 있습니다.
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1083,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(std::function<bool (PacketSessionRef &,BYTE *,int32)> &&) noexcept'
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Professional\VC\Tools\MSVC\14.29.30133\include\functional(1067,15): message : 또는       'std::function<bool (PacketSessionRef &,BYTE *,int32)> &std::function<bool (PacketSessionRef &,BYTE *,int32)>::operator =(const std::function<bool (PacketSessionRef &,BYTE *,int32)> &)'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(59,1): message : 인수 목록 '(PacketHandlerFunc, ClientPacketHandler::Init::<lambda_91858dda1b5338f010fae4a0afb37eaa>)'을(를) 일치시키는 동안
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(67,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(68,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(69,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(70,88): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(71,85): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(72,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(73,89): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(74,84): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(75,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(76,86): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(77,93): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(78,89): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(79,88): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(80,90): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(81,91): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.h(82,85): error C2065: 'pkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(18,58): error C2061: 구문 오류: 식별자 'C_LOGIN'
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(24,20): error C2146: 구문 오류: ';'이(가) 'loginPkt' 식별자 앞에 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(24,20): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(25,2): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(34,17): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(35,9): error C3536: 'player': 초기화되기 전에 사용할 수 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(48,17): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(49,9): error C3536: 'player': 초기화되기 전에 사용할 수 없습니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(61,56): error C2065: 'loginPkt': 선언되지 않은 식별자입니다.
-C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(61,64): fatal error C1003: 오류 수가 100개를 초과했습니다. 컴파일을 중지합니다.
   Room.cpp
   코드를 생성하고 있습니다...
+  GameServer.vcxproj -> C:\Developer\onlinegame\Server\Binary\Debug\GameServer.exe
