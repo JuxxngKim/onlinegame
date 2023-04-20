@@ -9,32 +9,6 @@ enum PlayerType
 	PLAYER_TYPE_ARCHER = 3;
 }
 
-enum MsgId {
-	S_ENTER_GAME = 0;
-	S_LEAVE_GAME = 1;
-	S_SPAWN = 2;
-	S_DESPAWN = 3;
-	C_MOVE = 4;
-	S_MOVE = 5;
-	C_SKILL = 6;
-	S_SKILL = 7;
-	S_CHANGE_HP = 8;
-	S_DIE = 9;
-	S_CONNECTED = 10;
-	C_LOGIN = 11;
-	S_LOGIN = 12;
-	C_ENTER_GAME = 13;
-	C_CREATE_PLAYER = 14;
-	S_CREATE_PLAYER = 15;
-	S_ITEM_LIST = 16;
-	S_ADD_ITEM = 17;
-	C_EQUIP_ITEM = 18;
-	S_EQUIP_ITEM = 19;
-	S_CHANGE_STAT = 20;
-	S_PING = 21;
-	C_PONG = 22;
-}
-
 enum CreatureState {
 	IDLE = 0;
 	MOVING = 1;

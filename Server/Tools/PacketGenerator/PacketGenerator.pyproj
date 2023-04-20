@@ -30,6 +30,12 @@
     <Folder Include="Templates\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Templates\ClientPacketHandler.cs">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Templates\ClientPacketManager.cs">
+      <SubType>Code</SubType>
+    </Content>
     <Content Include="Templates\PacketHandler.h">
       <SubType>Code</SubType>
     </Content>

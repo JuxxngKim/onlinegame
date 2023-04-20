@@ -23,7 +23,20 @@ def main():
 	f.write(output)
 	f.close()
 
-	print(output)
+	template2 = env.get_template('ClientPacketHandler.cs')
+	output = template2.render(parser=parser, output=args.output)
+
+	f2 = open('ClientPacketHandler.cs', 'w+')
+	f2.write(output)
+	f2.close()
+
+	
+	template3 = env.get_template('ClientPacketManager.cs')
+	output = template3.render(parser=parser, output=args.output)
+
+	f3 = open('ClientPacketManager.cs', 'w+')
+	f3.write(output)
+	f3.close()
 	return
 
 if __name__ == '__main__':

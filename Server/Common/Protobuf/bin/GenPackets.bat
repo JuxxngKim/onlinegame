@@ -27,6 +27,8 @@ XCOPY /Y ServerPacketHandler.h "../../../DummyClient"
 XCOPY /Y Enum.cs "../../../../Client/Assets/Scripts/Packet"
 XCOPY /Y Struct.cs "../../../../Client/Assets/Scripts/Packet"
 XCOPY /Y Protocol.cs "../../../../Client/Assets/Scripts/Packet"
+XCOPY /Y ClientPacketHandler.cs "../../../../Client/Assets/Scripts/Packet"
+XCOPY /Y ClientPacketManager.cs "../../../../Client/Assets/Scripts/Packet"
 
 DEL /Q /F *.pb.h
 DEL /Q /F *.pb.cc

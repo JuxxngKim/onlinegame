@@ -83,52 +83,6 @@ inline bool PlayerType_Parse(
   return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<PlayerType>(
     PlayerType_descriptor(), name, value);
 }
-enum MsgId : int {
-  S_ENTER_GAME = 0,
-  S_LEAVE_GAME = 1,
-  S_SPAWN = 2,
-  S_DESPAWN = 3,
-  C_MOVE = 4,
-  S_MOVE = 5,
-  C_SKILL = 6,
-  S_SKILL = 7,
-  S_CHANGE_HP = 8,
-  S_DIE = 9,
-  S_CONNECTED = 10,
-  C_LOGIN = 11,
-  S_LOGIN = 12,
-  C_ENTER_GAME = 13,
-  C_CREATE_PLAYER = 14,
-  S_CREATE_PLAYER = 15,
-  S_ITEM_LIST = 16,
-  S_ADD_ITEM = 17,
-  C_EQUIP_ITEM = 18,
-  S_EQUIP_ITEM = 19,
-  S_CHANGE_STAT = 20,
-  S_PING = 21,
-  C_PONG = 22,
-  MsgId_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::min(),
-  MsgId_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<::PROTOBUF_NAMESPACE_ID::int32>::max()
-};
-bool MsgId_IsValid(int value);
-constexpr MsgId MsgId_MIN = S_ENTER_GAME;
-constexpr MsgId MsgId_MAX = C_PONG;
-constexpr int MsgId_ARRAYSIZE = MsgId_MAX + 1;
-
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* MsgId_descriptor();
-template<typename T>
-inline const std::string& MsgId_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, MsgId>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function MsgId_Name.");
-  return ::PROTOBUF_NAMESPACE_ID::internal::NameOfEnum(
-    MsgId_descriptor(), enum_t_value);
-}
-inline bool MsgId_Parse(
-    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, MsgId* value) {
-  return ::PROTOBUF_NAMESPACE_ID::internal::ParseNamedEnum<MsgId>(
-    MsgId_descriptor(), name, value);
-}
 enum CreatureState : int {
   IDLE = 0,
   MOVING = 1,
@@ -393,11 +347,6 @@ template <> struct is_proto_enum< ::Protocol::PlayerType> : ::std::true_type {};
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::PlayerType>() {
   return ::Protocol::PlayerType_descriptor();
-}
-template <> struct is_proto_enum< ::Protocol::MsgId> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::Protocol::MsgId>() {
-  return ::Protocol::MsgId_descriptor();
 }
 template <> struct is_proto_enum< ::Protocol::CreatureState> : ::std::true_type {};
 template <>
