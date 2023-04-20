@@ -6,13 +6,15 @@ public class GameScene : BaseScene
 {
     protected override void Init()
     {
-        base.Init();
+        // base.Init();
 
-        SceneType = Define.Scene.Game;
+        // SceneType = Define.Scene.Game;
+        //
+        // Managers.Map.LoadMap(1);
+        //
+        // Screen.SetResolution(640, 480, false);
 
-        Managers.Map.LoadMap(1);
-
-        Screen.SetResolution(640, 480, false);
+        NetworkManager networkManager = Managers.Network;
     }
 
     public override void Clear()
