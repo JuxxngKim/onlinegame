@@ -1,5 +1,6 @@
 #pragma once
 #include "JobQueue.h"
+#include "Enum.pb.h"
 
 class Room : public JobQueue
 {

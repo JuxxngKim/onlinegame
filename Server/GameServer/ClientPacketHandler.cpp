@@ -37,7 +37,12 @@ bool Handle_C_CreatePlayer(PacketSessionRef& session, Protocol::C_CreatePlayer& 
 
 bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt)
 {
-	return false;
+	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
+	
+	//gameSession->_currentPlayer = gameSession->_players[index]; // READ_ONLY?
+	//gameSession->_room = GRoom;
+	//GRoom->DoAsync(&Room::Enter, gameSession->_currentPlayer);
+	return true;
 }
 
 bool Handle_C_EquipItem(PacketSessionRef& session, Protocol::C_EquipItem& pkt)
@@ -98,7 +103,7 @@ bool Handle_C_Pong(PacketSessionRef& session, Protocol::C_Pong& pkt)
 //
 //	return true;
 //}
-//
+
 //bool Handle_C_ENTER_GAME(PacketSessionRef& session, Protocol::C_ENTER_GAME& pkt)
 //{
 //	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);

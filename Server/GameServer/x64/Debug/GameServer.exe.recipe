@@ -2,7 +2,7 @@
 <Project>
   <ProjectOutputs>
     <ProjectOutput>
-      <FullPath>C:\Developer\onlinegame\Server\Binary\Debug\GameServer.exe</FullPath>
+      <FullPath>C:\GameServer\onlinegame\Server\Binary\Debug\GameServer.exe</FullPath>
     </ProjectOutput>
   </ProjectOutputs>
   <ContentFiles />
