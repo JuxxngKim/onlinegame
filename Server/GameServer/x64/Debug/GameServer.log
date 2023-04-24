@@ -39,6 +39,7 @@
   1개 파일이 복사되었습니다.
   계속하려면 아무 키나 누르십시오 . . . 
   pch.cpp
+C:\GameServer\onlinegame\Server\ServerCore\Memory.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   Enum.pb.cc
   Protocol.pb.cc
 C:\GameServer\onlinegame\Server\GameServer\Protocol.pb.cc(1180,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -67,11 +68,13 @@ C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1974,72): warning C4244:
 C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1981,67): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\GameServer\onlinegame\Server\GameServer\Struct.pb.cc(1988,66): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   코드를 생성하고 있습니다...
+  GameObject.cpp
   GameServer.cpp
   GameSession.cpp
   GameSessionManager.cpp
   Player.cpp
   ClientPacketHandler.cpp
+C:\GameServer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   Room.cpp
   코드를 생성하고 있습니다...
   GameServer.vcxproj -> C:\GameServer\onlinegame\Server\Binary\Debug\GameServer.exe

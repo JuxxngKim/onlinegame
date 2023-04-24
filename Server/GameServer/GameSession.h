@@ -1,5 +1,7 @@
 #pragma once
 #include "Session.h"
+#include "GameTypes.h"
+#include "Protocol.pb.h"
 
 class GameSession : public PacketSession
 {
@@ -15,8 +17,9 @@ public:
 	virtual void OnSend(int32 len) override;
 
 public:
-	Vector<PlayerRef> _players;
-
+	void HandleEnterGame(Protocol::C_EnterGame& enterGame);
+	
+public:
 	PlayerRef _currentPlayer;
 	weak_ptr<class Room> _room;
 };

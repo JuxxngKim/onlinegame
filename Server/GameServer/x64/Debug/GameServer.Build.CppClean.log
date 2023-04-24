@@ -6,9 +6,15 @@ c:\gameserver\onlinegame\server\gameserver\x64\debug\struct.pb.obj
 c:\gameserver\onlinegame\server\gameserver\x64\debug\protocol.pb.obj
 c:\gameserver\onlinegame\server\gameserver\x64\debug\enum.pb.obj
 c:\gameserver\onlinegame\server\gameserver\x64\debug\room.obj
+c:\gameserver\onlinegame\server\gameserver\x64\debug\clientpackethandler.obj
 c:\gameserver\onlinegame\server\gameserver\x64\debug\player.obj
 c:\gameserver\onlinegame\server\gameserver\x64\debug\gamesessionmanager.obj
-c:\gameserver\onlinegame\server\gameserver\x64\debug\gameserver.ilk
+c:\gameserver\onlinegame\server\gameserver\x64\debug\gamesession.obj
+c:\gameserver\onlinegame\server\gameserver\x64\debug\gameserver.obj
+c:\gameserver\onlinegame\server\gameserver\x64\debug\gameobject.obj
 c:\gameserver\onlinegame\server\gameserver\x64\debug\gameserver.tlog\cl.command.1.tlog
 c:\gameserver\onlinegame\server\gameserver\x64\debug\gameserver.tlog\cl.read.1.tlog
 c:\gameserver\onlinegame\server\gameserver\x64\debug\gameserver.tlog\cl.write.1.tlog
+c:\gameserver\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link.command.1.tlog
+c:\gameserver\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link.read.1.tlog
+c:\gameserver\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link.write.1.tlog

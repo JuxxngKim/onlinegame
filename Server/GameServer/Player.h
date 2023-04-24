@@ -1,12 +1,16 @@
 #pragma once
+#include "GameObject.h"
+#include "Enum.pb.h"
 
-class Player
+class Player : public GameObject
 {
 public:
+	Player(uint64 Id, Protocol::GameObjectType objectType);
 
-	uint64					playerId = 0;
-	string					name;
-	Protocol::PlayerType	type = Protocol::PLAYER_TYPE_NONE;
-	GameSessionRef			ownerSession; // Cycle
+public:
+	GameSessionRef GetOwnerSession() { return _ownerSession; }
+	
+public:
+	string					_name;
+	GameSessionRef			_ownerSession; // Cycle
 };
-

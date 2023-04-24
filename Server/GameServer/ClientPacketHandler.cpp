@@ -6,7 +6,6 @@
 
 PacketHandlerFunc GPacketHandler[UINT16_MAX];
 
-// Á÷Á¢ ÄÁÅÙÃ÷ ÀÛ¾÷ÀÚ
 
 bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len)
 {
@@ -38,7 +37,7 @@ bool Handle_C_CreatePlayer(PacketSessionRef& session, Protocol::C_CreatePlayer& 
 bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt)
 {
 	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
-	
+	gameSession->HandleEnterGame(pkt);
 	//gameSession->_currentPlayer = gameSession->_players[index]; // READ_ONLY?
 	//gameSession->_room = GRoom;
 	//GRoom->DoAsync(&Room::Enter, gameSession->_currentPlayer);
@@ -64,15 +63,15 @@ bool Handle_C_Pong(PacketSessionRef& session, Protocol::C_Pong& pkt)
 //	Protocol::S_LOGIN loginPkt;
 //	loginPkt.set_success(true);
 //
-//	// DB¿¡¼­ ÇÃ·¹ÀÌ Á¤º¸¸¦ ±Ü¾î¿Â´Ù
-//	// GameSession¿¡ ÇÃ·¹ÀÌ Á¤º¸¸¦ ÀúÀå (¸Þ¸ð¸®)
+//	// DBï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ü¾ï¿½Â´ï¿½
+//	// GameSessionï¿½ï¿½ ï¿½Ã·ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½Þ¸ï¿½)
 //
-//	// ID ¹ß±Þ (DB ¾ÆÀÌµð°¡ ¾Æ´Ï°í, ÀÎ°ÔÀÓ ¾ÆÀÌµð)
+//	// ID ï¿½ß±ï¿½ (DB ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Æ´Ï°ï¿½, ï¿½Î°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½)
 //	static Atomic<uint64> idGenerator = 1;
 //
 //	{
 //		auto player = loginPkt.add_players();
-//		player->set_name(u8"DB¿¡¼­±Ü¾î¿ÂÀÌ¸§1");
+//		player->set_name(u8"DBï¿½ï¿½ï¿½ï¿½ï¿½Ü¾ï¿½ï¿½ï¿½Ì¸ï¿½1");
 //		player->set_playertype(Protocol::PLAYER_TYPE_KNIGHT);
 //
 //		PlayerRef playerRef = MakeShared<Player>();
@@ -86,7 +85,7 @@ bool Handle_C_Pong(PacketSessionRef& session, Protocol::C_Pong& pkt)
 //
 //	{
 //		auto player = loginPkt.add_players();
-//		player->set_name(u8"DB¿¡¼­±Ü¾î¿ÂÀÌ¸§2");
+//		player->set_name(u8"DBï¿½ï¿½ï¿½ï¿½ï¿½Ü¾ï¿½ï¿½ï¿½Ì¸ï¿½2");
 //		player->set_playertype(Protocol::PLAYER_TYPE_MAGE);
 //
 //		PlayerRef playerRef = MakeShared<Player>();

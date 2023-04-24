@@ -5,21 +5,30 @@
 
 shared_ptr<Room> GRoom = make_shared<Room>();
 
-void Room::Enter(PlayerRef player)
+void Room::Enter(GameObjectRef object)
 {
-	_players[player->playerId] = player;
+	
+
+	
 }
 
-void Room::Leave(PlayerRef player)
+void Room::Leave(GameObjectRef object)
 {
-	_players.erase(player->playerId);
+	if (object->GetObjectType() == Protocol::GameObjectType::PLAYER)
+	{
+
+	}
+	else if (object->GetObjectType() == Protocol::GameObjectType::MONSTER)
+	{
+
+	}
 }
 
 void Room::Broadcast(SendBufferRef sendBuffer)
 {
 	for (auto& p : _players)
 	{
-		p.second->ownerSession->Send(sendBuffer);
+		p.second->GetOwnerSession()->Send(sendBuffer);
 	}
 }
 
