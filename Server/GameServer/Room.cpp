@@ -3,13 +3,14 @@
 #include "Player.h"
 #include "GameSession.h"
 
-shared_ptr<Room> GRoom = make_shared<Room>();
+Room::Room(int32 Id)
+{
+	InitMap(Id);
+}
 
 void Room::Enter(GameObjectRef object)
 {
-	
-
-	
+	auto objectType = object->GetObjectType();
 }
 
 void Room::Leave(GameObjectRef object)
@@ -34,5 +35,10 @@ void Room::Broadcast(SendBufferRef sendBuffer)
 
 void Room::Update()
 {
+	Execute();
+}
 
+void Room::InitMap(int32 Id)
+{
+	_map = MakeShared<GameMap>(Id);
 }

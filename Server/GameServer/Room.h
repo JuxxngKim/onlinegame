@@ -1,9 +1,13 @@
 #pragma once
 #include "JobQueue.h"
 #include "Enum.pb.h"
+#include "GameTypes.h"
 
 class Room : public JobQueue
 {
+public:
+	Room(int32 Id);
+
 public:
 	// 싱글쓰레드 환경인마냥 코딩
 	void Enter(GameObjectRef object);
@@ -12,7 +16,9 @@ public:
 	void Update();
 
 private:
+	void InitMap(int32 Id);
+
+private:
+	GameMapRef _map;
 	map<uint64, PlayerRef> _players;
 };
-
-extern shared_ptr<Room> GRoom;
