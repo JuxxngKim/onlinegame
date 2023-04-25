@@ -4,6 +4,7 @@
 #include "ClientPacketHandler.h"
 #include "Player.h"
 #include "Room.h"
+#include "GameLogic.h"
 
 void GameSession::OnConnected()
 {
@@ -31,7 +32,6 @@ void GameSession::OnRecvPacket(BYTE* buffer, int32 len)
 	PacketSessionRef session = GetPacketSessionRef();
 	PacketHeader* header = reinterpret_cast<PacketHeader*>(buffer);
 
-	// TODO : packetId �뿪 üũ
 	ClientPacketHandler::HandlePacket(session, buffer, len);
 }
 
@@ -42,5 +42,7 @@ void GameSession::OnSend(int32 len)
 void GameSession::HandleEnterGame(Protocol::C_EnterGame& enterGame)
 {
 	static Atomic<uint64> idGenerator{1};
-	_currentPlayer = MakeShared<Player>(idGenerator++, Protocol::GameObjectType::PLAYER);
+	_room = GGameLogic.FindFoom(1);
+
+	_currentPlayer = MakeShared<Player>(idGenerator++, Protocol::GameObjectType::PLAYER, _room);
 }

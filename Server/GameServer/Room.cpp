@@ -2,6 +2,7 @@
 #include "Room.h"
 #include "Player.h"
 #include "GameSession.h"
+#include "GameMap.h"
 
 Room::Room(int32 Id)
 {

@@ -5,7 +5,7 @@
 class GameObject
 {
 public:
-	GameObject(uint64 Id, Protocol::GameObjectType objectType);
+	GameObject(uint64 Id, Protocol::GameObjectType objectType, weak_ptr<class Room> room);
 
 public:
 	uint64 GetID() { return _Id; }

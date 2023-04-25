@@ -48,6 +48,12 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>GameContents</Filter>
     </ClCompile>
+    <ClCompile Include="GameLogic.cpp">
+      <Filter>GameContents</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMap.cpp">
+      <Filter>GameContents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -78,6 +84,12 @@
       <Filter>GameContents</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
+      <Filter>GameContents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameLogic.h">
+      <Filter>GameContents</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMap.h">
       <Filter>GameContents</Filter>
     </ClInclude>
   </ItemGroup>

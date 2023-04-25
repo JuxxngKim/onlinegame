@@ -5,7 +5,7 @@
 class Player : public GameObject
 {
 public:
-	Player(uint64 Id, Protocol::GameObjectType objectType);
+	Player(uint64 Id, Protocol::GameObjectType objectType, weak_ptr<class Room> room);
 
 public:
 	GameSessionRef GetOwnerSession() { return _ownerSession; }

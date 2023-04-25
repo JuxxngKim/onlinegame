@@ -1,9 +1,16 @@
 #include "pch.h"
 #include "GameLogic.h"
 
-void GameLogic::AddRoom(int mapId)
+GameLogic GGameLogic;
+
+void GameLogic::AddRoom(int roomId)
 {
-	_rooms[mapId] = MakeShared<Room>(mapId);
+	_rooms[roomId] = MakeShared<Room>(roomId);
+}
+
+std::weak_ptr<Room> GameLogic::FindFoom(int roomId)
+{
+	return std::weak_ptr<Room>(_rooms[roomId]);
 }
 
 void GameLogic::Update()
