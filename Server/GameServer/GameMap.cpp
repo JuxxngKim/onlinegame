@@ -3,6 +3,7 @@
 
 GameMap::GameMap(int32 mapId)
 {
+	LoadMap(mapId);
 }
 
 void GameMap::LoadMap(int mapId)

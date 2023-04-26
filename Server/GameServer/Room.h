@@ -9,7 +9,6 @@ public:
 	Room(int32 Id);
 
 public:
-	// 싱글쓰레드 환경인마냥 코딩
 	void Enter(GameObjectRef object);
 	void Leave(GameObjectRef object);
 	void Broadcast(SendBufferRef sendBuffer);
@@ -21,4 +20,5 @@ private:
 private:
 	GameMapRef _map;
 	map<uint64, PlayerRef> _players;
+	map<uint64, PlayerRef> _monsters;
 };
