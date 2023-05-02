@@ -16,7 +16,7 @@ public:
 	void Update();
 
 public:
-	void Handle_Move(Protocol::C_Move& pkt);
+	void Handle_Move(PlayerRef player, Protocol::C_Move pkt);
 
 private:
 	void InitMap(int32 Id);

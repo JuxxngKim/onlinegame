@@ -94,8 +94,32 @@ void Room::Update()
 	Execute();
 }
 
-void Room::Handle_Move(Protocol::C_Move& pkt)
+void Room::Handle_Move(PlayerRef player, Protocol::C_Move pkt)
 {
+	Protocol::PositionInfo movePosInfo = pkt.posinfo(); 
+	Protocol::PositionInfo posInfo = player->_posInfo;
+
+	if(posInfo.posx() != movePosInfo.posx() ||
+		posInfo.posy() != movePosInfo.posy())
+	{
+		Vector2Int vector2_int = Vector2Int(movePosInfo.posx(), movePosInfo.posy());
+		if(_map->CanGo(vector2_int, true) == false)
+			return;
+	}
+
+	player->_posInfo.set_posx(movePosInfo.posx());
+	player->_posInfo.set_posy(movePosInfo.posy());
+	player->_posInfo.set_state(pkt.posinfo().state());
+	player->_posInfo.set_movedir(pkt.posinfo().movedir());
+
+	{
+		Protocol::S_Move pkt;
+		pkt.set_objectid(player->GetID());
+		Protocol::PositionInfo* sendPosInfo = pkt.mutable_posinfo();
+		*sendPosInfo = player->_posInfo;
+		
+		Broadcast(ClientPacketHandler::MakeSendBuffer(pkt));
+	}
 }
 
 void Room::InitMap(int32 Id)

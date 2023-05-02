@@ -21,7 +21,7 @@ public:
 public:
 	void SetPosition();
 
-protected:
+public:
 	Protocol::ObjectInfo _objectInfo;
 	Protocol::PositionInfo _posInfo;
 	Protocol::StatInfo _statInfo;
