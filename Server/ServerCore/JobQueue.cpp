@@ -25,7 +25,7 @@ void JobQueue::Execute()
 		for (int32 i = 0; i < jobCount; i++)
 			jobs[i]->Execute();
 
-		// ³²Àº ÀÏ°¨ÀÌ 0°³¶ó¸é Á¾·á
+		// ë‚¨ì€ ì¼ê°ì´ 0ê°œë¼ë©´ ì¢…ë£Œ
 		if (_jobCount.fetch_sub(jobCount) == jobCount)
 		{
 			LCurrentJobQueue = nullptr;

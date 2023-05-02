@@ -13,6 +13,7 @@
 #include "Player.h"
 #include "DBConnectionPool.h"
 #include "DBBind.h"
+#include "GameLogic.h"
 
 enum
 {
@@ -56,8 +57,15 @@ int main()
 			});
 	}
 
+	GGameLogic.AddRoom(1);
+	
 	// Main Thread
-	DoWorkerJob(service);
+	while (true)
+	{
+		GGameLogic.Update();
+	}
+
+	// DoWorkerJob(service);
 
 	GThreadManager->Join();
 }

@@ -101,47 +101,46 @@ bool GameMap::ApplyMove(GameObjectRef gameObject, Vector2Int dest)
 void GameMap::LoadMap(int mapId)
 {
 	string line;
-	string path = "../../../../../Common/MapData/Map" + mapId;
+	string path = "../../Common/MapData/Map" + mapId;
 	path.append(".txt");
 	ifstream file(path);
-	if (file.is_open())
-	{
-		getline(file, line);
-		_minX = std::stoi(line);
-		
-		getline(file, line);
-		_maxX = std::stoi(line);
-		
-		getline(file, line);
-		_minY = std::stoi(line);
-
-		getline(file, line);
-		_maxX = std::stoi(line);
-
-		const int xCount = _maxX - _minX + 1;
-		const int yCount = _maxY - _minY + 1;
-
-		_collision = new bool* [yCount];
-		for (int i = 0; i < yCount; ++i)
-			_collision[i] = new bool[xCount];
-
-		_objects = new uint64 * [yCount];
-		for (int i = 0; i < yCount; ++i)
-			_objects[i] = new uint64[xCount] { 0, };
-
-		for (int y = 0; y < yCount; y++)
-		{
-			getline(file, line);
-			for (int x = 0; x < xCount; x++)
-			{
-				_collision[y][x] = (line[x] == '1' ? true : false);
-			}
-		}
-
-		file.close();
-	}
-	else
+	if (!file.is_open())
 	{
 		cout << "Unable to open map file";
+		return;
 	}
+
+	getline(file, line);
+	_minX = std::stoi(line);
+
+	getline(file, line);
+	_maxX = std::stoi(line);
+
+	getline(file, line);
+	_minY = std::stoi(line);
+
+	getline(file, line);
+	_maxX = std::stoi(line);
+
+	const int xCount = _maxX - _minX + 1;
+	const int yCount = _maxY - _minY + 1;
+
+	_collision = new bool*[yCount];
+	for (int i = 0; i < yCount; ++i)
+		_collision[i] = new bool[xCount];
+
+	_objects = new uint64*[yCount];
+	for (int i = 0; i < yCount; ++i)
+		_objects[i] = new uint64[xCount]{0,};
+
+	for (int y = 0; y < yCount; y++)
+	{
+		getline(file, line);
+		for (int x = 0; x < xCount; x++)
+		{
+			_collision[y][x] = (line[x] == '1' ? true : false);
+		}
+	}
+
+	file.close();
 }
