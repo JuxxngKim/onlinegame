@@ -40,16 +40,20 @@ class GameMap
 {
 public:
 	GameMap(int32 mapId);
+	~GameMap();
 
 public:
 	bool CanGo(Vector2Int cellPos, bool checkObjects = true);
-
+	uint64 Find(Vector2Int cellPos);
+	bool ApplyLeave(GameObjectRef gameObject);
+	bool ApplyMove(GameObjectRef gameObject, Vector2Int dest);
+	
 private:
 	void LoadMap(int mapId);
 
 private:
-	/*bool** _collision;
-	GameObject* _objects;*/
+	bool** _collision;
+	uint64** _objects;
 
 	int _minX;
 	int _minY;

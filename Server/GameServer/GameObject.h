@@ -5,12 +5,19 @@
 class GameObject
 {
 public:
+	GameObject() {}
 	GameObject(uint64 Id, Protocol::GameObjectType objectType, weak_ptr<class Room> room);
 
 public:
+	weak_ptr<class Room> GetRoom() { return _room; }
+	
+public:
 	uint64 GetID() const { return _Id; }
 	Protocol::GameObjectType GetObjectType() const { return _objectType; }
-
+	const Protocol::ObjectInfo GetObjectInfo() const { return _objectInfo; }
+	const Protocol::PositionInfo GetPos() const { return _posInfo; }
+	const Protocol::StatInfo GetStat() const { return _statInfo; }
+	
 public:
 	void SetPosition();
 
