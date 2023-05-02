@@ -8,9 +8,9 @@ public:
 	Player(uint64 Id, Protocol::GameObjectType objectType, weak_ptr<class Room> room);
 
 public:
-	GameSessionRef GetOwnerSession() { return _ownerSession; }
+	GameSessionRef GetOwnerSession() const { return _ownerSession.lock(); }
 	
 public:
 	string					_name;
-	GameSessionRef			_ownerSession; // Cycle
+	weak_ptr<GameSession>	_ownerSession; // Cycle
 };

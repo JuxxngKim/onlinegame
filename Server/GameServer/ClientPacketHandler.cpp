@@ -38,9 +38,6 @@ bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt)
 {
 	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
 	gameSession->HandleEnterGame(pkt);
-	//gameSession->_currentPlayer = gameSession->_players[index]; // READ_ONLY?
-	//gameSession->_room = GRoom;
-	//GRoom->DoAsync(&Room::Enter, gameSession->_currentPlayer);
 	return true;
 }
 

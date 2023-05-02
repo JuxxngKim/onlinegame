@@ -45,4 +45,11 @@ void GameSession::HandleEnterGame(Protocol::C_EnterGame& enterGame)
 	_room = GGameLogic.FindFoom(1);
 
 	_currentPlayer = MakeShared<Player>(idGenerator++, Protocol::GameObjectType::PLAYER, _room);
+
+	if (_room.expired())
+		return;
+
+	const RoomRef roomRef = _room.lock();
+	const GameObjectRef objectRef = _currentPlayer;
+	roomRef->DoAsync(&Room::Enter, objectRef);
 }

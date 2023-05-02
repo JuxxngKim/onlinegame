@@ -2,6 +2,7 @@
 #include "JobQueue.h"
 #include "Enum.pb.h"
 #include "GameTypes.h"
+#include "Protocol.pb.h"
 
 class Room : public JobQueue
 {
@@ -13,6 +14,9 @@ public:
 	void Leave(GameObjectRef object);
 	void Broadcast(SendBufferRef sendBuffer);
 	void Update();
+
+public:
+	void Handle_Move(Protocol::C_Move& pkt);
 
 private:
 	void InitMap(int32 Id);
