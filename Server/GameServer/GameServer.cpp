@@ -1,18 +1,9 @@
 ﻿#include "pch.h"
 #include "ThreadManager.h"
 #include "Service.h"
-#include "Session.h"
 #include "GameSession.h"
-#include "GameSessionManager.h"
-#include "BufferWriter.h"
 #include "ClientPacketHandler.h"
-#include <tchar.h>
 #include "Protocol.pb.h"
-#include "Job.h"
-#include "Room.h"
-#include "Player.h"
-#include "DBConnectionPool.h"
-#include "DBBind.h"
 #include "GameLogic.h"
 
 enum

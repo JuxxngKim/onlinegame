@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <filesystem>
 #include "GameObject.h"
 
 Vector2Int Vector2Int::up{ 0, 1 };
@@ -19,15 +20,6 @@ GameMap::~GameMap()
 {
 	const int xCount = _maxX - _minX + 1;
 	const int yCount = _maxY - _minY + 1;
-
-	for(int i = 0; i < yCount; ++i)
-	{
-		delete[] _collision[i];
-		delete[] _objects[i];
-	}
-
-	delete[] _collision;
-	delete[] _objects;
 }
 
 bool GameMap::CanGo(Vector2Int cellPos, bool checkObjects)
@@ -39,20 +31,11 @@ bool GameMap::CanGo(Vector2Int cellPos, bool checkObjects)
 
 	int x = cellPos.X - _minY;
 	int y = _maxX - cellPos.Y;
-	return !_collision[y][x] && (!checkObjects || _objects[y][x] == 0);
-	return false;
-}
+	Tile* tile = GetTileAt({ x, y });
+	if (tile == nullptr)
+		return false;
 
-uint64 GameMap::Find(Vector2Int cellPos)
-{
-	if (cellPos.X < _minX || cellPos.X > _maxX)
-		return 0;
-	if (cellPos.Y < _minY || cellPos.Y > _maxY)
-		return 0;
-
-	int x = cellPos.X - _minX;
-	int y = _maxY - cellPos.Y;
-	return _objects[y][x];
+	return !tile->collision && (!checkObjects || tile->object != 0);
 }
 
 bool GameMap::ApplyLeave(GameObjectRef gameObject)
@@ -69,11 +52,14 @@ bool GameMap::ApplyLeave(GameObjectRef gameObject)
 
 	int x = posInfo.posx() - _minX;
 	int y = _maxY - posInfo.posy();
-	if(_objects[y][x] == 0)
-		return false;
 	
-	if (_objects[y][x] == gameObject->GetID())
-		_objects[y][x] = 0;
+
+	Tile* tile = GetTileAt({ x, y });
+	if (tile == nullptr)
+		return false;
+
+	if (tile->object == gameObject->GetID())
+		tile->object = 0;
 
 	return true;
 }
@@ -93,54 +79,65 @@ bool GameMap::ApplyMove(GameObjectRef gameObject, Vector2Int dest)
 	{
 		int x = dest.X - _minX;
 		int y = _maxY - dest.Y;
-		_objects[y][x] = gameObject->GetID();
+
+		Tile* tile = GetTileAt({ x, y });
+		if (tile->object == gameObject->GetID())
+			tile->object = gameObject->GetID();
 	}
+
 	return true;
 }
 
+namespace fs = std::filesystem;
+
 void GameMap::LoadMap(int mapId)
 {
-	string line;
-	string path = "../../Common/MapData/Map" + mapId;
-	path.append(".txt");
-	ifstream file(path);
+	string curPath = fs::current_path().string();
+
+	//string path = "C:\\GameServer\\onlinegame\\Server\\Common\\MapData\\Map_1.txt";
+	string path = "../Common/MapData/Map_1.txt";
+	ifstream file;
+	file.open(path);
+
 	if (!file.is_open())
 	{
 		cout << "Unable to open map file";
 		return;
 	}
 
-	getline(file, line);
-	_minX = std::stoi(line);
-
-	getline(file, line);
-	_maxX = std::stoi(line);
-
-	getline(file, line);
-	_minY = std::stoi(line);
-
-	getline(file, line);
-	_maxX = std::stoi(line);
+	file >> _minX >> _maxX;
+	file >> _minY >> _maxY;
 
 	const int xCount = _maxX - _minX + 1;
 	const int yCount = _maxY - _minY + 1;
 
-	_collision = new bool*[yCount];
-	for (int i = 0; i < yCount; ++i)
-		_collision[i] = new bool[xCount];
+	_mapSize = { xCount , yCount };
 
-	_objects = new uint64*[yCount];
-	for (int i = 0; i < yCount; ++i)
-		_objects[i] = new uint64[xCount]{0,};
-
-	for (int y = 0; y < yCount; y++)
+	_tiles = vector<vector<Tile>>(yCount, vector<Tile>(xCount));
+	for (int32 y = 0; y < yCount; y++)
 	{
-		getline(file, line);
-		for (int x = 0; x < xCount; x++)
+		for (int32 x = 0; x < xCount; x++)
 		{
-			_collision[y][x] = (line[x] == '1' ? true : false);
+			_tiles[y][x] = Tile{ 0, false };
 		}
 	}
 
+	for (int32 y = 0; y < yCount; y++)
+	{
+		string line;
+		file >> line;
+
+		for (int32 x = 0; x < xCount; x++)
+			_tiles[y][x].collision = line[x] - '0';
+	}
+
 	file.close();
+}
+
+Tile* GameMap::GetTileAt(Vector2Int pos)
+{
+	if (pos.X < 0 || pos.X >= _mapSize.X || pos.Y < 0 || pos.Y >= _mapSize.Y)
+		return nullptr;
+
+	return &_tiles[pos.Y][pos.X];
 }

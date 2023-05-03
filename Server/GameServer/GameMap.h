@@ -36,6 +36,12 @@ public:
 	int32 X;
 };
 
+struct Tile
+{
+	uint64 object = 0;
+	bool collision = false;
+};
+
 class GameMap
 {
 public:
@@ -47,19 +53,20 @@ public:
 	uint64 Find(Vector2Int cellPos);
 	bool ApplyLeave(GameObjectRef gameObject);
 	bool ApplyMove(GameObjectRef gameObject, Vector2Int dest);
-	
+	Tile* GetTileAt(Vector2Int pos);
+
 private:
 	void LoadMap(int mapId);
 
 private:
-	bool** _collision;
-	uint64** _objects;
+	vector<vector<Tile>> _tiles;
+	//bool** _collision;
+	//uint64** _objects;
 
 	int _minX;
 	int _minY;
 	int _maxX;
 	int _maxY;
 
-	int _sizeX;
-	int _sizeY;
+	Vector2Int _mapSize = {0, 0};
 };
