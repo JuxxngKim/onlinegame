@@ -71,15 +71,17 @@ void Room::Enter(GameObjectRef objectRef)
 void Room::Leave(GameObjectRef objectRef)
 {
 	Protocol::GameObjectType objectType = objectRef->GetObjectType();
+	uint64 objId = objectRef->GetID();
+
 	if (objectType == Protocol::PLAYER)
 	{
-		if (!_players.contains(objectRef->GetID()))
-			_players.erase(objectRef->GetID());
+		if (_players.contains(objId))
+			_players.erase(objId);
 	}
 	else if (objectType == Protocol::MONSTER)
 	{
-		if (!_monsters.contains(objectRef->GetID()))
-			_monsters.erase(objectRef->GetID());
+		if (_monsters.contains(objId))
+			_monsters.erase(objId);
 	}
 
 	{
