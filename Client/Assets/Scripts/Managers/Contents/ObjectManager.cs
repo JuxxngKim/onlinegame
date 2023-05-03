@@ -22,7 +22,7 @@ public class ObjectManager
 		if (_objects.ContainsKey(info.ObjectId))
 			return;
 
-		GameObjectType objectType = GetObjectTypeById(info.ObjectId);
+		GameObjectType objectType = info.ObjectType;
 		if (objectType == GameObjectType.Player)
 		{
 			if (myPlayer)

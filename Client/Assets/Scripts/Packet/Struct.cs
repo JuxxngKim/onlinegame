@@ -28,24 +28,25 @@ namespace Protocol {
             "chIKCgJpZBgBIAEoBBIMCgRuYW1lGAIgASgJEigKCnBsYXllclR5cGUYAyAB",
             "KA4yFC5Qcm90b2NvbC5QbGF5ZXJUeXBlIlkKD0xvYmJ5UGxheWVySW5mbxIS",
             "CgpwbGF5ZXJEYklkGAEgASgFEgwKBG5hbWUYAiABKAkSJAoIc3RhdEluZm8Y",
-            "AyABKAsyEi5Qcm90b2NvbC5TdGF0SW5mbyJ7CgpPYmplY3RJbmZvEhAKCG9i",
-            "amVjdElkGAEgASgFEgwKBG5hbWUYAiABKAkSJwoHcG9zSW5mbxgDIAEoCzIW",
-            "LlByb3RvY29sLlBvc2l0aW9uSW5mbxIkCghzdGF0SW5mbxgEIAEoCzISLlBy",
-            "b3RvY29sLlN0YXRJbmZvInYKDFBvc2l0aW9uSW5mbxImCgVzdGF0ZRgBIAEo",
-            "DjIXLlByb3RvY29sLkNyZWF0dXJlU3RhdGUSIgoHbW92ZURpchgCIAEoDjIR",
-            "LlByb3RvY29sLk1vdmVEaXISDAoEcG9zWBgDIAEoBRIMCgRwb3NZGAQgASgF",
-            "ImUKCFN0YXRJbmZvEg0KBWxldmVsGAEgASgFEgoKAmhwGAIgASgFEg0KBW1h",
-            "eEhwGAMgASgFEg4KBmF0dGFjaxgEIAEoBRINCgVzcGVlZBgFIAEoAhIQCgh0",
-            "b3RhbEV4cBgGIAEoBSIcCglTa2lsbEluZm8SDwoHc2tpbGxJZBgBIAEoBSJf",
-            "CghJdGVtSW5mbxIQCghpdGVtRGJJZBgBIAEoBRISCgp0ZW1wbGF0ZUlkGAIg",
-            "ASgFEg0KBWNvdW50GAMgASgFEgwKBHNsb3QYBCABKAUSEAoIZXF1aXBwZWQY",
-            "BSABKAhiBnByb3RvMw=="));
+            "AyABKAsyEi5Qcm90b2NvbC5TdGF0SW5mbyKpAQoKT2JqZWN0SW5mbxIQCghv",
+            "YmplY3RJZBgBIAEoBRIMCgRuYW1lGAIgASgJEiwKCm9iamVjdFR5cGUYAyAB",
+            "KA4yGC5Qcm90b2NvbC5HYW1lT2JqZWN0VHlwZRInCgdwb3NJbmZvGAQgASgL",
+            "MhYuUHJvdG9jb2wuUG9zaXRpb25JbmZvEiQKCHN0YXRJbmZvGAUgASgLMhIu",
+            "UHJvdG9jb2wuU3RhdEluZm8idgoMUG9zaXRpb25JbmZvEiYKBXN0YXRlGAEg",
+            "ASgOMhcuUHJvdG9jb2wuQ3JlYXR1cmVTdGF0ZRIiCgdtb3ZlRGlyGAIgASgO",
+            "MhEuUHJvdG9jb2wuTW92ZURpchIMCgRwb3NYGAMgASgFEgwKBHBvc1kYBCAB",
+            "KAUiZQoIU3RhdEluZm8SDQoFbGV2ZWwYASABKAUSCgoCaHAYAiABKAUSDQoF",
+            "bWF4SHAYAyABKAUSDgoGYXR0YWNrGAQgASgFEg0KBXNwZWVkGAUgASgCEhAK",
+            "CHRvdGFsRXhwGAYgASgFIhwKCVNraWxsSW5mbxIPCgdza2lsbElkGAEgASgF",
+            "Il8KCEl0ZW1JbmZvEhAKCGl0ZW1EYklkGAEgASgFEhIKCnRlbXBsYXRlSWQY",
+            "AiABKAUSDQoFY291bnQYAyABKAUSDAoEc2xvdBgEIAEoBRIQCghlcXVpcHBl",
+            "ZBgFIAEoCGIGcHJvdG8z"));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.Player), global::Protocol.Player.Parser, new[]{ "Id", "Name", "PlayerType" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.LobbyPlayerInfo), global::Protocol.LobbyPlayerInfo.Parser, new[]{ "PlayerDbId", "Name", "StatInfo" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "Name", "PosInfo", "StatInfo" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.ObjectInfo), global::Protocol.ObjectInfo.Parser, new[]{ "ObjectId", "Name", "ObjectType", "PosInfo", "StatInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.PositionInfo), global::Protocol.PositionInfo.Parser, new[]{ "State", "MoveDir", "PosX", "PosY" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.StatInfo), global::Protocol.StatInfo.Parser, new[]{ "Level", "Hp", "MaxHp", "Attack", "Speed", "TotalExp" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.SkillInfo), global::Protocol.SkillInfo.Parser, new[]{ "SkillId" }, null, null, null, null),
@@ -587,6 +588,7 @@ namespace Protocol {
     public ObjectInfo(ObjectInfo other) : this() {
       objectId_ = other.objectId_;
       name_ = other.name_;
+      objectType_ = other.objectType_;
       posInfo_ = other.posInfo_ != null ? other.posInfo_.Clone() : null;
       statInfo_ = other.statInfo_ != null ? other.statInfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -619,8 +621,19 @@ namespace Protocol {
       }
     }
 
+    /// <summary>Field number for the "objectType" field.</summary>
+    public const int ObjectTypeFieldNumber = 3;
+    private global::Protocol.GameObjectType objectType_ = global::Protocol.GameObjectType.None;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public global::Protocol.GameObjectType ObjectType {
+      get { return objectType_; }
+      set {
+        objectType_ = value;
+      }
+    }
+
     /// <summary>Field number for the "posInfo" field.</summary>
-    public const int PosInfoFieldNumber = 3;
+    public const int PosInfoFieldNumber = 4;
     private global::Protocol.PositionInfo posInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Protocol.PositionInfo PosInfo {
@@ -631,7 +644,7 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "statInfo" field.</summary>
-    public const int StatInfoFieldNumber = 4;
+    public const int StatInfoFieldNumber = 5;
     private global::Protocol.StatInfo statInfo_;
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public global::Protocol.StatInfo StatInfo {
@@ -656,6 +669,7 @@ namespace Protocol {
       }
       if (ObjectId != other.ObjectId) return false;
       if (Name != other.Name) return false;
+      if (ObjectType != other.ObjectType) return false;
       if (!object.Equals(PosInfo, other.PosInfo)) return false;
       if (!object.Equals(StatInfo, other.StatInfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -666,6 +680,7 @@ namespace Protocol {
       int hash = 1;
       if (ObjectId != 0) hash ^= ObjectId.GetHashCode();
       if (Name.Length != 0) hash ^= Name.GetHashCode();
+      if (ObjectType != global::Protocol.GameObjectType.None) hash ^= ObjectType.GetHashCode();
       if (posInfo_ != null) hash ^= PosInfo.GetHashCode();
       if (statInfo_ != null) hash ^= StatInfo.GetHashCode();
       if (_unknownFields != null) {
@@ -692,12 +707,16 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(Name);
       }
+      if (ObjectType != global::Protocol.GameObjectType.None) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) ObjectType);
+      }
       if (posInfo_ != null) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(34);
         output.WriteMessage(PosInfo);
       }
       if (statInfo_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(42);
         output.WriteMessage(StatInfo);
       }
       if (_unknownFields != null) {
@@ -717,12 +736,16 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(Name);
       }
+      if (ObjectType != global::Protocol.GameObjectType.None) {
+        output.WriteRawTag(24);
+        output.WriteEnum((int) ObjectType);
+      }
       if (posInfo_ != null) {
-        output.WriteRawTag(26);
+        output.WriteRawTag(34);
         output.WriteMessage(PosInfo);
       }
       if (statInfo_ != null) {
-        output.WriteRawTag(34);
+        output.WriteRawTag(42);
         output.WriteMessage(StatInfo);
       }
       if (_unknownFields != null) {
@@ -739,6 +762,9 @@ namespace Protocol {
       }
       if (Name.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Name);
+      }
+      if (ObjectType != global::Protocol.GameObjectType.None) {
+        size += 1 + pb::CodedOutputStream.ComputeEnumSize((int) ObjectType);
       }
       if (posInfo_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(PosInfo);
@@ -762,6 +788,9 @@ namespace Protocol {
       }
       if (other.Name.Length != 0) {
         Name = other.Name;
+      }
+      if (other.ObjectType != global::Protocol.GameObjectType.None) {
+        ObjectType = other.ObjectType;
       }
       if (other.posInfo_ != null) {
         if (posInfo_ == null) {
@@ -797,14 +826,18 @@ namespace Protocol {
             Name = input.ReadString();
             break;
           }
-          case 26: {
+          case 24: {
+            ObjectType = (global::Protocol.GameObjectType) input.ReadEnum();
+            break;
+          }
+          case 34: {
             if (posInfo_ == null) {
               PosInfo = new global::Protocol.PositionInfo();
             }
             input.ReadMessage(PosInfo);
             break;
           }
-          case 34: {
+          case 42: {
             if (statInfo_ == null) {
               StatInfo = new global::Protocol.StatInfo();
             }
@@ -833,14 +866,18 @@ namespace Protocol {
             Name = input.ReadString();
             break;
           }
-          case 26: {
+          case 24: {
+            ObjectType = (global::Protocol.GameObjectType) input.ReadEnum();
+            break;
+          }
+          case 34: {
             if (posInfo_ == null) {
               PosInfo = new global::Protocol.PositionInfo();
             }
             input.ReadMessage(PosInfo);
             break;
           }
-          case 34: {
+          case 42: {
             if (statInfo_ == null) {
               StatInfo = new global::Protocol.StatInfo();
             }

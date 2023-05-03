@@ -526,9 +526,10 @@ class ObjectInfo final :
 
   enum : int {
     kNameFieldNumber = 2,
-    kPosInfoFieldNumber = 3,
-    kStatInfoFieldNumber = 4,
+    kPosInfoFieldNumber = 4,
+    kStatInfoFieldNumber = 5,
     kObjectIdFieldNumber = 1,
+    kObjectTypeFieldNumber = 3,
   };
   // string name = 2;
   void clear_name();
@@ -544,7 +545,7 @@ class ObjectInfo final :
   std::string* _internal_mutable_name();
   public:
 
-  // .Protocol.PositionInfo posInfo = 3;
+  // .Protocol.PositionInfo posInfo = 4;
   bool has_posinfo() const;
   private:
   bool _internal_has_posinfo() const;
@@ -562,7 +563,7 @@ class ObjectInfo final :
       ::Protocol::PositionInfo* posinfo);
   ::Protocol::PositionInfo* unsafe_arena_release_posinfo();
 
-  // .Protocol.StatInfo statInfo = 4;
+  // .Protocol.StatInfo statInfo = 5;
   bool has_statinfo() const;
   private:
   bool _internal_has_statinfo() const;
@@ -589,6 +590,15 @@ class ObjectInfo final :
   void _internal_set_objectid(::PROTOBUF_NAMESPACE_ID::int32 value);
   public:
 
+  // .Protocol.GameObjectType objectType = 3;
+  void clear_objecttype();
+  ::Protocol::GameObjectType objecttype() const;
+  void set_objecttype(::Protocol::GameObjectType value);
+  private:
+  ::Protocol::GameObjectType _internal_objecttype() const;
+  void _internal_set_objecttype(::Protocol::GameObjectType value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.ObjectInfo)
  private:
   class _Internal;
@@ -600,6 +610,7 @@ class ObjectInfo final :
   ::Protocol::PositionInfo* posinfo_;
   ::Protocol::StatInfo* statinfo_;
   ::PROTOBUF_NAMESPACE_ID::int32 objectid_;
+  int objecttype_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Struct_2eproto;
 };
@@ -1580,7 +1591,27 @@ inline void ObjectInfo::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.ObjectInfo.name)
 }
 
-// .Protocol.PositionInfo posInfo = 3;
+// .Protocol.GameObjectType objectType = 3;
+inline void ObjectInfo::clear_objecttype() {
+  objecttype_ = 0;
+}
+inline ::Protocol::GameObjectType ObjectInfo::_internal_objecttype() const {
+  return static_cast< ::Protocol::GameObjectType >(objecttype_);
+}
+inline ::Protocol::GameObjectType ObjectInfo::objecttype() const {
+  // @@protoc_insertion_point(field_get:Protocol.ObjectInfo.objectType)
+  return _internal_objecttype();
+}
+inline void ObjectInfo::_internal_set_objecttype(::Protocol::GameObjectType value) {
+  
+  objecttype_ = value;
+}
+inline void ObjectInfo::set_objecttype(::Protocol::GameObjectType value) {
+  _internal_set_objecttype(value);
+  // @@protoc_insertion_point(field_set:Protocol.ObjectInfo.objectType)
+}
+
+// .Protocol.PositionInfo posInfo = 4;
 inline bool ObjectInfo::_internal_has_posinfo() const {
   return this != internal_default_instance() && posinfo_ != nullptr;
 }
@@ -1663,7 +1694,7 @@ inline void ObjectInfo::set_allocated_posinfo(::Protocol::PositionInfo* posinfo)
   // @@protoc_insertion_point(field_set_allocated:Protocol.ObjectInfo.posInfo)
 }
 
-// .Protocol.StatInfo statInfo = 4;
+// .Protocol.StatInfo statInfo = 5;
 inline bool ObjectInfo::_internal_has_statinfo() const {
   return this != internal_default_instance() && statinfo_ != nullptr;
 }

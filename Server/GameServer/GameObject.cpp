@@ -7,6 +7,7 @@ GameObject::GameObject(uint64 Id, Protocol::GameObjectType objectType, weak_ptr<
     _objectType = objectType;
     _objectInfo.set_allocated_posinfo(&_posInfo);
     _objectInfo.set_allocated_statinfo(&_statInfo);
+    _objectInfo.set_objectid(Id);
     _Id = Id;
     _room = room;
 }

@@ -11,8 +11,10 @@ class PacketHandler
 	public static void S_EnterGameHandler(PacketSession session, IMessage message)
 	{
 		S_EnterGame packet = message as S_EnterGame;
-		if (packet == null)
+		if (packet?.Player == null)
 			return;
+
+		Managers.Object.Add(packet.Player, myPlayer: true);
 	}
 
 	public static void S_LeaveGameHandler(PacketSession session, IMessage message)
@@ -24,9 +26,14 @@ class PacketHandler
 
 	public static void S_SpawnHandler(PacketSession session, IMessage message)
 	{
-		S_Spawn packet = message as S_Spawn;
-		if (packet == null)
+		S_Spawn spawn = message as S_Spawn;
+		if (spawn?.Objects == null || spawn.Objects.Count <= 0)
 			return;
+		
+		foreach (ObjectInfo obj in spawn.Objects)
+		{
+			Managers.Object.Add(obj, myPlayer: false);
+		}
 	}
 
 	public static void S_DespawnHandler(PacketSession session, IMessage message)

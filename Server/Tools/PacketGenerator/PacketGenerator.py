@@ -22,14 +22,6 @@ def main():
 	f = open(args.output+'.h', 'w+')
 	f.write(output)
 	f.close()
-
-	template2 = env.get_template('ClientPacketHandler.cs')
-	output = template2.render(parser=parser, output=args.output)
-
-	f2 = open('ClientPacketHandler.cs', 'w+')
-	f2.write(output)
-	f2.close()
-
 	
 	template3 = env.get_template('ClientPacketManager.cs')
 	output = template3.render(parser=parser, output=args.output)
