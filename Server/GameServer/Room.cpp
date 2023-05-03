@@ -16,8 +16,15 @@ void Room::Enter(GameObjectRef objectRef)
 	Protocol::GameObjectType objectType = objectRef->GetObjectType();
 	if(objectType == Protocol::PLAYER)
 	{
+		if (_players.contains(objectRef->GetID()))
+			return;
+
 		const PlayerRef playerRef = static_pointer_cast<Player>(objectRef);
-		_map->ApplyMove(playerRef, Vector2Int(0, 0));
+		auto spawnPos = Vector2Int(2, 3);
+
+		playerRef->SetMoveDir(Protocol::MoveDir::DOWN);
+		playerRef->SetPosition(spawnPos);
+
 		_players[playerRef->GetID()] = playerRef;
 
 		// 본인한테 정보 전송
@@ -56,7 +63,6 @@ void Room::Enter(GameObjectRef objectRef)
 			
 			Protocol::ObjectInfo* info = spawnPacket.add_objects();
 			*info = objectRef->GetObjectInfo();
-
 			p.second->GetOwnerSession()->Send(ClientPacketHandler::MakeSendBuffer(spawnPacket));
 		}
 	}
@@ -67,11 +73,13 @@ void Room::Leave(GameObjectRef objectRef)
 	Protocol::GameObjectType objectType = objectRef->GetObjectType();
 	if (objectType == Protocol::PLAYER)
 	{
-		_players.erase(objectRef->GetID());
+		if (!_players.contains(objectRef->GetID()))
+			_players.erase(objectRef->GetID());
 	}
 	else if (objectType == Protocol::MONSTER)
 	{
-		_monsters.erase(objectRef->GetID());
+		if (!_monsters.contains(objectRef->GetID()))
+			_monsters.erase(objectRef->GetID());
 	}
 
 	{
@@ -99,18 +107,16 @@ void Room::Handle_Move(PlayerRef player, Protocol::C_Move pkt)
 	Protocol::PositionInfo movePosInfo = pkt.posinfo(); 
 	Protocol::PositionInfo posInfo = player->_posInfo;
 
-	if(posInfo.posx() != movePosInfo.posx() ||
+	Vector2Int vector2_int = { movePosInfo };
+	if (posInfo.posx() != movePosInfo.posx() ||
 		posInfo.posy() != movePosInfo.posy())
 	{
-		Vector2Int vector2_int = Vector2Int(movePosInfo.posx(), movePosInfo.posy());
 		if(_map->CanGo(vector2_int, true) == false)
 			return;
 	}
 
-	player->_posInfo.set_posx(movePosInfo.posx());
-	player->_posInfo.set_posy(movePosInfo.posy());
-	player->_posInfo.set_state(pkt.posinfo().state());
-	player->_posInfo.set_movedir(pkt.posinfo().movedir());
+	player->SetPosition(vector2_int);
+	player->SetMoveDir(pkt.posinfo().movedir());
 
 	{
 		Protocol::S_Move pkt;

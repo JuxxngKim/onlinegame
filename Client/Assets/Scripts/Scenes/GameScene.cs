@@ -13,12 +13,17 @@ public class GameScene : BaseScene
         // Managers.Map.LoadMap(1);
         //
         // Screen.SetResolution(640, 480, false);
-
+        Managers.Map.LoadMap(1);
         NetworkManager networkManager = Managers.Network;
     }
 
     public override void Clear()
     {
         
+    }
+
+    public void OnApplicationQuit()
+    {
+        Managers.Network.DisConnect();
     }
 }

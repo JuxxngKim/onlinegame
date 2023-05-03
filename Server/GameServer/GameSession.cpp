@@ -41,13 +41,15 @@ void GameSession::OnSend(int32 len)
 
 void GameSession::HandleEnterGame(Protocol::C_EnterGame& enterGame)
 {
-	static Atomic<uint64> idGenerator{1};
+	static Atomic<uint64> idGenerator{ 1 };
 	_room = GGameLogic.FindFoom(1);
 
 	_currentPlayer = MakeShared<Player>(idGenerator++, Protocol::GameObjectType::PLAYER, _room);
 
 	if (_room.expired())
 		return;
+
+	_currentPlayer->_ownerSession = weak_ptr<GameSession>(static_pointer_cast<GameSession>(shared_from_this()));
 
 	const RoomRef roomRef = _room.lock();
 	const GameObjectRef objectRef = _currentPlayer;

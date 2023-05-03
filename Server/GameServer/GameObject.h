@@ -5,8 +5,8 @@
 class GameObject
 {
 public:
-	GameObject() {}
 	GameObject(uint64 Id, Protocol::GameObjectType objectType, weak_ptr<class Room> room);
+	virtual ~GameObject();
 
 public:
 	weak_ptr<class Room> GetRoom() { return _room; }
@@ -19,7 +19,8 @@ public:
 	const Protocol::StatInfo& GetStat() const { return _statInfo; }
 	
 public:
-	void SetPosition();
+	void SetPosition(Vector2Int pos);
+	void SetMoveDir(Protocol::MoveDir dir);
 
 public:
 	Protocol::ObjectInfo _objectInfo;

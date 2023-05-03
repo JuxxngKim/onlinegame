@@ -42,4 +42,9 @@ public class NetworkManager
 		}	
 	}
 
+	public void DisConnect()
+    {
+		_session?.Disconnect();
+	}
+
 }

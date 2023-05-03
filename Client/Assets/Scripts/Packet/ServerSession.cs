@@ -30,6 +30,10 @@ public class ServerSession : PacketSession
 		{
 			PacketQueue.Instance.Push(i, m);
 		};
+
+		C_EnterGame enterGame = new C_EnterGame();
+		enterGame.Name = $"11";
+		Managers.Network.Send(enterGame);
 	}
 
 	public override void OnDisconnected(EndPoint endPoint)
