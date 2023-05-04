@@ -38,9 +38,9 @@ class PacketHandler
 
 	public static void S_DespawnHandler(PacketSession session, IMessage message)
 	{
-		S_Despawn packet = message as S_Despawn;
-		if (packet == null)
-			return;
+		S_Despawn despawnPacket = message as S_Despawn;
+		foreach (int id in despawnPacket.ObjectIds)
+			Managers.Object.Remove(id);
 	}
 
 	public static void S_MoveHandler(PacketSession session, IMessage message)
@@ -48,6 +48,16 @@ class PacketHandler
 		S_Move packet = message as S_Move;
 		if (packet == null)
 			return;
+		
+		GameObject go = Managers.Object.FindById(packet.ObjectId);
+		if (go == null)
+			return;
+		
+		BaseController bc = go.GetComponent<BaseController>();
+		if (bc == null)
+			return;
+
+		bc.PosInfo = packet.PosInfo;
 	}
 
 	public static void S_SkillHandler(PacketSession session, IMessage message)

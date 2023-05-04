@@ -29,13 +29,13 @@ bool GameMap::CanGo(Vector2Int cellPos, bool checkObjects)
 	if (cellPos.Y < _minY || cellPos.Y > _maxY)
 		return false;
 
-	int x = cellPos.X - _minY;
-	int y = _maxX - cellPos.Y;
+	int x = cellPos.X - _minX;
+	int y = _maxY - cellPos.Y;
 	Tile* tile = GetTileAt({ x, y });
 	if (tile == nullptr)
 		return false;
 
-	return !tile->collision && (!checkObjects || tile->object != 0);
+	return !tile->collision && (!checkObjects || tile->object == 0);
 }
 
 bool GameMap::ApplyLeave(GameObjectRef gameObject)
