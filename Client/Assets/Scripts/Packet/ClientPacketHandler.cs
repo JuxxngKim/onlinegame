@@ -48,11 +48,14 @@ class PacketHandler
 		S_Move packet = message as S_Move;
 		if (packet == null)
 			return;
-		
+
 		GameObject go = Managers.Object.FindById(packet.ObjectId);
 		if (go == null)
 			return;
-		
+
+		if (Managers.Object.MyPlayer.Id == packet.ObjectId)
+			return;
+
 		BaseController bc = go.GetComponent<BaseController>();
 		if (bc == null)
 			return;

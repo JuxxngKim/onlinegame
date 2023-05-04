@@ -1,8 +1,8 @@
-﻿using Protocol;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using static Define;
+using Protocol;
 
 public class MyPlayerController : PlayerController
 {
@@ -69,7 +69,7 @@ public class MyPlayerController : PlayerController
 
 	void GetUIKeyInput()
 	{
-		
+
 	}
 
 	// 키보드 입력

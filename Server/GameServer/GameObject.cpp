@@ -28,3 +28,9 @@ void GameObject::SetMoveDir(Protocol::MoveDir dir)
 {
     _posInfo.set_movedir(dir);
 }
+
+void GameObject::SetState(Protocol::CreatureState state)
+{
+    _posInfo.set_state(state);
+}
+

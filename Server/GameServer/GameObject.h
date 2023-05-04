@@ -21,6 +21,7 @@ public:
 public:
 	void SetPosition(Vector2Int pos);
 	void SetMoveDir(Protocol::MoveDir dir);
+	void SetState(Protocol::CreatureState state);
 
 public:
 	Protocol::ObjectInfo _objectInfo;
