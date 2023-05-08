@@ -96,36 +96,16 @@ class PacketHandler
 		S_Login packet = message as S_Login;
 		if (packet == null)
 			return;
-	}
 
-	public static void S_CreatePlayerHandler(PacketSession session, IMessage message)
-	{
-		S_CreatePlayer packet = message as S_CreatePlayer;
-		if (packet == null)
+		if (packet.LoginOk != 1)
+		{
+			Debug.LogError($"LoginError : {packet.LoginOk}");
 			return;
+		}
+		
+		Managers.Scene.LoadScene(Define.Scene.Game);
 	}
-
-	public static void S_ItemListHandler(PacketSession session, IMessage message)
-	{
-		S_ItemList packet = message as S_ItemList;
-		if (packet == null)
-			return;
-	}
-
-	public static void S_AddItemHandler(PacketSession session, IMessage message)
-	{
-		S_AddItem packet = message as S_AddItem;
-		if (packet == null)
-			return;
-	}
-
-	public static void S_EquipItemHandler(PacketSession session, IMessage message)
-	{
-		S_EquipItem packet = message as S_EquipItem;
-		if (packet == null)
-			return;
-	}
-
+	
 	public static void S_ChangeStatHandler(PacketSession session, IMessage message)
 	{
 		S_ChangeStat packet = message as S_ChangeStat;
@@ -138,5 +118,21 @@ class PacketHandler
 		S_Ping packet = message as S_Ping;
 		if (packet == null)
 			return;
+	}
+	
+	public static void S_ChatHandler(PacketSession session, IMessage message)
+	{
+		S_Chat packet = message as S_Chat;
+		if (packet == null)
+			return;
+	}
+	
+	public static void S_CreateAccountHandler(PacketSession session, IMessage message)
+	{
+		S_CreateAccount packet = message as S_CreateAccount;
+		if (packet == null)
+			return;
+		
+		
 	}
 }

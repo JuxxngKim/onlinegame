@@ -27,8 +27,11 @@ public class LoginPopup : MonoBehaviour
         if (_accountInputField.text.Length <= 0 || _passwordInputField.text.Length <= 0)
             return;
         
-        C_CreatePlayer createPlayer = new C_CreatePlayer();
-        Managers.Network.Send(createPlayer);
+        C_CreateAccount createPacket = new C_CreateAccount();
+        createPacket.Id = _accountInputField.text;
+        createPacket.Password = _passwordInputField.text;
+        
+        Managers.Network.Send(createPacket);
     }
 
     private void OnClickLoginButton()
@@ -37,6 +40,14 @@ public class LoginPopup : MonoBehaviour
             return;
         
         C_Login loginPacket = new C_Login();
+        loginPacket.Id = _accountInputField.text;
+        loginPacket.Password = _passwordInputField.text;
         Managers.Network.Send(loginPacket);
+    }
+
+    public void ClearIdInfo()
+    {
+        _accountInputField.text = string.Empty;
+        _passwordInputField.text = string.Empty;
     }
 }

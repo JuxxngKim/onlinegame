@@ -21,16 +21,14 @@ class PacketManager
         PKT_S_Connected = 1010,
         PKT_C_Login = 1011,
         PKT_S_Login = 1012,
-        PKT_C_CreatePlayer = 1013,
-        PKT_S_CreatePlayer = 1014,
-        PKT_C_EnterGame = 1015,
-        PKT_S_ItemList = 1016,
-        PKT_S_AddItem = 1017,
-        PKT_C_EquipItem = 1018,
-        PKT_S_EquipItem = 1019,
-        PKT_S_ChangeStat = 1020,
-        PKT_S_Ping = 1021,
-        PKT_C_Pong = 1022,
+        PKT_C_EnterGame = 1013,
+        PKT_S_ChangeStat = 1014,
+        PKT_C_Chat = 1015,
+        PKT_S_Chat = 1016,
+        PKT_C_CreateAccount = 1017,
+        PKT_S_CreateAccount = 1018,
+        PKT_S_Ping = 1019,
+        PKT_C_Pong = 1020,
     }
 
 	#region Singleton
@@ -70,16 +68,12 @@ class PacketManager
 		_handler.Add((ushort)MsgId.PKT_S_Connected, PacketHandler.S_ConnectedHandler);
 		_onRecv.Add((ushort)MsgId.PKT_S_Login, MakePacket<S_Login>);
 		_handler.Add((ushort)MsgId.PKT_S_Login, PacketHandler.S_LoginHandler);
-		_onRecv.Add((ushort)MsgId.PKT_S_CreatePlayer, MakePacket<S_CreatePlayer>);
-		_handler.Add((ushort)MsgId.PKT_S_CreatePlayer, PacketHandler.S_CreatePlayerHandler);
-		_onRecv.Add((ushort)MsgId.PKT_S_ItemList, MakePacket<S_ItemList>);
-		_handler.Add((ushort)MsgId.PKT_S_ItemList, PacketHandler.S_ItemListHandler);
-		_onRecv.Add((ushort)MsgId.PKT_S_AddItem, MakePacket<S_AddItem>);
-		_handler.Add((ushort)MsgId.PKT_S_AddItem, PacketHandler.S_AddItemHandler);
-		_onRecv.Add((ushort)MsgId.PKT_S_EquipItem, MakePacket<S_EquipItem>);
-		_handler.Add((ushort)MsgId.PKT_S_EquipItem, PacketHandler.S_EquipItemHandler);
 		_onRecv.Add((ushort)MsgId.PKT_S_ChangeStat, MakePacket<S_ChangeStat>);
 		_handler.Add((ushort)MsgId.PKT_S_ChangeStat, PacketHandler.S_ChangeStatHandler);
+		_onRecv.Add((ushort)MsgId.PKT_S_Chat, MakePacket<S_Chat>);
+		_handler.Add((ushort)MsgId.PKT_S_Chat, PacketHandler.S_ChatHandler);
+		_onRecv.Add((ushort)MsgId.PKT_S_CreateAccount, MakePacket<S_CreateAccount>);
+		_handler.Add((ushort)MsgId.PKT_S_CreateAccount, PacketHandler.S_CreateAccountHandler);
 		_onRecv.Add((ushort)MsgId.PKT_S_Ping, MakePacket<S_Ping>);
 		_handler.Add((ushort)MsgId.PKT_S_Ping, PacketHandler.S_PingHandler);
 	}
