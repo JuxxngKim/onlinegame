@@ -88,14 +88,10 @@ bool GameMap::ApplyMove(GameObjectRef gameObject, Vector2Int dest)
 	return true;
 }
 
-namespace fs = std::filesystem;
-
 void GameMap::LoadMap(int mapId)
 {
-	string curPath = fs::current_path().string();
-
 	//string path = "C:\\GameServer\\onlinegame\\Server\\Common\\MapData\\Map_1.txt";
-	string path = "../Common/MapData/Map_1.txt";
+	string path = "../Common/MapData/Map_001.txt";
 	ifstream file;
 	file.open(path);
 

@@ -19,7 +19,7 @@ public class MapEditor
 	private static void GenerateMap()
 	{
 		GenerateByPath("Assets/Resources/Map");
-		GenerateByPath("../Common/MapData");
+		GenerateByPath("../Server/Common/MapData");
 	}
 
 	private static void GenerateByPath(string pathPrefix)
@@ -28,8 +28,8 @@ public class MapEditor
 
 		foreach (GameObject go in gameObjects)
 		{
-			Tilemap tmBase = Util.FindChild<Tilemap>(go, "Tilemap_Base", true);
-			Tilemap tm = Util.FindChild<Tilemap>(go, "Tilemap_Collision", true);
+			Tilemap tmBase = Util.FindChild<Tilemap>(go, "Ground", true);
+			Tilemap tm = Util.FindChild<Tilemap>(go, "Collision", true);
 
 			using (var writer = File.CreateText($"{pathPrefix }/{go.name}.txt"))
 			{
