@@ -24,6 +24,7 @@ void Room::Enter(GameObjectRef objectRef)
 
 		playerRef->SetMoveDir(Protocol::MoveDir::DOWN);
 		playerRef->SetPosition(spawnPos);
+		playerRef->SetState(Protocol::CreatureState::IDLE);
 
 		_players[playerRef->GetID()] = playerRef;
 
@@ -119,6 +120,7 @@ void Room::Handle_Move(PlayerRef player, Protocol::C_Move pkt)
 
 	player->SetPosition(vector2_int);
 	player->SetMoveDir(pkt.posinfo().movedir());
+	player->SetState(pkt.posinfo().state());
 
 	{
 		Protocol::S_Move pkt;
