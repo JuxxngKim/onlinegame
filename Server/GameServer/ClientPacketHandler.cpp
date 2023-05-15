@@ -21,23 +21,30 @@ bool Handle_C_Move(PacketSessionRef& session, Protocol::C_Move& pkt)
 	RoomRef roomRef = playerRef->GetRoom().lock();
 
 	roomRef->DoAsync(&Room::Handle_Move, playerRef, pkt);
-	return false;
+	return true;
 }
 
 bool Handle_C_Skill(PacketSessionRef& session, Protocol::C_Skill& pkt)
 {
-	return false;
+	return true;
 }
 
 bool Handle_C_Login(PacketSessionRef& session, Protocol::C_Login& pkt)
 {
-	return false;
+	Protocol::S_Login loginPacket;
+
+	// TODO: DB 검증
+	loginPacket.set_loginok(true);
+
+	const auto enterLoginPacket = ClientPacketHandler::MakeSendBuffer(loginPacket);
+	session->Send(enterLoginPacket);
+
+	if(loginPacket.loginok() == false)
+		return true;
+
+	return true;
 }
 
-bool Handle_C_CreatePlayer(PacketSessionRef& session, Protocol::C_CreatePlayer& pkt)
-{
-	return false;
-}
 
 bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt)
 {
@@ -46,12 +53,25 @@ bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt)
 	return true;
 }
 
-bool Handle_C_EquipItem(PacketSessionRef& session, Protocol::C_EquipItem& pkt)
+bool Handle_C_Chat(PacketSessionRef& session, Protocol::C_Chat& pkt)
 {
-	return false;
+	return true;
+}
+
+bool Handle_C_CreateAccount(PacketSessionRef& session, Protocol::C_CreateAccount& pkt)
+{
+	Protocol::S_CreateAccount createAccountPacket;
+
+	// TODO: DB 검증
+	createAccountPacket.set_success(true);
+
+	const auto enterLoginPacket = ClientPacketHandler::MakeSendBuffer(createAccountPacket);
+	session->Send(enterLoginPacket);
+	
+	return true;
 }
 
 bool Handle_C_Pong(PacketSessionRef& session, Protocol::C_Pong& pkt)
 {
-	return false;
+	return true;
 }

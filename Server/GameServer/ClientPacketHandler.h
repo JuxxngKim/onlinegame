@@ -21,16 +21,14 @@ enum : uint16
 	PKT_S_Connected = 1010,
 	PKT_C_Login = 1011,
 	PKT_S_Login = 1012,
-	PKT_C_CreatePlayer = 1013,
-	PKT_S_CreatePlayer = 1014,
-	PKT_C_EnterGame = 1015,
-	PKT_S_ItemList = 1016,
-	PKT_S_AddItem = 1017,
-	PKT_C_EquipItem = 1018,
-	PKT_S_EquipItem = 1019,
-	PKT_S_ChangeStat = 1020,
-	PKT_S_Ping = 1021,
-	PKT_C_Pong = 1022,
+	PKT_C_EnterGame = 1013,
+	PKT_S_ChangeStat = 1014,
+	PKT_C_Chat = 1015,
+	PKT_S_Chat = 1016,
+	PKT_C_CreateAccount = 1017,
+	PKT_S_CreateAccount = 1018,
+	PKT_S_Ping = 1019,
+	PKT_C_Pong = 1020,
 };
 
 // Custom Handlers
@@ -38,9 +36,9 @@ bool Handle_INVALID(PacketSessionRef& session, BYTE* buffer, int32 len);
 bool Handle_C_Move(PacketSessionRef& session, Protocol::C_Move& pkt);
 bool Handle_C_Skill(PacketSessionRef& session, Protocol::C_Skill& pkt);
 bool Handle_C_Login(PacketSessionRef& session, Protocol::C_Login& pkt);
-bool Handle_C_CreatePlayer(PacketSessionRef& session, Protocol::C_CreatePlayer& pkt);
 bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt);
-bool Handle_C_EquipItem(PacketSessionRef& session, Protocol::C_EquipItem& pkt);
+bool Handle_C_Chat(PacketSessionRef& session, Protocol::C_Chat& pkt);
+bool Handle_C_CreateAccount(PacketSessionRef& session, Protocol::C_CreateAccount& pkt);
 bool Handle_C_Pong(PacketSessionRef& session, Protocol::C_Pong& pkt);
 
 class ClientPacketHandler
@@ -53,9 +51,9 @@ public:
 		GPacketHandler[PKT_C_Move] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_Move>(Handle_C_Move, session, buffer, len); };
 		GPacketHandler[PKT_C_Skill] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_Skill>(Handle_C_Skill, session, buffer, len); };
 		GPacketHandler[PKT_C_Login] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_Login>(Handle_C_Login, session, buffer, len); };
-		GPacketHandler[PKT_C_CreatePlayer] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_CreatePlayer>(Handle_C_CreatePlayer, session, buffer, len); };
 		GPacketHandler[PKT_C_EnterGame] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_EnterGame>(Handle_C_EnterGame, session, buffer, len); };
-		GPacketHandler[PKT_C_EquipItem] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_EquipItem>(Handle_C_EquipItem, session, buffer, len); };
+		GPacketHandler[PKT_C_Chat] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_Chat>(Handle_C_Chat, session, buffer, len); };
+		GPacketHandler[PKT_C_CreateAccount] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_CreateAccount>(Handle_C_CreateAccount, session, buffer, len); };
 		GPacketHandler[PKT_C_Pong] = [](PacketSessionRef& session, BYTE* buffer, int32 len) { return HandlePacket<Protocol::C_Pong>(Handle_C_Pong, session, buffer, len); };
 	}
 
@@ -74,11 +72,9 @@ public:
 	static SendBufferRef MakeSendBuffer(Protocol::S_Die& pkt) { return MakeSendBuffer(pkt, PKT_S_Die); }
 	static SendBufferRef MakeSendBuffer(Protocol::S_Connected& pkt) { return MakeSendBuffer(pkt, PKT_S_Connected); }
 	static SendBufferRef MakeSendBuffer(Protocol::S_Login& pkt) { return MakeSendBuffer(pkt, PKT_S_Login); }
-	static SendBufferRef MakeSendBuffer(Protocol::S_CreatePlayer& pkt) { return MakeSendBuffer(pkt, PKT_S_CreatePlayer); }
-	static SendBufferRef MakeSendBuffer(Protocol::S_ItemList& pkt) { return MakeSendBuffer(pkt, PKT_S_ItemList); }
-	static SendBufferRef MakeSendBuffer(Protocol::S_AddItem& pkt) { return MakeSendBuffer(pkt, PKT_S_AddItem); }
-	static SendBufferRef MakeSendBuffer(Protocol::S_EquipItem& pkt) { return MakeSendBuffer(pkt, PKT_S_EquipItem); }
 	static SendBufferRef MakeSendBuffer(Protocol::S_ChangeStat& pkt) { return MakeSendBuffer(pkt, PKT_S_ChangeStat); }
+	static SendBufferRef MakeSendBuffer(Protocol::S_Chat& pkt) { return MakeSendBuffer(pkt, PKT_S_Chat); }
+	static SendBufferRef MakeSendBuffer(Protocol::S_CreateAccount& pkt) { return MakeSendBuffer(pkt, PKT_S_CreateAccount); }
 	static SendBufferRef MakeSendBuffer(Protocol::S_Ping& pkt) { return MakeSendBuffer(pkt, PKT_S_Ping); }
 
 private:

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Protocol;
 using UnityEngine;
 
 public class GameScene : BaseScene
@@ -9,10 +10,11 @@ public class GameScene : BaseScene
         base.Init();
 
         SceneType = Define.Scene.Game;
-        Screen.SetResolution(640, 480, false);
-        
-        Managers.UI.Clear();
         Managers.Map.LoadMap(1);
+        
+        C_EnterGame enterGame = new C_EnterGame();
+        enterGame.Name = $"11";
+        Managers.Network.Send(enterGame);
     }
 
     public override void Clear()

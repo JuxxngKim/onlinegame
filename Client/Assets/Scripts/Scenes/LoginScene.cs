@@ -11,7 +11,7 @@ public class LoginScene : BaseScene
         base.Init();
 
         SceneType = Define.Scene.Login;
-        Screen.SetResolution(640, 480, false);
+        Screen.SetResolution(800, 600, false);
 
         StartCoroutine(_Init());
     }
@@ -26,6 +26,7 @@ public class LoginScene : BaseScene
 
     public override void Clear()
     {
-        
+        Managers.UI.Clear();
+        _sceneUI = null;
     }
 }
