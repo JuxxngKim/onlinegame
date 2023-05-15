@@ -10,6 +10,8 @@ public class NetworkManager
 {
 	ServerSession _session = new ServerSession();
 
+	public bool IsConnected = false; 
+
 	public void Send(IMessage packet)
 	{
 		_session.Send(packet);

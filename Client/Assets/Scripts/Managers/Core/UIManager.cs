@@ -9,15 +9,20 @@ public class UIManager
     Stack<MonoBehaviour> _popupStack = new Stack<MonoBehaviour>();
     public MonoBehaviour SceneUI { get; private set; }
 
+    private GameObject _root;
+
     public GameObject Root
     {
         get
         {
-			GameObject root = GameObject.Find("@UI_Root");
-			if (root == null)
-				root = new GameObject { name = "@UI_Root" };
-            return root;
-		}
+            if (_root != null)
+                return _root;
+            
+            var root = Resources.Load<GameObject>("Prefabs/UI/UIRoot");
+            _root = GameObject.Instantiate(root);
+            GameObject.DontDestroyOnLoad(_root);
+            return _root;
+        }
     }
 
     public void SetCanvas(GameObject go, bool sort = true)
@@ -42,7 +47,7 @@ public class UIManager
 		if (string.IsNullOrEmpty(name))
 			name = typeof(T).Name;
 
-		GameObject go = Managers.Resource.Instantiate($"UI/Scene/{name}");
+		GameObject go = Managers.Resource.Instantiate($"UI/{name}");
 		T sceneUI = Util.GetOrAddComponent<T>(go);
         SceneUI = sceneUI;
 
@@ -99,6 +104,11 @@ public class UIManager
     public void Clear()
     {
         CloseAllPopupUI();
-        SceneUI = null;
+
+        if (SceneUI != null)
+        {
+            Managers.Resource.Destroy(SceneUI.gameObject);
+            SceneUI = null;
+        }
     }
 }

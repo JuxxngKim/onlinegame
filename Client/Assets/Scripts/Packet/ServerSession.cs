@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net;
 using UnityEngine;
+using UnityEngine.Events;
 using MsgId = PacketManager.MsgId;
 
 public class ServerSession : PacketSession
@@ -24,21 +25,19 @@ public class ServerSession : PacketSession
 
 	public override void OnConnected(EndPoint endPoint)
 	{
-		Debug.Log($"OnConnected : {endPoint}");
-
 		PacketManager.Instance.CustomHandler = (s, m, i) =>
 		{
 			PacketQueue.Instance.Push(i, m);
 		};
 
-		C_EnterGame enterGame = new C_EnterGame();
-		enterGame.Name = $"11";
-		Managers.Network.Send(enterGame);
+		Managers.Network.IsConnected = true;
 	}
 
 	public override void OnDisconnected(EndPoint endPoint)
 	{
 		Debug.Log($"OnDisconnected : {endPoint}");
+		
+		Managers.Network.IsConnected = false;
 	}
 
 	public override void OnRecvPacket(ArraySegment<byte> buffer)

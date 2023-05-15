@@ -10,8 +10,9 @@ public class GameScene : BaseScene
 
         SceneType = Define.Scene.Game;
         Screen.SetResolution(640, 480, false);
+        
+        Managers.UI.Clear();
         Managers.Map.LoadMap(1);
-        NetworkManager networkManager = Managers.Network;
     }
 
     public override void Clear()
