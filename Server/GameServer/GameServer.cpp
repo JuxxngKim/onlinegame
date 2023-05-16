@@ -5,6 +5,7 @@
 #include "ClientPacketHandler.h"
 #include "Protocol.pb.h"
 #include "GameLogic.h"
+#include "DBConnectionPool.h"
 
 enum
 {
@@ -30,6 +31,23 @@ void DoWorkerJob(ServerServiceRef& service)
 
 int main()
 {
+	ASSERT_CRASH(GDBConnectionPool->Connect(1, L"Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=ServerDb;Trusted_Connection=Yes;"));
+
+	// Create Table
+	{
+		auto query = L"									\
+			DROP TABLE IF EXISTS [dbo].[Gold];			\
+			CREATE TABLE [dbo].[Gold]					\
+			(											\
+				[id] INT NOT NULL PRIMARY KEY IDENTITY, \
+				[gold] INT NULL							\
+			);";
+
+		DBConnection* dbConn = GDBConnectionPool->Pop();
+		ASSERT_CRASH(dbConn->Execute(query));
+		GDBConnectionPool->Push(dbConn);
+	}
+
 	ClientPacketHandler::Init();
 
 	ServerServiceRef service = MakeShared<ServerService>(
