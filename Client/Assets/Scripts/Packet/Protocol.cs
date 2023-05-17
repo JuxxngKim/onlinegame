@@ -40,11 +40,11 @@ namespace Protocol {
             "TG9naW4SDwoHbG9naW5PaxgBIAEoBRIkCgZwbGF5ZXIYAiABKAsyFC5Qcm90",
             "b2NvbC5PYmplY3RJbmZvIhsKC0NfRW50ZXJHYW1lEgwKBG5hbWUYASABKAki",
             "NAoMU19DaGFuZ2VTdGF0EiQKCHN0YXRJbmZvGAEgASgLMhIuUHJvdG9jb2wu",
-            "U3RhdEluZm8iGQoGQ19DaGF0Eg8KB21lc3NhZ2UYASABKAkiKwoGU19DaGF0",
-            "EhAKCHVzZXJOYW1lGAEgASgJEg8KB21lc3NhZ2UYAiABKAkiLwoPQ19DcmVh",
-            "dGVBY2NvdW50EgoKAklkGAEgASgJEhAKCHBhc3N3b3JkGAIgASgJIiIKD1Nf",
-            "Q3JlYXRlQWNjb3VudBIPCgdzdWNjZXNzGAEgASgIIggKBlNfUGluZyIICgZD",
-            "X1BvbmdiBnByb3RvMw=="));
+            "U3RhdEluZm8iGQoGQ19DaGF0Eg8KB21lc3NhZ2UYASABKAkiPQoGU19DaGF0",
+            "EhAKCG9iamVjdElkGAEgASgFEhAKCHVzZXJOYW1lGAIgASgJEg8KB21lc3Nh",
+            "Z2UYAyABKAkiLwoPQ19DcmVhdGVBY2NvdW50EgoKAklkGAEgASgJEhAKCHBh",
+            "c3N3b3JkGAIgASgJIiIKD1NfQ3JlYXRlQWNjb3VudBIPCgdzdWNjZXNzGAEg",
+            "ASgIIggKBlNfUGluZyIICgZDX1BvbmdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -64,7 +64,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_EnterGame), global::Protocol.C_EnterGame.Parser, new[]{ "Name" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ChangeStat), global::Protocol.S_ChangeStat.Parser, new[]{ "StatInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_Chat), global::Protocol.C_Chat.Parser, new[]{ "Message" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_Chat), global::Protocol.S_Chat.Parser, new[]{ "UserName", "Message" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_Chat), global::Protocol.S_Chat.Parser, new[]{ "ObjectId", "UserName", "Message" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_CreateAccount), global::Protocol.C_CreateAccount.Parser, new[]{ "Id", "Password" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_CreateAccount), global::Protocol.S_CreateAccount.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_Ping), global::Protocol.S_Ping.Parser, null, null, null, null, null),
@@ -3043,6 +3043,7 @@ namespace Protocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public S_Chat(S_Chat other) : this() {
+      objectId_ = other.objectId_;
       userName_ = other.userName_;
       message_ = other.message_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
@@ -3053,8 +3054,19 @@ namespace Protocol {
       return new S_Chat(this);
     }
 
+    /// <summary>Field number for the "objectId" field.</summary>
+    public const int ObjectIdFieldNumber = 1;
+    private int objectId_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int ObjectId {
+      get { return objectId_; }
+      set {
+        objectId_ = value;
+      }
+    }
+
     /// <summary>Field number for the "userName" field.</summary>
-    public const int UserNameFieldNumber = 1;
+    public const int UserNameFieldNumber = 2;
     private string userName_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string UserName {
@@ -3065,7 +3077,7 @@ namespace Protocol {
     }
 
     /// <summary>Field number for the "message" field.</summary>
-    public const int MessageFieldNumber = 2;
+    public const int MessageFieldNumber = 3;
     private string message_ = "";
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public string Message {
@@ -3088,6 +3100,7 @@ namespace Protocol {
       if (ReferenceEquals(other, this)) {
         return true;
       }
+      if (ObjectId != other.ObjectId) return false;
       if (UserName != other.UserName) return false;
       if (Message != other.Message) return false;
       return Equals(_unknownFields, other._unknownFields);
@@ -3096,6 +3109,7 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override int GetHashCode() {
       int hash = 1;
+      if (ObjectId != 0) hash ^= ObjectId.GetHashCode();
       if (UserName.Length != 0) hash ^= UserName.GetHashCode();
       if (Message.Length != 0) hash ^= Message.GetHashCode();
       if (_unknownFields != null) {
@@ -3114,12 +3128,16 @@ namespace Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
       output.WriteRawMessage(this);
     #else
+      if (ObjectId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ObjectId);
+      }
       if (UserName.Length != 0) {
-        output.WriteRawTag(10);
+        output.WriteRawTag(18);
         output.WriteString(UserName);
       }
       if (Message.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(26);
         output.WriteString(Message);
       }
       if (_unknownFields != null) {
@@ -3131,12 +3149,16 @@ namespace Protocol {
     #if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {
+      if (ObjectId != 0) {
+        output.WriteRawTag(8);
+        output.WriteInt32(ObjectId);
+      }
       if (UserName.Length != 0) {
-        output.WriteRawTag(10);
+        output.WriteRawTag(18);
         output.WriteString(UserName);
       }
       if (Message.Length != 0) {
-        output.WriteRawTag(18);
+        output.WriteRawTag(26);
         output.WriteString(Message);
       }
       if (_unknownFields != null) {
@@ -3148,6 +3170,9 @@ namespace Protocol {
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int CalculateSize() {
       int size = 0;
+      if (ObjectId != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(ObjectId);
+      }
       if (UserName.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(UserName);
       }
@@ -3164,6 +3189,9 @@ namespace Protocol {
     public void MergeFrom(S_Chat other) {
       if (other == null) {
         return;
+      }
+      if (other.ObjectId != 0) {
+        ObjectId = other.ObjectId;
       }
       if (other.UserName.Length != 0) {
         UserName = other.UserName;
@@ -3185,11 +3213,15 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
             break;
-          case 10: {
-            UserName = input.ReadString();
+          case 8: {
+            ObjectId = input.ReadInt32();
             break;
           }
           case 18: {
+            UserName = input.ReadString();
+            break;
+          }
+          case 26: {
             Message = input.ReadString();
             break;
           }
@@ -3207,11 +3239,15 @@ namespace Protocol {
           default:
             _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, ref input);
             break;
-          case 10: {
-            UserName = input.ReadString();
+          case 8: {
+            ObjectId = input.ReadInt32();
             break;
           }
           case 18: {
+            UserName = input.ReadString();
+            break;
+          }
+          case 26: {
             Message = input.ReadString();
             break;
           }

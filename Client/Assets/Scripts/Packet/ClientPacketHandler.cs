@@ -3,6 +3,7 @@ using Protocol;
 using ServerCore;
 using System.Collections;
 using System.Collections.Generic;
+using deVoid.Utils;
 using UnityEngine;
 
 class PacketHandler
@@ -125,6 +126,9 @@ class PacketHandler
 		S_Chat packet = message as S_Chat;
 		if (packet == null)
 			return;
+		
+		Signals.Get<AddChat>().Dispatch(packet.ObjectId, packet.UserName, packet.Message);
+		// ChatWindow.Instance.AddChat(packet.ObjectId, packet.UserName, packet.Message);
 	}
 	
 	public static void S_CreateAccountHandler(PacketSession session, IMessage message)

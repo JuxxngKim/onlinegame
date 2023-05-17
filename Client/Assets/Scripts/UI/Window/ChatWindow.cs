@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using deVoid.Utils;
 using Protocol;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,12 +15,18 @@ public class ChatWindow : MonoBehaviour
     [SerializeField] Text _imeIsSelectedText;
     [SerializeField] RectTransform _contentRoot;
     [SerializeField] RectTransform _bubbleRoot;
-    // [SerializeField] ChatBubble _templateChatBubble;
+    [SerializeField] ChatBubble _templateChatBubble;
     
     public static bool InputLock = false;
     
     List<Text> _chatList = new List<Text>();
     Dictionary<int, ChatBubble> _chatBubbles = new Dictionary<int, ChatBubble>();
+
+    private void Awake()
+    {
+        _inputField.onEndEdit.AddListener(SendChat);
+        Signals.Get<AddChat>().AddListener(AddChat);
+    }
 
     public void Update()
     {
@@ -64,13 +72,20 @@ public class ChatWindow : MonoBehaviour
 
         LayoutRebuilder.ForceRebuildLayoutImmediate(_contentRoot);
 
-        if (_chatBubbles.ContainsKey(objectId))
+        if (_chatBubbles.TryGetValue(objectId, out var bubble))
         {
-            _chatBubbles[objectId].UpdateData(userChat);
+            bubble.UpdateData(userChat);
         }
         else
         {
+            var creatureController = Managers.Object.FindById(objectId)?.GetComponent<CreatureController>();
+            if (creatureController == null)
+                return;
 
+            var newBubble = GameObjectCache.Make(_templateChatBubble, _bubbleRoot);
+            _chatBubbles.Add(objectId, newBubble);
+
+            _chatBubbles[objectId].SetUp(creatureController, userName, userChat, RemoveBubbleChat);
         }
 
         StartCoroutine(RefreshScrollPoisition());

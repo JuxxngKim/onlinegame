@@ -41,7 +41,7 @@ public class UIManager
             canvas.sortingOrder = 0;
         }
     }
-
+    
 	public T ShowSceneUI<T>(string name = null) where T : MonoBehaviour
 	{
 		if (string.IsNullOrEmpty(name))

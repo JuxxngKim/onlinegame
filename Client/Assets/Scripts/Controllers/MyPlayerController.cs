@@ -8,19 +8,8 @@ public class MyPlayerController : PlayerController
 {
 	bool _moveKeyPressed = false;
 
-	public int WeaponDamage { get; private set; }
-	public int ArmorDefence { get; private set; }
-
-	protected override void Init()
-	{
-		base.Init();
-		RefreshAdditionalStat();
-	}
-
 	protected override void UpdateController()
 	{
-		GetUIKeyInput();
-
 		switch (State)
 		{
 			case CreatureState.Idle:
@@ -43,33 +32,12 @@ public class MyPlayerController : PlayerController
 			return;
 		}
 
-		if (_coSkillCooltime == null && Input.GetKey(KeyCode.Space))
-		{
-			Debug.Log("Skill !");
-
-			C_Skill skill = new C_Skill() { Info = new SkillInfo() };
-			skill.Info.SkillId = 2;
-			Managers.Network.Send(skill);
-
-			_coSkillCooltime = StartCoroutine("CoInputCooltime", 0.2f);
-		}
-	}
-
-	Coroutine _coSkillCooltime;
-	IEnumerator CoInputCooltime(float time)
-	{
-		yield return new WaitForSeconds(time);
-		_coSkillCooltime = null;
+	
 	}
 
 	void LateUpdate()
 	{
 		Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-	}
-
-	void GetUIKeyInput()
-	{
-
 	}
 
 	// 키보드 입력
@@ -146,11 +114,5 @@ public class MyPlayerController : PlayerController
 			Managers.Network.Send(movePacket);
 			_updated = false;
 		}
-	}
-
-	public void RefreshAdditionalStat()
-	{
-		WeaponDamage = 0;
-		ArmorDefence = 0;
 	}
 }

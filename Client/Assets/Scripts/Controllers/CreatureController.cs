@@ -7,7 +7,8 @@ using static Define;
 
 public class CreatureController : BaseController
 {
-	HpBar _hpBar;
+	[SerializeField] protected GameObject _uIRoot;
+	public GameObject UIRoot => _uIRoot;
 
 	public override StatInfo Stat
 	{
@@ -23,23 +24,19 @@ public class CreatureController : BaseController
 
 	protected void AddHpBar()
 	{
-		GameObject go = Managers.Resource.Instantiate("UI/HpBar", transform);
-		go.transform.localPosition = new Vector3(0, 0.5f, 0);
-		go.name = "HpBar";
-		_hpBar = go.GetComponent<HpBar>();
 		UpdateHpBar();
 	}
 
 	void UpdateHpBar()
 	{
-		if (_hpBar == null)
-			return;
-
-		float ratio = 0.0f;
-		if (Stat.MaxHp > 0)
-			ratio = ((float)Hp) / Stat.MaxHp;
-
-		_hpBar.SetHpBar(ratio);
+		// if (_hpBar == null)
+		// 	return;
+		//
+		// float ratio = 0.0f;
+		// if (Stat.MaxHp > 0)
+		// 	ratio = ((float)Hp) / Stat.MaxHp;
+		//
+		// _hpBar.SetHpBar(ratio);
 	}
 
 	protected override void Init()
