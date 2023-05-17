@@ -78,8 +78,7 @@ public class BaseController : MonoBehaviour
 		}
 	}
 
-	protected Animator _animator;
-	protected SpriteRenderer _sprite;
+	protected Animator[] _animator;
 
 	public virtual CreatureState State
 	{
@@ -145,80 +144,31 @@ public class BaseController : MonoBehaviour
 		return cellPos;
 	}
 
+	protected virtual void PlayAnimation(string name)
+	{
+		if (_animator == null || _animator.Length <= 0)
+			return;
+		
+		foreach(var anim in _animator)
+			anim.Play(name);
+	}
+	
+
 	protected virtual void UpdateAnimation()
 	{
-		if (_animator == null || _sprite == null)
+		if (_animator == null)
 			return;
 
 		if (State == CreatureState.Idle)
 		{
-			switch (Dir)
-			{
-				case MoveDir.Up:
-					_animator.Play("IDLE_BACK");
-					_sprite.flipX = false;
-					break;
-				case MoveDir.Down:
-					_animator.Play("IDLE_FRONT");
-					_sprite.flipX = false;
-					break;
-				case MoveDir.Left:
-					_animator.Play("IDLE_RIGHT");
-					_sprite.flipX = true;
-					break;
-				case MoveDir.Right:
-					_animator.Play("IDLE_RIGHT");
-					_sprite.flipX = false;
-					break;
-			}
+			PlayAnimation($"{State}_{Dir}");
 		}
 		else if (State == CreatureState.Moving)
 		{
-			switch (Dir)
-			{
-				case MoveDir.Up:
-					_animator.Play("WALK_BACK");
-					_sprite.flipX = false;
-					break;
-				case MoveDir.Down:
-					_animator.Play("WALK_FRONT");
-					_sprite.flipX = false;
-					break;
-				case MoveDir.Left:
-					_animator.Play("WALK_RIGHT");
-					_sprite.flipX = true;
-					break;
-				case MoveDir.Right:
-					_animator.Play("WALK_RIGHT");
-					_sprite.flipX = false;
-					break;
-			}
+			PlayAnimation($"Run_{Dir}");
 		}
 		else if (State == CreatureState.Skill)
 		{
-			switch (Dir)
-			{
-				case MoveDir.Up:
-					_animator.Play("ATTACK_BACK");
-					_sprite.flipX = false;
-					break;
-				case MoveDir.Down:
-					_animator.Play("ATTACK_FRONT");
-					_sprite.flipX = false;
-					break;
-				case MoveDir.Left:
-					_animator.Play("ATTACK_RIGHT");
-					_sprite.flipX = true;
-					break;
-				case MoveDir.Right:
-					_animator.Play("ATTACK_RIGHT");
-					_sprite.flipX = false;
-					break;
-			}
-		}
-		else
-		{
-
 		}
 	}
 
@@ -234,8 +184,8 @@ public class BaseController : MonoBehaviour
 
 	protected virtual void Init()
 	{
-		_animator = GetComponent<Animator>();
-		_sprite = GetComponent<SpriteRenderer>();
+		_animator = GetComponentsInChildren<Animator>();
+		
 		Vector3 pos = Managers.Map.CurrentGrid.CellToWorld(CellPos) + new Vector3(0.5f, 0.5f);
 		transform.position = pos;
 
