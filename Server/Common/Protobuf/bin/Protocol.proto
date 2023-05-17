@@ -74,13 +74,15 @@ message C_Chat {
 }
 
 message S_Chat {
-	string userName = 1;
-	string message = 2;
+  int32 objectId = 1;
+  string userName = 2;
+  string message = 3;
 }
 
 message C_CreateAccount {
 	string Id = 1;
-	string password = 2;
+  string password = 2;
+  string nickName = 3;
 }
 
 message S_CreateAccount {

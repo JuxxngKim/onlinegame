@@ -55,6 +55,17 @@ bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt)
 
 bool Handle_C_Chat(PacketSessionRef& session, Protocol::C_Chat& pkt)
 {
+	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
+	const RoomRef roomRef = gameSession->_room.lock();
+
+	Protocol::S_Chat chatPacket;
+	chatPacket.set_objectid(gameSession->_currentPlayer->GetID());
+	chatPacket.set_username("test");
+	chatPacket.set_message(pkt.message());
+	
+	const auto sendPacket = ClientPacketHandler::MakeSendBuffer(chatPacket);
+	
+	roomRef->DoAsync(&Room::Broadcast, sendPacket);
 	return true;
 }
 

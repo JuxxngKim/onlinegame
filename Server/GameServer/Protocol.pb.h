@@ -2513,10 +2513,11 @@ class S_Chat final :
   // accessors -------------------------------------------------------
 
   enum : int {
-    kUserNameFieldNumber = 1,
-    kMessageFieldNumber = 2,
+    kUserNameFieldNumber = 2,
+    kMessageFieldNumber = 3,
+    kObjectIdFieldNumber = 1,
   };
-  // string userName = 1;
+  // string userName = 2;
   void clear_username();
   const std::string& username() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -2530,7 +2531,7 @@ class S_Chat final :
   std::string* _internal_mutable_username();
   public:
 
-  // string message = 2;
+  // string message = 3;
   void clear_message();
   const std::string& message() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -2544,6 +2545,15 @@ class S_Chat final :
   std::string* _internal_mutable_message();
   public:
 
+  // int32 objectId = 1;
+  void clear_objectid();
+  ::PROTOBUF_NAMESPACE_ID::int32 objectid() const;
+  void set_objectid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  private:
+  ::PROTOBUF_NAMESPACE_ID::int32 _internal_objectid() const;
+  void _internal_set_objectid(::PROTOBUF_NAMESPACE_ID::int32 value);
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.S_Chat)
  private:
   class _Internal;
@@ -2553,6 +2563,7 @@ class S_Chat final :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr username_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr message_;
+  ::PROTOBUF_NAMESPACE_ID::int32 objectid_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -2668,6 +2679,7 @@ class C_CreateAccount final :
   enum : int {
     kIdFieldNumber = 1,
     kPasswordFieldNumber = 2,
+    kNickNameFieldNumber = 3,
   };
   // string Id = 1;
   void clear_id();
@@ -2697,6 +2709,20 @@ class C_CreateAccount final :
   std::string* _internal_mutable_password();
   public:
 
+  // string nickName = 3;
+  void clear_nickname();
+  const std::string& nickname() const;
+  template <typename ArgT0 = const std::string&, typename... ArgT>
+  void set_nickname(ArgT0&& arg0, ArgT... args);
+  std::string* mutable_nickname();
+  PROTOBUF_FUTURE_MUST_USE_RESULT std::string* release_nickname();
+  void set_allocated_nickname(std::string* nickname);
+  private:
+  const std::string& _internal_nickname() const;
+  inline PROTOBUF_ALWAYS_INLINE void _internal_set_nickname(const std::string& value);
+  std::string* _internal_mutable_nickname();
+  public:
+
   // @@protoc_insertion_point(class_scope:Protocol.C_CreateAccount)
  private:
   class _Internal;
@@ -2706,6 +2732,7 @@ class C_CreateAccount final :
   typedef void DestructorSkippable_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr id_;
   ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr password_;
+  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr nickname_;
   mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
   friend struct ::TableStruct_Protocol_2eproto;
 };
@@ -4110,7 +4137,27 @@ inline void C_Chat::set_allocated_message(std::string* message) {
 
 // S_Chat
 
-// string userName = 1;
+// int32 objectId = 1;
+inline void S_Chat::clear_objectid() {
+  objectid_ = 0;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 S_Chat::_internal_objectid() const {
+  return objectid_;
+}
+inline ::PROTOBUF_NAMESPACE_ID::int32 S_Chat::objectid() const {
+  // @@protoc_insertion_point(field_get:Protocol.S_Chat.objectId)
+  return _internal_objectid();
+}
+inline void S_Chat::_internal_set_objectid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  
+  objectid_ = value;
+}
+inline void S_Chat::set_objectid(::PROTOBUF_NAMESPACE_ID::int32 value) {
+  _internal_set_objectid(value);
+  // @@protoc_insertion_point(field_set:Protocol.S_Chat.objectId)
+}
+
+// string userName = 2;
 inline void S_Chat::clear_username() {
   username_.ClearToEmpty();
 }
@@ -4155,7 +4202,7 @@ inline void S_Chat::set_allocated_username(std::string* username) {
   // @@protoc_insertion_point(field_set_allocated:Protocol.S_Chat.userName)
 }
 
-// string message = 2;
+// string message = 3;
 inline void S_Chat::clear_message() {
   message_.ClearToEmpty();
 }
@@ -4292,6 +4339,51 @@ inline void C_CreateAccount::set_allocated_password(std::string* password) {
   password_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), password,
       GetArenaForAllocation());
   // @@protoc_insertion_point(field_set_allocated:Protocol.C_CreateAccount.password)
+}
+
+// string nickName = 3;
+inline void C_CreateAccount::clear_nickname() {
+  nickname_.ClearToEmpty();
+}
+inline const std::string& C_CreateAccount::nickname() const {
+  // @@protoc_insertion_point(field_get:Protocol.C_CreateAccount.nickName)
+  return _internal_nickname();
+}
+template <typename ArgT0, typename... ArgT>
+inline PROTOBUF_ALWAYS_INLINE
+void C_CreateAccount::set_nickname(ArgT0&& arg0, ArgT... args) {
+ 
+ nickname_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set:Protocol.C_CreateAccount.nickName)
+}
+inline std::string* C_CreateAccount::mutable_nickname() {
+  // @@protoc_insertion_point(field_mutable:Protocol.C_CreateAccount.nickName)
+  return _internal_mutable_nickname();
+}
+inline const std::string& C_CreateAccount::_internal_nickname() const {
+  return nickname_.Get();
+}
+inline void C_CreateAccount::_internal_set_nickname(const std::string& value) {
+  
+  nickname_.Set(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, value, GetArenaForAllocation());
+}
+inline std::string* C_CreateAccount::_internal_mutable_nickname() {
+  
+  return nickname_.Mutable(::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::EmptyDefault{}, GetArenaForAllocation());
+}
+inline std::string* C_CreateAccount::release_nickname() {
+  // @@protoc_insertion_point(field_release:Protocol.C_CreateAccount.nickName)
+  return nickname_.Release(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), GetArenaForAllocation());
+}
+inline void C_CreateAccount::set_allocated_nickname(std::string* nickname) {
+  if (nickname != nullptr) {
+    
+  } else {
+    
+  }
+  nickname_.SetAllocated(&::PROTOBUF_NAMESPACE_ID::internal::GetEmptyStringAlreadyInited(), nickname,
+      GetArenaForAllocation());
+  // @@protoc_insertion_point(field_set_allocated:Protocol.C_CreateAccount.nickName)
 }
 
 // -------------------------------------------------------------------
