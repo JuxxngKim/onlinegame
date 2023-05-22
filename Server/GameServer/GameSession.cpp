@@ -39,7 +39,7 @@ void GameSession::OnSend(int32 len)
 {
 }
 
-void GameSession::HandleEnterGame(Protocol::C_EnterGame& enterGame)
+void GameSession::HandleEnterGame(string name, int32 level)
 {
 	static Atomic<uint64> idGenerator{ 1 };
 	_room = GGameLogic.FindFoom(1);

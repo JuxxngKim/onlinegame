@@ -77,6 +77,12 @@ bool DBConnection::Fetch()
 	}
 }
 
+SQLRETURN DBConnection::GetFechResult()
+{
+	SQLRETURN ret = ::SQLFetch(_statement);
+	return ret;
+}
+
 int32 DBConnection::GetRowCount()
 {
 	SQLLEN count = 0;

@@ -20,6 +20,7 @@ public:
 
 	bool			Execute(const WCHAR* query);
 	bool			Fetch();
+	SQLRETURN		GetFechResult();
 	int32			GetRowCount();
 	void			Unbind();
 
@@ -46,7 +47,7 @@ public:
 	bool			BindCol(int32 columnIndex, WCHAR* str, int32 size, SQLLEN* index);
 	bool			BindCol(int32 columnIndex, BYTE* bin, int32 size, SQLLEN* index);
 
-private:
+public:
 	bool			BindParam(SQLUSMALLINT paramIndex, SQLSMALLINT cType, SQLSMALLINT sqlType, SQLULEN len, SQLPOINTER ptr, SQLLEN* index);
 	bool			BindCol(SQLUSMALLINT columnIndex, SQLSMALLINT cType, SQLULEN len, SQLPOINTER value, SQLLEN* index);
 	void			HandleError(SQLRETURN ret);

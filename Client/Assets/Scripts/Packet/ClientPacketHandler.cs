@@ -128,7 +128,6 @@ class PacketHandler
 			return;
 		
 		Signals.Get<AddChat>().Dispatch(packet.ObjectId, packet.UserName, packet.Message);
-		// ChatWindow.Instance.AddChat(packet.ObjectId, packet.UserName, packet.Message);
 	}
 	
 	public static void S_CreateAccountHandler(PacketSession session, IMessage message)
@@ -137,6 +136,10 @@ class PacketHandler
 		if (packet == null)
 			return;
 		
-		
+		if (!packet.Success)
+		{
+			Debug.LogError($"Create Account Fail!");
+			return;
+		}
 	}
 }

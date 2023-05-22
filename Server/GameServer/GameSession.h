@@ -17,7 +17,7 @@ public:
 	virtual void OnSend(int32 len) override;
 
 public:
-	void HandleEnterGame(Protocol::C_EnterGame& enterGame);
+	void HandleEnterGame(string name, int32 level);
 	
 public:
 	PlayerRef _currentPlayer;
