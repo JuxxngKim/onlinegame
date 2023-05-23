@@ -6,6 +6,7 @@
 #include "Protocol.pb.h"
 #include "GameLogic.h"
 #include "DBConnectionPool.h"
+#include "DbTransaction.h"
 
 enum
 {
@@ -29,10 +30,10 @@ void DoWorkerJob(ServerServiceRef& service)
 	}
 }
 
-int main()
+void DoDBWorkerJob()
 {
 	// ASSERT_CRASH(GDBConnectionPool->Connect(1, L"Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=ServerDb;Trusted_Connection=Yes;"));
-	//
+
 	// // Create Table
 	// {
 	// 	auto query = L"									\
@@ -47,7 +48,16 @@ int main()
 	// 	ASSERT_CRASH(dbConn->Execute(query));
 	// 	GDBConnectionPool->Push(dbConn);
 	// }
+	
+	// Main Thread
+	while (true)
+	{
+		GDbTransaction.Execute();
+	}
+}
 
+int main()
+{
 	ClientPacketHandler::Init();
 
 	ServerServiceRef service = MakeShared<ServerService>(
@@ -61,20 +71,25 @@ int main()
 	for (int32 i = 0; i < 5; i++)
 	{
 		GThreadManager->Launch([&service]()
-			{
-				DoWorkerJob(service);
-			});
+		{
+			DoWorkerJob(service);
+		});
 	}
 
+	// DB Thread
+	GThreadManager->Launch([]()
+	{
+		DoDBWorkerJob();
+	});
+	
 	GGameLogic.AddRoom(1);
 	
-	// Main Thread
+	// GameLogic Thread
 	while (true)
 	{
 		GGameLogic.Update();
 	}
 
-	// DoWorkerJob(service);
-
+	// Join
 	GThreadManager->Join();
 }
