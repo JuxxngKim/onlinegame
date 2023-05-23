@@ -26,7 +26,7 @@ void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outId), &outId, &outIdLen));
 
         // SQL 실행
-        ASSERT_CRASH(dbConn->Execute(L"SELECT id, gold FROM [dbo].[Account] WHERE Id = (?)"));
+        ASSERT_CRASH(dbConn->Execute(L"SELECT id FROM [dbo].[Account] WHERE Id = (?)"));
 
         bool containsAccountOrError = false;
         const SQLRETURN ret = dbConn->GetFechResult();
@@ -65,10 +65,10 @@ void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
 
         // 넘길 인자 바인딩
         ASSERT_CRASH(dbConn->BindParam(1, &accountId, &len));
-        ASSERT_CRASH(dbConn->BindParam(1, &password, &pwLen));
+        ASSERT_CRASH(dbConn->BindParam(2, &password, &pwLen));
 
         // SQL 실행
-        ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Account]([Id], [password]) VALUES(?, ?)"));
+        ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Account]([Id], [Password]) VALUES(?, ?)"));
 
         GDBConnectionPool->Push(dbConn);
     }
@@ -88,13 +88,17 @@ void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         int32 level = 1;
         SQLLEN levelLen = 0;
 
+        int32 gold = 1;
+        SQLLEN goldLen = 0;
+
         // 넘길 인자 바인딩
         ASSERT_CRASH(dbConn->BindParam(1, &accountId, &len));
         ASSERT_CRASH(dbConn->BindParam(2, name, &nameLen));
         ASSERT_CRASH(dbConn->BindParam(3, &level, &levelLen));
+        ASSERT_CRASH(dbConn->BindParam(4, &gold, &goldLen));
 
         // SQL 실행
-        ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Player]([Id], [name], [level]) VALUES(?, ?, ?)"));
+        ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Player]([Id], [Name], [Level], [Gold]) VALUES(?, ?, ?, ?)"));
 
         GDBConnectionPool->Push(dbConn);
     }
@@ -129,7 +133,7 @@ void DbTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
         ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outPw), &outPw, &outPwLen));
 
         // SQL 실행
-        ASSERT_CRASH(dbConn->Execute(L"SELECT id, password gold FROM [dbo].[Account] WHERE Id = (?)"));
+        ASSERT_CRASH(dbConn->Execute(L"SELECT id, password FROM [dbo].[Account] WHERE Id = (?)"));
 
         bool result = dbConn->Fetch();
         GDBConnectionPool->Push(dbConn);
@@ -161,6 +165,10 @@ void DbTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
         SQLLEN outLvLen = 0;
         ASSERT_CRASH(dbConn->BindCol(2, SQL_C_LONG, sizeof(outLv), &outLv, &outLvLen));
 
+        int32 outGold = 0;
+        SQLLEN outGoldLen = 0;
+        ASSERT_CRASH(dbConn->BindCol(3, SQL_C_LONG, sizeof(outGold), &outGold, &outGoldLen));
+        
         // SQL 실행
         ASSERT_CRASH(dbConn->Execute(L"SELECT name, level gold FROM [dbo].[Player] WHERE Id = (?)"));
         bool result = dbConn->Fetch();
@@ -181,6 +189,6 @@ void DbTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
         wstring wName(outName);
         string name(wName.begin(), wName.end());
         GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
-        gameSession->HandleEnterGame(name, outLv);
+        gameSession->HandleEnterGame(name, outLv, outGold);
     }
 }

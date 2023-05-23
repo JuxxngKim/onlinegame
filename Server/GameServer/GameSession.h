@@ -17,7 +17,7 @@ public:
 	virtual void OnSend(int32 len) override;
 
 public:
-	void HandleEnterGame(string name, int32 level);
+	void HandleEnterGame(string name, int32 level, int32 gold);
 	
 public:
 	PlayerRef _currentPlayer;
