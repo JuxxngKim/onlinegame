@@ -1,11 +1,11 @@
 ﻿  pch.cpp
+C:\Developer\onlinegame\Server\ServerCore\Memory.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   Allocator.cpp
   BufferReader.cpp
   BufferWriter.cpp
   CoreGlobal.cpp
   CorePch.cpp
   CoreTLS.cpp
-  DBBind.cpp
   DBConnection.cpp
   DBConnectionPool.cpp
   DeadLockProfiler.cpp
@@ -16,19 +16,21 @@
   JobTimer.cpp
   LockQueue.cpp
   JobQueue.cpp
+C:\Developer\onlinegame\Server\ServerCore\JobQueue.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   Listener.cpp
   Lock.cpp
   Memory.cpp
+  MemoryPool.cpp
   코드를 생성하고 있습니다...
   컴파일하고 있습니다...
-  MemoryPool.cpp
   NetAddress.cpp
   RecvBuffer.cpp
   RefCounting.cpp
   SendBuffer.cpp
   Service.cpp
   Session.cpp
+C:\Developer\onlinegame\Server\ServerCore\Session.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
   SocketUtils.cpp
   ThreadManager.cpp
   코드를 생성하고 있습니다...
-  ServerCore.vcxproj -> C:\GameServer\onlinegame\Server\Libraries\Libs\ServerCore\Debug\ServerCore.lib
+  ServerCore.vcxproj -> C:\Developer\onlinegame\Server\Libraries\Libs\ServerCore\Debug\ServerCore.lib

@@ -54,6 +54,9 @@
     <ClCompile Include="GameMap.cpp">
       <Filter>GameContents</Filter>
     </ClCompile>
+    <ClCompile Include="DBTransaction.cpp">
+      <Filter>GameContents</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -90,6 +93,9 @@
       <Filter>GameContents</Filter>
     </ClInclude>
     <ClInclude Include="GameMap.h">
+      <Filter>GameContents</Filter>
+    </ClInclude>
+    <ClInclude Include="DBTransaction.h">
       <Filter>GameContents</Filter>
     </ClInclude>
   </ItemGroup>
