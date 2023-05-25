@@ -2,7 +2,7 @@
 #include "ClientPacketHandler.h"
 
 #include "DBConnectionPool.h"
-#include "DbTransaction.h"
+#include "DBTransaction.h"
 #include "Player.h"
 #include "Room.h"
 #include "GameSession.h"
@@ -33,7 +33,7 @@ bool Handle_C_Skill(PacketSessionRef& session, Protocol::C_Skill& pkt)
 
 bool Handle_C_Login(PacketSessionRef& session, Protocol::C_Login& pkt)
 {
-	GDbTransaction.DoAsync(&DbTransaction::Login, session, pkt);
+	// GDbTransaction.DoAsync(&DbTransaction::Login, session, pkt);
 	return true;
 }
 
@@ -41,7 +41,7 @@ bool Handle_C_Login(PacketSessionRef& session, Protocol::C_Login& pkt)
 bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt)
 {
 	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
-	gameSession->HandleEnterGame("dummy", 1);
+	gameSession->HandleEnterGame("dummy", 1, 0);
 	return true;
 }
 
@@ -62,7 +62,7 @@ bool Handle_C_Chat(PacketSessionRef& session, Protocol::C_Chat& pkt)
 
 bool Handle_C_CreateAccount(PacketSessionRef& session, Protocol::C_CreateAccount& pkt)
 {
-	GDbTransaction.DoAsync(&DbTransaction::CreateAccount, session, pkt);
+	// GDbTransaction.DoAsync(&DbTransaction::CreateAccount, session, pkt);
 	return true;
 }
 

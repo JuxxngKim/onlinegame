@@ -1,19 +1,18 @@
-Ôªø#include "pch.h"
-#include "DbTransaction.h"
+#include "pch.h"
+#include "DBTransaction.h"
 #include "DBConnection.h"
 #include "DBConnectionPool.h"
 #include "ClientPacketHandler.h"
 #include "GameSession.h"
 
+DBTransaction GDBTransaction;
 
-DbTransaction GDbTransaction;
-
-void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAccount pkt)
+void DBTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAccount pkt)
 {
     auto idHash = std::hash<string>{}(pkt.id());
     const auto pwHash = std::hash<string>{}(pkt.password());
 
-    // Í≥ÑÏ†ï Í≤ÄÏÇ¨
+    // ∞Ë¡§ ∞ÀªÁ
     {
         DBConnection* dbConn = GDBConnectionPool->Pop();
         dbConn->Unbind();
@@ -25,7 +24,7 @@ void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         SQLLEN outIdLen = 0;
         ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outId), &outId, &outIdLen));
 
-        // SQL Ïã§Ìñâ
+        // SQL Ω««‡
         ASSERT_CRASH(dbConn->Execute(L"SELECT id FROM [dbo].[Account] WHERE Id = (?)"));
 
         bool containsAccountOrError = false;
@@ -41,7 +40,7 @@ void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
 
         GDBConnectionPool->Push(dbConn);
 
-        // Ïù¥ÎØ∏ Îç∞Ïù¥ÌÑ∞Í∞Ä Ï°¥Ïû¨ÌïòÍ±∞ÎÇò ÏóêÎü¨ Î∞úÏÉù
+        // ¿ÃπÃ µ•¿Ã≈Õ∞° ¡∏¿Á«œ∞≈≥™ ø°∑Ø πﬂª˝
         if (containsAccountOrError)
         {
             Protocol::S_CreateAccount createAccountPacket;
@@ -52,7 +51,7 @@ void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         }
     }
 
-    // Í≥ÑÏ†ï Ï†ïÎ≥¥ Ï†ÄÏû•
+    // ∞Ë¡§ ¡§∫∏ ¿˙¿Â
     {
         DBConnection* dbConn = GDBConnectionPool->Pop();
         dbConn->Unbind();
@@ -63,17 +62,17 @@ void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         int32 password = pwHash;
         SQLLEN pwLen = 0;
 
-        // ÎÑòÍ∏∏ Ïù∏Ïûê Î∞îÏù∏Îî©
+        // ≥—±Ê ¿Œ¿⁄ πŸ¿Œµ˘
         ASSERT_CRASH(dbConn->BindParam(1, &accountId, &len));
         ASSERT_CRASH(dbConn->BindParam(2, &password, &pwLen));
 
-        // SQL Ïã§Ìñâ
+        // SQL Ω««‡
         ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Account]([Id], [Password]) VALUES(?, ?)"));
 
         GDBConnectionPool->Push(dbConn);
     }
 
-    // ÌîåÎ†àÏù¥Ïñ¥ Ï†ïÎ≥¥ Ï†ÄÏû•
+    // «√∑π¿ÃæÓ ¡§∫∏ ¿˙¿Â
     {
         DBConnection* dbConn = GDBConnectionPool->Pop();
         dbConn->Unbind();
@@ -91,13 +90,13 @@ void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         int32 gold = 1;
         SQLLEN goldLen = 0;
 
-        // ÎÑòÍ∏∏ Ïù∏Ïûê Î∞îÏù∏Îî©
+        // ≥—±Ê ¿Œ¿⁄ πŸ¿Œµ˘
         ASSERT_CRASH(dbConn->BindParam(1, &accountId, &len));
         ASSERT_CRASH(dbConn->BindParam(2, name, &nameLen));
         ASSERT_CRASH(dbConn->BindParam(3, &level, &levelLen));
         ASSERT_CRASH(dbConn->BindParam(4, &gold, &goldLen));
 
-        // SQL Ïã§Ìñâ
+        // SQL Ω««‡
         ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Player]([Id], [Name], [Level], [Gold]) VALUES(?, ?, ?, ?)"));
 
         GDBConnectionPool->Push(dbConn);
@@ -109,86 +108,87 @@ void DbTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
     session->Send(sendPacket);
 }
 
-void DbTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
+void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 {
-    Protocol::S_Login loginPacket;
+	Protocol::S_Login loginPacket;
 
-    auto idHash = std::hash<string>{}(pkt.id());
-    auto pwHash = std::hash<string>{}(pkt.password());
+	auto idHash = std::hash<string>{}(pkt.id());
+	auto pwHash = std::hash<string>{}(pkt.password());
 
-    // Í≥ÑÏ†ï Í≤ÄÏÇ¨
-    {
-        DBConnection* dbConn = GDBConnectionPool->Pop();
-        dbConn->Unbind();
+	// ∞Ë¡§ ∞ÀªÁ
+	{
+		DBConnection* dbConn = GDBConnectionPool->Pop();
+		dbConn->Unbind();
 
-        SQLLEN len = 0;
-        ASSERT_CRASH(dbConn->BindParam(0, SQL_C_LONG, SQL_INTEGER, idHash, &idHash, &len));
+		SQLLEN len = 0;
+		ASSERT_CRASH(dbConn->BindParam(0, SQL_C_LONG, SQL_INTEGER, idHash, &idHash, &len));
 
-        int32 outId = 0;
-        SQLLEN outIdLen = 0;
-        ASSERT_CRASH(dbConn->BindCol(0, SQL_C_LONG, sizeof(outId), &outId, &outIdLen));
+		int32 outId = 0;
+		SQLLEN outIdLen = 0;
+		ASSERT_CRASH(dbConn->BindCol(0, SQL_C_LONG, sizeof(outId), &outId, &outIdLen));
 
-        int32 outPw = 0;
-        SQLLEN outPwLen = 0;
-        ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outPw), &outPw, &outPwLen));
+		int32 outPw = 0;
+		SQLLEN outPwLen = 0;
+		ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outPw), &outPw, &outPwLen));
 
-        // SQL Ïã§Ìñâ
-        ASSERT_CRASH(dbConn->Execute(L"SELECT id, password FROM [dbo].[Account] WHERE Id = (?)"));
+		// SQL Ω««‡
+		ASSERT_CRASH(dbConn->Execute(L"SELECT id, password FROM [dbo].[Account] WHERE Id = (?)"));
 
-        bool result = dbConn->Fetch();
-        GDBConnectionPool->Push(dbConn);
+		bool result = dbConn->Fetch();
+		GDBConnectionPool->Push(dbConn);
 
-        // Ìå®Ïä§ÏõåÎìú Í≤ÄÏÇ¨.
-        result &= outPw == pwHash;
-        if (!result)
-        {
-            loginPacket.set_loginok(false);
-            const auto sendPacket = ClientPacketHandler::MakeSendBuffer(loginPacket);
-            session->Send(sendPacket);
-            return;
-        }
-    }
+		// ∆–Ω∫øˆµÂ ∞ÀªÁ.
+		result &= outPw == pwHash;
+		if (!result)
+		{
+			loginPacket.set_loginok(false);
+			const auto sendPacket = ClientPacketHandler::MakeSendBuffer(loginPacket);
+			session->Send(sendPacket);
+			return;
+		}
+	}
 
-    // ÌîåÎ†àÏù¥Ïñ¥ Ï†ïÎ≥¥ Read
-    {
-        DBConnection* dbConn = GDBConnectionPool->Pop();
-        dbConn->Unbind();
+	// «√∑π¿ÃæÓ ¡§∫∏ Read
+	{
+		DBConnection* dbConn = GDBConnectionPool->Pop();
+		dbConn->Unbind();
 
-        SQLLEN len = 0;
-        ASSERT_CRASH(dbConn->BindParam(1, SQL_C_LONG, SQL_INTEGER, idHash, &idHash, &len));
+		SQLLEN len = 0;
+		ASSERT_CRASH(dbConn->BindParam(1, SQL_C_LONG, SQL_INTEGER, idHash, &idHash, &len));
 
-        WCHAR outName[100];
-        SQLLEN outNameLen = 0;
-        ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outName), outName, &outNameLen));
+		WCHAR outName[100];
+		SQLLEN outNameLen = 0;
+		ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outName), outName, &outNameLen));
 
-        int32 outLv = 0;
-        SQLLEN outLvLen = 0;
-        ASSERT_CRASH(dbConn->BindCol(2, SQL_C_LONG, sizeof(outLv), &outLv, &outLvLen));
+		int32 outLv = 0;
+		SQLLEN outLvLen = 0;
+		ASSERT_CRASH(dbConn->BindCol(2, SQL_C_LONG, sizeof(outLv), &outLv, &outLvLen));
 
-        int32 outGold = 0;
-        SQLLEN outGoldLen = 0;
-        ASSERT_CRASH(dbConn->BindCol(3, SQL_C_LONG, sizeof(outGold), &outGold, &outGoldLen));
-        
-        // SQL Ïã§Ìñâ
-        ASSERT_CRASH(dbConn->Execute(L"SELECT name, level gold FROM [dbo].[Player] WHERE Id = (?)"));
-        bool result = dbConn->Fetch();
-        if (!result)
-        {
-            loginPacket.set_loginok(false);
-            const auto sendPacket = ClientPacketHandler::MakeSendBuffer(loginPacket);
-            session->Send(sendPacket);
-            return;
-        }
+		int32 outGold = 0;
+		SQLLEN outGoldLen = 0;
+		ASSERT_CRASH(dbConn->BindCol(3, SQL_C_LONG, sizeof(outGold), &outGold, &outGoldLen));
 
-        // Î°úÍ∑∏Ïù∏ ÏÑ±Í≥µ
-        loginPacket.set_loginok(true);
-        const auto enterLoginPacket = ClientPacketHandler::MakeSendBuffer(loginPacket);
-        session->Send(enterLoginPacket);
+		// SQL Ω««‡
+		ASSERT_CRASH(dbConn->Execute(L"SELECT name, level gold FROM [dbo].[Player] WHERE Id = (?)"));
+		bool result = dbConn->Fetch();
+		if (!result)
+		{
+			loginPacket.set_loginok(false);
+			const auto sendPacket = ClientPacketHandler::MakeSendBuffer(loginPacket);
+			session->Send(sendPacket);
+			return;
+		}
 
-        // Ï†ëÏÜç
-        wstring wName(outName);
-        string name(wName.begin(), wName.end());
-        GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
-        gameSession->HandleEnterGame(name, outLv, outGold);
-    }
+		// ∑Œ±◊¿Œ º∫∞¯
+		loginPacket.set_loginok(true);
+		const auto enterLoginPacket = ClientPacketHandler::MakeSendBuffer(loginPacket);
+		session->Send(enterLoginPacket);
+
+		// ¡¢º”
+		wstring wName(outName);
+		string name(wName.begin(), wName.end());
+		GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
+		gameSession->HandleEnterGame(name, outLv, outGold);
+	}
+
 }
