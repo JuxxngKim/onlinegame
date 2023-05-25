@@ -80,9 +80,8 @@ message S_Chat {
 }
 
 message C_CreateAccount {
-	string Id = 1;
+  string Id = 1;
   string password = 2;
-  string nickName = 3;
 }
 
 message S_CreateAccount {

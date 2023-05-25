@@ -15,14 +15,12 @@ c:\developer\onlinegame\server\gameserver\x64\debug\dbtransaction.obj
 c:\developer\onlinegame\server\gameserver\x64\debug\struct.pb.obj
 c:\developer\onlinegame\server\gameserver\x64\debug\protocol.pb.obj
 c:\developer\onlinegame\server\gameserver\x64\debug\enum.pb.obj
+c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.ilk
+c:\developer\onlinegame\server\binary\debug\gameserver.exe
 c:\developer\onlinegame\server\binary\debug\gameserver.pdb
 c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\cl.command.1.tlog
 c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\cl.read.1.tlog
 c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\cl.write.1.tlog
-c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link-cvtres.read.1.tlog
-c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link-cvtres.write.1.tlog
-c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link-rc.read.1.tlog
-c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link-rc.write.1.tlog
 c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link.command.1.tlog
 c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link.read.1.tlog
 c:\developer\onlinegame\server\gameserver\x64\debug\gameserver.tlog\link.write.1.tlog

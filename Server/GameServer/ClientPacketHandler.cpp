@@ -62,7 +62,7 @@ bool Handle_C_Chat(PacketSessionRef& session, Protocol::C_Chat& pkt)
 
 bool Handle_C_CreateAccount(PacketSessionRef& session, Protocol::C_CreateAccount& pkt)
 {
-	// GDbTransaction.DoAsync(&DbTransaction::CreateAccount, session, pkt);
+	GDBTransaction->DoAsync(&DBTransaction::CreateAccount, session, pkt.id(), pkt.password());
 	return true;
 }
 

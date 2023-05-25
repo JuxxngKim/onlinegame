@@ -5,12 +5,12 @@
 #include "ClientPacketHandler.h"
 #include "GameSession.h"
 
-DBTransaction GDBTransaction;
+DBTransactionRef GDBTransaction = nullptr;
 
-void DBTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAccount pkt)
+void DBTransaction::CreateAccount(PacketSessionRef session, string id, string password)
 {
-    auto idHash = std::hash<string>{}(pkt.id());
-    const auto pwHash = std::hash<string>{}(pkt.password());
+    auto idHash = (int)std::hash<string>{}(id);
+    const auto pwHash = (int)std::hash<string>{}(password);
 
     // 계정 검사
     {
@@ -18,14 +18,14 @@ void DBTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         dbConn->Unbind();
 
         SQLLEN len = 0;
-        ASSERT_CRASH(dbConn->BindParam(1, SQL_C_LONG, SQL_INTEGER, idHash, &idHash, &len));
+        ASSERT_CRASH(dbConn->BindParam(1, &idHash, &len));
 
         int32 outId = 0;
         SQLLEN outIdLen = 0;
         ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outId), &outId, &outIdLen));
 
         // SQL 실행
-        ASSERT_CRASH(dbConn->Execute(L"SELECT id FROM [dbo].[Account] WHERE Id = (?)"));
+        ASSERT_CRASH(dbConn->Execute(L"SELECT id FROM [dbo].[Account] WHERE id = (?)"));
 
         bool containsAccountOrError = false;
         const SQLRETURN ret = dbConn->GetFechResult();
@@ -33,6 +33,7 @@ void DBTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         {
         case SQL_NO_DATA:
             containsAccountOrError = false;
+            break;
         default:
             containsAccountOrError = true;
             break;
@@ -67,7 +68,7 @@ void DBTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         ASSERT_CRASH(dbConn->BindParam(2, &password, &pwLen));
 
         // SQL 실행
-        ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Account]([Id], [Password]) VALUES(?, ?)"));
+        ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Account]([id], [password]) VALUES(?, ?)"));
 
         GDBConnectionPool->Push(dbConn);
     }
@@ -97,7 +98,7 @@ void DBTransaction::CreateAccount(PacketSessionRef session, Protocol::C_CreateAc
         ASSERT_CRASH(dbConn->BindParam(4, &gold, &goldLen));
 
         // SQL 실행
-        ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Player]([Id], [Name], [Level], [Gold]) VALUES(?, ?, ?, ?)"));
+        ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Player]([id], [name], [level], [gold]) VALUES(?, ?, ?, ?)"));
 
         GDBConnectionPool->Push(dbConn);
     }
@@ -112,8 +113,8 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 {
 	Protocol::S_Login loginPacket;
 
-	auto idHash = std::hash<string>{}(pkt.id());
-	auto pwHash = std::hash<string>{}(pkt.password());
+    auto idHash = (int)std::hash<string>{}(pkt.id());
+    const auto pwHash = (int)std::hash<string>{}(pkt.password());
 
 	// 계정 검사
 	{
@@ -121,7 +122,7 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 		dbConn->Unbind();
 
 		SQLLEN len = 0;
-		ASSERT_CRASH(dbConn->BindParam(0, SQL_C_LONG, SQL_INTEGER, idHash, &idHash, &len));
+		ASSERT_CRASH(dbConn->BindParam(0, &idHash, &len));
 
 		int32 outId = 0;
 		SQLLEN outIdLen = 0;
@@ -132,7 +133,7 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 		ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outPw), &outPw, &outPwLen));
 
 		// SQL 실행
-		ASSERT_CRASH(dbConn->Execute(L"SELECT id, password FROM [dbo].[Account] WHERE Id = (?)"));
+		ASSERT_CRASH(dbConn->Execute(L"SELECT id, password FROM [dbo].[Account] WHERE id = (?)"));
 
 		bool result = dbConn->Fetch();
 		GDBConnectionPool->Push(dbConn);
@@ -154,7 +155,7 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 		dbConn->Unbind();
 
 		SQLLEN len = 0;
-		ASSERT_CRASH(dbConn->BindParam(1, SQL_C_LONG, SQL_INTEGER, idHash, &idHash, &len));
+		ASSERT_CRASH(dbConn->BindParam(1, SQL_C_LONG, SQL_INTEGER, sizeof(idHash), &idHash, &len));
 
 		WCHAR outName[100];
 		SQLLEN outNameLen = 0;
@@ -169,7 +170,7 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 		ASSERT_CRASH(dbConn->BindCol(3, SQL_C_LONG, sizeof(outGold), &outGold, &outGoldLen));
 
 		// SQL 실행
-		ASSERT_CRASH(dbConn->Execute(L"SELECT name, level gold FROM [dbo].[Player] WHERE Id = (?)"));
+		ASSERT_CRASH(dbConn->Execute(L"SELECT name, level gold FROM [dbo].[Player] WHERE id = (?)"));
 		bool result = dbConn->Fetch();
 		if (!result)
 		{

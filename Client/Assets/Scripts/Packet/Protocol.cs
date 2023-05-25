@@ -42,10 +42,9 @@ namespace Protocol {
             "NAoMU19DaGFuZ2VTdGF0EiQKCHN0YXRJbmZvGAEgASgLMhIuUHJvdG9jb2wu",
             "U3RhdEluZm8iGQoGQ19DaGF0Eg8KB21lc3NhZ2UYASABKAkiPQoGU19DaGF0",
             "EhAKCG9iamVjdElkGAEgASgFEhAKCHVzZXJOYW1lGAIgASgJEg8KB21lc3Nh",
-            "Z2UYAyABKAkiQQoPQ19DcmVhdGVBY2NvdW50EgoKAklkGAEgASgJEhAKCHBh",
-            "c3N3b3JkGAIgASgJEhAKCG5pY2tOYW1lGAMgASgJIiIKD1NfQ3JlYXRlQWNj",
-            "b3VudBIPCgdzdWNjZXNzGAEgASgIIggKBlNfUGluZyIICgZDX1BvbmdiBnBy",
-            "b3RvMw=="));
+            "Z2UYAyABKAkiLwoPQ19DcmVhdGVBY2NvdW50EgoKAklkGAEgASgJEhAKCHBh",
+            "c3N3b3JkGAIgASgJIiIKD1NfQ3JlYXRlQWNjb3VudBIPCgdzdWNjZXNzGAEg",
+            "ASgIIggKBlNfUGluZyIICgZDX1BvbmdiBnByb3RvMw=="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { global::Protocol.EnumReflection.Descriptor, global::Protocol.StructReflection.Descriptor, },
           new pbr::GeneratedClrTypeInfo(null, null, new pbr::GeneratedClrTypeInfo[] {
@@ -66,7 +65,7 @@ namespace Protocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_ChangeStat), global::Protocol.S_ChangeStat.Parser, new[]{ "StatInfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_Chat), global::Protocol.C_Chat.Parser, new[]{ "Message" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_Chat), global::Protocol.S_Chat.Parser, new[]{ "ObjectId", "UserName", "Message" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_CreateAccount), global::Protocol.C_CreateAccount.Parser, new[]{ "Id", "Password", "NickName" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_CreateAccount), global::Protocol.C_CreateAccount.Parser, new[]{ "Id", "Password" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_CreateAccount), global::Protocol.S_CreateAccount.Parser, new[]{ "Success" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.S_Ping), global::Protocol.S_Ping.Parser, null, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::Protocol.C_Pong), global::Protocol.C_Pong.Parser, null, null, null, null, null)
@@ -3290,7 +3289,6 @@ namespace Protocol {
     public C_CreateAccount(C_CreateAccount other) : this() {
       id_ = other.id_;
       password_ = other.password_;
-      nickName_ = other.nickName_;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -3321,17 +3319,6 @@ namespace Protocol {
       }
     }
 
-    /// <summary>Field number for the "nickName" field.</summary>
-    public const int NickNameFieldNumber = 3;
-    private string nickName_ = "";
-    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public string NickName {
-      get { return nickName_; }
-      set {
-        nickName_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
-      }
-    }
-
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as C_CreateAccount);
@@ -3347,7 +3334,6 @@ namespace Protocol {
       }
       if (Id != other.Id) return false;
       if (Password != other.Password) return false;
-      if (NickName != other.NickName) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -3356,7 +3342,6 @@ namespace Protocol {
       int hash = 1;
       if (Id.Length != 0) hash ^= Id.GetHashCode();
       if (Password.Length != 0) hash ^= Password.GetHashCode();
-      if (NickName.Length != 0) hash ^= NickName.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -3381,10 +3366,6 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(Password);
       }
-      if (NickName.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(NickName);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -3402,10 +3383,6 @@ namespace Protocol {
         output.WriteRawTag(18);
         output.WriteString(Password);
       }
-      if (NickName.Length != 0) {
-        output.WriteRawTag(26);
-        output.WriteString(NickName);
-      }
       if (_unknownFields != null) {
         _unknownFields.WriteTo(ref output);
       }
@@ -3420,9 +3397,6 @@ namespace Protocol {
       }
       if (Password.Length != 0) {
         size += 1 + pb::CodedOutputStream.ComputeStringSize(Password);
-      }
-      if (NickName.Length != 0) {
-        size += 1 + pb::CodedOutputStream.ComputeStringSize(NickName);
       }
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
@@ -3440,9 +3414,6 @@ namespace Protocol {
       }
       if (other.Password.Length != 0) {
         Password = other.Password;
-      }
-      if (other.NickName.Length != 0) {
-        NickName = other.NickName;
       }
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
@@ -3466,10 +3437,6 @@ namespace Protocol {
             Password = input.ReadString();
             break;
           }
-          case 26: {
-            NickName = input.ReadString();
-            break;
-          }
         }
       }
     #endif
@@ -3490,10 +3457,6 @@ namespace Protocol {
           }
           case 18: {
             Password = input.ReadString();
-            break;
-          }
-          case 26: {
-            NickName = input.ReadString();
             break;
           }
         }

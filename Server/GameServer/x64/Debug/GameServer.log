@@ -38,10 +38,9 @@
   계속하려면 아무 키나 누르십시오 . . . 
   pch.cpp
 C:\Developer\onlinegame\Server\ServerCore\Memory.h(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
+  ClientPacketHandler.cpp
+C:\Developer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(54,60): warning C4244: '인수': 'uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   DBTransaction.cpp
-C:\Developer\onlinegame\Server\GameServer\DBTransaction.cpp(59,33): warning C4267: '초기화 중': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\DBTransaction.cpp(62,32): warning C4267: '초기화 중': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\DBTransaction.cpp(80,33): warning C4267: '초기화 중': 'size_t'에서 'int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.29.30133\include\xstring(2541,23): warning C4244: '인수': 'wchar_t'에서 'const _Elem'(으)로 변환하면서 데이터가 손실될 수 있습니다.
           with
           [
@@ -67,14 +66,14 @@ C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.2
           [
               _Iter=wchar_t *
           ]
-C:\Developer\onlinegame\Server\GameServer\DBTransaction.cpp(189): message : 컴파일되는 함수 템플릿 인스턴스화 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)'에 대한 참조를 확인하세요.
+C:\Developer\onlinegame\Server\GameServer\DBTransaction.cpp(190): message : 컴파일되는 함수 템플릿 인스턴스화 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)'에 대한 참조를 확인하세요.
           with
           [
               _Elem=wchar_t,
               _Iter=std::_String_iterator<std::_String_val<std::_Simple_types<wchar_t>>>,
               _Alloc=std::allocator<char>
           ]
-C:\Developer\onlinegame\Server\GameServer\DBTransaction.cpp(189): message : 컴파일되는 함수 템플릿 인스턴스화 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)'에 대한 참조를 확인하세요.
+C:\Developer\onlinegame\Server\GameServer\DBTransaction.cpp(190): message : 컴파일되는 함수 템플릿 인스턴스화 'std::basic_string<char,std::char_traits<char>,std::allocator<char>>::basic_string<std::_String_iterator<std::_String_val<std::_Simple_types<_Elem>>>,0>(_Iter,_Iter,const _Alloc &)'에 대한 참조를 확인하세요.
           with
           [
               _Elem=wchar_t,
@@ -89,8 +88,6 @@ C:\Developer\onlinegame\Server\GameServer\GameObject.cpp(10,30): warning C4244: 
   GameSession.cpp
   GameSessionManager.cpp
   Player.cpp
-  ClientPacketHandler.cpp
-C:\Developer\onlinegame\Server\GameServer\ClientPacketHandler.cpp(54,60): warning C4244: '인수': 'uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Room.cpp
 C:\Developer\onlinegame\Server\GameServer\Room.cpp(1,1): warning C4819: 현재 코드 페이지(949)에서 표시할 수 없는 문자가 파일에 들어 있습니다. 데이터가 손실되지 않게 하려면 해당 파일을 유니코드 형식으로 저장하십시오.
 C:\Developer\onlinegame\Server\GameServer\Room.cpp(90,47): warning C4244: '인수': 'uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
@@ -98,15 +95,15 @@ C:\Developer\onlinegame\Server\GameServer\Room.cpp(127,33): warning C4244: '인�
   코드를 생성하고 있습니다...
   Enum.pb.cc
   Protocol.pb.cc
-C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(1143,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(1577,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2032,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2259,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2266,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2484,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2491,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(3131,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(3988,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(1141,82): warning C4244: '인수': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(1575,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2030,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2257,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2264,64): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2482,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(2489,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(3129,69): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Developer\onlinegame\Server\GameServer\Protocol.pb.cc(3986,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
   Struct.pb.cc
 C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(612,72): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Developer\onlinegame\Server\GameServer\Struct.pb.cc(911,70): warning C4244: '=': 'google::protobuf::uint64'에서 'google::protobuf::int32'(으)로 변환하면서 데이터가 손실될 수 있습니다.

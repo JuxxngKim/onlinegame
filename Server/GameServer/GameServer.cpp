@@ -32,27 +32,29 @@ void DoWorkerJob(ServerServiceRef& service)
 
 void DoDBWorkerJob()
 {
-	 ASSERT_CRASH(GDBConnectionPool->Connect(1, L"Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=ServerDb;Trusted_Connection=Yes;"));
+	GDBTransaction = shared_ptr<DBTransaction>(new DBTransaction());
 
-	 //// Create Table
-	 //{
-	 //	auto query = L"									\
-	 //		DROP TABLE IF EXISTS [dbo].[Gold];			\
-	 //		CREATE TABLE [dbo].[Gold]					\
-	 //		(											\
-	 //			[id] INT NOT NULL PRIMARY KEY IDENTITY, \
-	 //			[gold] INT NULL							\
-	 //		);";
+	ASSERT_CRASH(GDBConnectionPool->Connect(1, L"Driver={ODBC Driver 17 for SQL Server};Server=(localdb)\\MSSQLLocalDB;Database=ServerDb;Trusted_Connection=Yes;"));
 
-	 //	DBConnection* dbConn = GDBConnectionPool->Pop();
-	 //	ASSERT_CRASH(dbConn->Execute(query));
-	 //	GDBConnectionPool->Push(dbConn);
-	 //}
+	//// Create Table
+	//{
+	//	auto query = L"									\
+	// 		DROP TABLE IF EXISTS [dbo].[Gold];			\
+	// 		CREATE TABLE [dbo].[Gold]					\
+	// 		(											\
+	// 			[id] INT NOT NULL PRIMARY KEY IDENTITY, \
+	// 			[gold] INT NULL							\
+	// 		);";
 
-	 while (true)
-	 {
-		 GDBTransaction.Execute();
-	 }
+	//	DBConnection* dbConn = GDBConnectionPool->Pop();
+	//	ASSERT_CRASH(dbConn->Execute(query));
+	//	GDBConnectionPool->Push(dbConn);
+	//}
+
+	while (true)
+	{
+		GDBTransaction->Execute();
+	}
 }
 
 int main()

@@ -5,8 +5,8 @@
 class DBTransaction : public JobQueue
 {
 public:
-    void CreateAccount(PacketSessionRef session, Protocol::C_CreateAccount pkt);
+    void CreateAccount(PacketSessionRef session, string id, string password);
     void Login(PacketSessionRef session, Protocol::C_Login pkt);
 };
 
-extern DBTransaction GDBTransaction;
+extern DBTransactionRef GDBTransaction;
