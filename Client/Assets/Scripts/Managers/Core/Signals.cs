@@ -30,9 +30,14 @@ using System.Collections.Generic;
 using deVoid.Utils;
 
 /// <summary>
-/// 채팅 말풍선 생성
+/// Chat 
 /// </summary>
 public class AddChat : ASignal<int, string, string> { }
+
+/// <summary>
+/// Toast Popup
+/// </summary>
+public class ShowToastMessage : ASignal<string> { }
 
 
 namespace deVoid.Utils

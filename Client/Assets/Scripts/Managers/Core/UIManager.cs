@@ -20,6 +20,11 @@ public class UIManager
             
             var root = Resources.Load<GameObject>("Prefabs/UI/UIRoot");
             _root = GameObject.Instantiate(root);
+            
+            var toastPopup = Resources.Load<GameObject>("Prefabs/UI/ToastPopupFactory");
+
+            
+            
             GameObject.DontDestroyOnLoad(_root);
             return _root;
         }

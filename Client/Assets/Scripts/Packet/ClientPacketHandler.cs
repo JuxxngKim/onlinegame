@@ -100,7 +100,7 @@ class PacketHandler
 
 		if (packet.LoginOk != 1)
 		{
-			Debug.LogError($"LoginError : {packet.LoginOk}");
+			Signals.Get<ShowToastMessage>().Dispatch("로그인 실패!");
 			return;
 		}
 		
@@ -138,7 +138,7 @@ class PacketHandler
 		
 		if (!packet.Success)
 		{
-			Debug.LogError($"Create Account Fail!");
+			Signals.Get<ShowToastMessage>().Dispatch("계정 생성 실패!");
 			return;
 		}
 	}
