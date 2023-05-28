@@ -33,10 +33,9 @@ bool Handle_C_Skill(PacketSessionRef& session, Protocol::C_Skill& pkt)
 
 bool Handle_C_Login(PacketSessionRef& session, Protocol::C_Login& pkt)
 {
-	// GDbTransaction.DoAsync(&DbTransaction::Login, session, pkt);
+	GDBTransaction->DoAsync(&DBTransaction::Login, session, pkt);
 	return true;
 }
-
 
 bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt)
 {

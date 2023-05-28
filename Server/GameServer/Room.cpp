@@ -20,7 +20,7 @@ void Room::Enter(GameObjectRef objectRef)
 			return;
 
 		const PlayerRef playerRef = static_pointer_cast<Player>(objectRef);
-		auto spawnPos = Vector2Int(2, 3);
+		auto spawnPos = Vector2Int(0, 0);
 
 		playerRef->SetMoveDir(Protocol::MoveDir::DOWN);
 		playerRef->SetPosition(spawnPos);

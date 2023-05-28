@@ -11,10 +11,9 @@ public class GameScene : BaseScene
 
         SceneType = Define.Scene.Game;
         Managers.Map.LoadMap(1);
-        
-        C_EnterGame enterGame = new C_EnterGame();
-        enterGame.Name = $"11";
-        Managers.Network.Send(enterGame);
+
+        // C_EnterGame enterGame = new C_EnterGame();
+        // Managers.Network.Send(enterGame);
     }
 
     public override void Clear()
