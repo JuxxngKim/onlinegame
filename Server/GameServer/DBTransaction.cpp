@@ -1,5 +1,8 @@
 #include "pch.h"
 #include "DBTransaction.h"
+
+#include <codecvt>
+
 #include "DBConnection.h"
 #include "DBConnectionPool.h"
 #include "ClientPacketHandler.h"
@@ -12,7 +15,7 @@ void DBTransaction::CreateAccount(PacketSessionRef session, string id, string pa
     auto idHash = (int)std::hash<string>{}(id);
     const auto pwHash = (int)std::hash<string>{}(password);
 
-    // ���� �˻�
+    // DB 데이터 검사
     {
         DBConnection* dbConn = GDBConnectionPool->Pop();
         dbConn->Unbind();
@@ -24,7 +27,7 @@ void DBTransaction::CreateAccount(PacketSessionRef session, string id, string pa
         SQLLEN outIdLen = 0;
         ASSERT_CRASH(dbConn->BindCol(1, SQL_C_LONG, sizeof(outId), &outId, &outIdLen));
 
-        // SQL ����
+        // SQL
         ASSERT_CRASH(dbConn->Execute(L"SELECT id FROM [dbo].[Account] WHERE id = (?)"));
 
         bool containsAccountOrError = false;
@@ -41,7 +44,6 @@ void DBTransaction::CreateAccount(PacketSessionRef session, string id, string pa
 
         GDBConnectionPool->Push(dbConn);
 
-        // �̹� �����Ͱ� �����ϰų� ���� �߻�
         if (containsAccountOrError)
         {
             Protocol::S_CreateAccount createAccountPacket;
@@ -52,7 +54,7 @@ void DBTransaction::CreateAccount(PacketSessionRef session, string id, string pa
         }
     }
 
-    // ���� ���� ����
+    // 계정 생성
     {
         DBConnection* dbConn = GDBConnectionPool->Pop();
         dbConn->Unbind();
@@ -63,17 +65,16 @@ void DBTransaction::CreateAccount(PacketSessionRef session, string id, string pa
         int32 password = pwHash;
         SQLLEN pwLen = 0;
 
-        // �ѱ� ���� ���ε�
         ASSERT_CRASH(dbConn->BindParam(1, &accountId, &len));
         ASSERT_CRASH(dbConn->BindParam(2, &password, &pwLen));
 
-        // SQL ����
+        // SQL
         ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Account]([id], [password]) VALUES(?, ?)"));
 
         GDBConnectionPool->Push(dbConn);
     }
 
-    // �÷��̾� ���� ����
+    // 플레이어 정보 생성
     {
         DBConnection* dbConn = GDBConnectionPool->Pop();
         dbConn->Unbind();
@@ -81,7 +82,7 @@ void DBTransaction::CreateAccount(PacketSessionRef session, string id, string pa
         int32 accountId = idHash;
         SQLLEN len = 0;
 
-        const wstring strName = to_wstring(accountId);
+        const wstring strName(id.begin(), id.end());
         const wchar_t* name = strName.c_str();
         SQLLEN nameLen = 0;
 
@@ -91,13 +92,12 @@ void DBTransaction::CreateAccount(PacketSessionRef session, string id, string pa
         int32 gold = 1;
         SQLLEN goldLen = 0;
 
-        // �ѱ� ���� ���ε�
         ASSERT_CRASH(dbConn->BindParam(1, &accountId, &len));
         ASSERT_CRASH(dbConn->BindParam(2, name, &nameLen));
         ASSERT_CRASH(dbConn->BindParam(3, &level, &levelLen));
         ASSERT_CRASH(dbConn->BindParam(4, &gold, &goldLen));
 
-        // SQL ����
+        // SQL
         ASSERT_CRASH(dbConn->Execute(L"INSERT INTO [dbo].[Player]([id], [name], [lv], [gold]) VALUES(?, ?, ?, ?)"));
 
         GDBConnectionPool->Push(dbConn);
@@ -116,7 +116,7 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
     auto idHash = (int)std::hash<string>{}(pkt.id());
     const auto pwHash = (int)std::hash<string>{}(pkt.password());
 
-	// ���� �˻�
+	// 계정이 있는지 검사
 	{
 		DBConnection* dbConn = GDBConnectionPool->Pop();
 		dbConn->Unbind();
@@ -132,13 +132,13 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 		SQLLEN outPwLen = 0;
 		ASSERT_CRASH(dbConn->BindCol(2, SQL_C_LONG, sizeof(outPw), &outPw, &outPwLen));
 
-		// SQL ����
+		// SQL
 		ASSERT_CRASH(dbConn->Execute(L"SELECT id, password FROM [dbo].[Account] WHERE id = (?)"));
 
 		bool result = dbConn->Fetch();
 		GDBConnectionPool->Push(dbConn);
 
-		// �н����� �˻�.
+		// DB 데이터 여부와 패스워드 비교
 		result &= outPw == pwHash;
 		if (!result)
 		{
@@ -149,7 +149,7 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 		}
 	}
 
-	// �÷��̾� ���� Read
+	// 플레이어 정보
 	{
 		DBConnection* dbConn = GDBConnectionPool->Pop();
 		dbConn->Unbind();
@@ -169,9 +169,10 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 		SQLLEN outGoldLen = 0;
 		ASSERT_CRASH(dbConn->BindCol(3, SQL_C_LONG, sizeof(outGold), &outGold, &outGoldLen));
 
-		// SQL ����
+		// SQL
 		ASSERT_CRASH(dbConn->Execute(L"SELECT name, lv gold FROM [dbo].[Player] WHERE id = (?)"));
 		bool result = dbConn->Fetch();
+		GDBConnectionPool->Push(dbConn);
 		if (!result)
 		{
 			loginPacket.set_loginok(false);
@@ -180,16 +181,13 @@ void DBTransaction::Login(PacketSessionRef session, Protocol::C_Login pkt)
 			return;
 		}
 
-		// �α��� ����
+		GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
+		gameSession->HandleLogin(pkt.id(), outLv, outGold);
+		
+		// 로그인 성공
 		loginPacket.set_loginok(true);
 		const auto enterLoginPacket = ClientPacketHandler::MakeSendBuffer(loginPacket);
 		session->Send(enterLoginPacket);
-
-		// ����
-		wstring wName(outName);
-		string name(wName.begin(), wName.end());
-		GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
-		gameSession->HandleEnterGame(name, outLv, outGold);
 	}
 
 }

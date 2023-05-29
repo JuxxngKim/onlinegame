@@ -43,6 +43,9 @@ public class MyPlayerController : PlayerController
 	// 키보드 입력
 	void GetDirInput()
 	{
+		if (ChatWindow.InputLock)
+			return;
+		
 		_moveKeyPressed = true;
 
 		if (Input.GetKey(KeyCode.W))

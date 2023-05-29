@@ -40,7 +40,7 @@ bool Handle_C_Login(PacketSessionRef& session, Protocol::C_Login& pkt)
 bool Handle_C_EnterGame(PacketSessionRef& session, Protocol::C_EnterGame& pkt)
 {
 	GameSessionRef gameSession = static_pointer_cast<GameSession>(session);
-	gameSession->HandleEnterGame("dummy", 1, 0);
+	gameSession->HandleEnterGame();
 	return true;
 }
 
@@ -51,6 +51,7 @@ bool Handle_C_Chat(PacketSessionRef& session, Protocol::C_Chat& pkt)
 
 	Protocol::S_Chat chatPacket;
 	chatPacket.set_objectid(gameSession->_currentPlayer->GetID());
+	chatPacket.set_username(gameSession->_currentPlayer->GetName());
 	chatPacket.set_message(pkt.message());
 	
 	const auto sendPacket = ClientPacketHandler::MakeSendBuffer(chatPacket);

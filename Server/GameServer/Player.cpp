@@ -13,3 +13,9 @@ Player::Player(uint64 Id, Protocol::GameObjectType objectType, weak_ptr<class Ro
     _statInfo.set_speed(3);
     _statInfo.set_totalexp(0);
 }
+
+void Player::SetPlayerInfo(PlayerDBData data)
+{
+    _statInfo.set_level(data.level);
+    _name = data.name;
+}

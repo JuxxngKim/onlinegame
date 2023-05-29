@@ -104,6 +104,7 @@ class PacketHandler
 			return;
 		}
 		
+		Signals.Get<ShowToastMessage>().Dispatch("로그인 성공!");
 		Managers.Scene.LoadScene(Define.Scene.Game);
 	}
 	
@@ -141,5 +142,7 @@ class PacketHandler
 			Signals.Get<ShowToastMessage>().Dispatch("계정 생성 실패!");
 			return;
 		}
+		
+		Signals.Get<ShowToastMessage>().Dispatch("계정 생성 성공!");
 	}
 }

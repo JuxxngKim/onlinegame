@@ -22,8 +22,7 @@ public class UIManager
             _root = GameObject.Instantiate(root);
             
             var toastPopup = Resources.Load<GameObject>("Prefabs/UI/ToastPopupFactory");
-
-            
+            GameObject.Instantiate(toastPopup, _root.transform);
             
             GameObject.DontDestroyOnLoad(_root);
             return _root;

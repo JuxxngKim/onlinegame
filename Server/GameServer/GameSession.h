@@ -1,6 +1,7 @@
 #pragma once
 #include "Session.h"
 #include "GameTypes.h"
+#include "Player.h"
 #include "Protocol.pb.h"
 
 class GameSession : public PacketSession
@@ -17,9 +18,12 @@ public:
 	virtual void OnSend(int32 len) override;
 
 public:
-	void HandleEnterGame(string name, int32 level, int32 gold);
+	void HandleEnterGame();
+	void HandleLogin(string name, int32 level, int32 gold);
 	
 public:
+	PlayerDBData _playerDBData;
 	PlayerRef _currentPlayer;
 	weak_ptr<class Room> _room;
+	bool _isLogin;
 };

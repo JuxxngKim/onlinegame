@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class LoginScene : BaseScene
 {
-    LoginPopup _sceneUI;
-
     protected override void Init()
     {
         base.Init();
@@ -21,12 +19,11 @@ public class LoginScene : BaseScene
         NetworkManager networkManager = Managers.Network;
         yield return new WaitUntil(() => { return networkManager.IsConnected; });
         
-        _sceneUI = Managers.UI.ShowSceneUI<LoginPopup>();
+        Managers.UI.ShowSceneUI<LoginPopup>();
     }
 
     public override void Clear()
     {
         Managers.UI.Clear();
-        _sceneUI = null;
     }
 }
